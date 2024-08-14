@@ -72,12 +72,24 @@
 		<repository>
 			<id>maven-repository</id>
 			<name>maven-repository</name>
-			<url>https://repo1.maven.org/maven2</url>
+			<url>https://maven.aliyun.com/repository/public</url>
 		</repository>
 		<repository>
 			<id>gradle-repository</id>
 			<name>gradle-repository</name>
-			<url>https://repo.gradle.org/gradle/libs-releases-local</url>
+			<url>https://maven.aliyun.com/repository/gradle-plugin</url>
+		</repository>
+		<repository>
+			<id>central</id>
+			<name>central</name>
+			<url>https://maven.aliyun.com/repository/central</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
 		</repository>
 	</repositories>
 

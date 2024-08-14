@@ -71,7 +71,7 @@ void QtProjectWizardContentPathPythonEnvironment::onTextChanged(const QString& t
 					 .wstr()},
 				FilePath(),
 				false,
-				5000);
+				boost::chrono::milliseconds(5000));
 			m_onQtThread([=, this]() {
 				if (out.exitCode == 0)
 				{
