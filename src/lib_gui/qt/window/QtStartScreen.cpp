@@ -48,13 +48,12 @@ void QtRecentProjectButton::handleButtonClick()
 	else
 	{
 		QtMessageBox msgBox;
-		msgBox.setText(QStringLiteral("Missing Project File"));
+		msgBox.setText(QStringLiteral("缺少项目文件"));
 		msgBox.setInformativeText(QString::fromStdWString(
-			L"<p>Couldn't find \"" + m_projectFilePath.wstr() +
-			L"\" on your filesystem.</p><p>Do you want to remove it from recent project "
-			L"list?</p>"));
-		QPushButton *removeButton = msgBox.addButton(QStringLiteral("Remove"), QtMessageBox::ButtonRole::YesRole);
-		msgBox.addButton(QStringLiteral("Keep"), QtMessageBox::ButtonRole::NoRole);
+			L"<p>未能在文件系统中找到 \"" + m_projectFilePath.wstr() +
+			L"\"。</p><p>您是否要将其从最近项目列表中移除？</p>"));
+		QPushButton *removeButton = msgBox.addButton(QStringLiteral("移除"), QtMessageBox::ButtonRole::YesRole);
+		msgBox.addButton(QStringLiteral("保留"), QtMessageBox::ButtonRole::NoRole);
 		msgBox.setIcon(QtMessageBox::Icon::Question);
 
 		if (msgBox.execModal() == removeButton)
@@ -186,7 +185,7 @@ void QtStartScreen::setupStartScreen()
 
 		col->addSpacing(20);
 
-		QPushButton* githubButton = new QPushButton(QStringLiteral("View on GitHub"), this);
+		QPushButton* githubButton = new QPushButton(QStringLiteral("在 GitHub 上查看"), this);
 		githubButton->setAttribute(Qt::WA_LayoutUsesWidgetRect);	// fixes layouting on Mac
 		githubButton->setObjectName(QStringLiteral("infoButton"));
 		githubButton->setIcon(m_githubIcon);
@@ -205,7 +204,7 @@ void QtStartScreen::setupStartScreen()
 		col->addSpacing(35);
 		col->addStretch();
 
-		QPushButton* newProjectButton = new QPushButton(QStringLiteral("New Project"), this);
+		QPushButton* newProjectButton = new QPushButton(QStringLiteral("新建项目"), this);
 		newProjectButton->setAttribute(Qt::WA_LayoutUsesWidgetRect);	// fixes layouting on Mac
 		newProjectButton->setObjectName(QStringLiteral("projectButton"));
 		newProjectButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -215,7 +214,7 @@ void QtStartScreen::setupStartScreen()
 
 		col->addSpacing(8);
 
-		QPushButton* openProjectButton = new QPushButton(QStringLiteral("Open Project"), this);
+		QPushButton* openProjectButton = new QPushButton(QStringLiteral("打开项目"), this);
 		openProjectButton->setAttribute(Qt::WA_LayoutUsesWidgetRect);	 // fixes layouting on Mac
 		openProjectButton->setObjectName(QStringLiteral("projectButton"));
 		openProjectButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -230,7 +229,7 @@ void QtStartScreen::setupStartScreen()
 		QVBoxLayout* col = new QVBoxLayout();
 		layout->addLayout(col, 1);
 
-		QLabel* recentProjectsLabel = new QLabel(QStringLiteral("Recent Projects: "), this);
+		QLabel* recentProjectsLabel = new QLabel(QStringLiteral("最近的项目："), this);
 		recentProjectsLabel->setObjectName(QStringLiteral("titleLabel"));
 		col->addWidget(recentProjectsLabel);
 

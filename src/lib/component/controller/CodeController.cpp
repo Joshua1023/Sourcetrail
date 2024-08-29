@@ -137,29 +137,29 @@ void CodeController::handleMessage(MessageActivateOverview* message)
 	ss << "\n";
 	if (stats.timestamp.isValid())
 	{
-		ss << "\tlast indexed: " + stats.timestamp.toString() + "\n";
+		ss << "\t上次索引时间：" + stats.timestamp.toString() + "\n";
 		ss << "\n";
 	}
 
-	ss << "\t" + std::to_string(stats.fileCount) + " files";
+	ss << "\t" + std::to_string(stats.fileCount) + " 个文件";
 	ss << (stats.completedFileCount != stats.fileCount
-			   ? " (" + std::to_string(stats.completedFileCount) + " complete)"
+			   ? " （" + std::to_string(stats.completedFileCount) + " 个文件分析完成）"
 			   : "") +
 			"\n";
-	ss << "\t" + std::to_string(stats.fileLOCCount) + " lines of code\n";
+	ss << "\t" + std::to_string(stats.fileLOCCount) + " 行代码\n";
 	ss << "\n";
-	ss << "\t" + std::to_string(stats.nodeCount) + " symbols\n";
-	ss << "\t" + std::to_string(stats.edgeCount) + " references\n";
+	ss << "\t" + std::to_string(stats.nodeCount) + " 个符号\n";
+	ss << "\t" + std::to_string(stats.edgeCount) + " 个引用\n";
 	ss << "\n";
-	ss << "\t" + std::to_string(errorCount.total) + " errors (" + std::to_string(errorCount.fatal) +
-			" fatal)\n";
+	ss << "\t" + std::to_string(errorCount.total) + " 个错误（" + std::to_string(errorCount.fatal) +
+			" 个致命错误）\n";
 	ss << "\n";
 
 	if (errorCount.fatal)
 	{
-		ss << "\tWarning: Your project has fatal errors, which cause\n";
-		ss << "\t  a lot of missing information in affected files.\n";
-		ss << "\t  Try to resolve them!\n";
+		ss << "\t警告：您的项目中存在致命错误, \n";
+		ss << "\t  会导致相关文件大量信息缺失。\n";
+		ss << "\t  请尝试处理它们！\n";
 		ss << "\n";
 	}
 
@@ -231,20 +231,19 @@ void CodeController::handleMessage(MessageActivateTokens* message)
 		std::wstring status;
 		for (const SearchMatch& match: message->getSearchMatches())
 		{
-			status += L"Activate \"" + match.name + L"\": ";
+			status += L"激活 \"" + match.name + L"\": ";
 			// TODO (PMost): MSVC warns about unreachable code
 			break;
 		}
 
 		status += std::to_wstring(message->tokenIds.size()) + L" ";
-		status += (message->tokenIds.size() == 1 ? L"result" : L"results");
+		status += L"个结果";
 
 		if (fileCount > 0)
 		{
-			status += L" with " + std::to_wstring(referenceCount) + L" ";
-			status += (referenceCount == 1 ? L"reference" : L"references");
-			status += L" in " + std::to_wstring(fileCount) + L" ";
-			status += (fileCount == 1 ? L"file" : L"files");
+			status += L"，其中 " + std::to_wstring(fileCount) + L" 个文件存在 ";
+			status += std::to_wstring(referenceCount) + L" ";
+			status += L"个引用";
 		}
 
 		MessageStatus(status).dispatch();
@@ -462,7 +461,7 @@ void CodeController::handleMessage(MessageScrollToLine* message)
 		false);
 
 	MessageStatus(
-		L"Showing source location: " + message->filePath.wstr() + L" : " +
+		L"显示源位置：" + message->filePath.wstr() + L" : " +
 		std::to_wstring(message->line))
 		.dispatch();
 }

@@ -359,7 +359,7 @@ Task::TaskState TaskExecuteCustomCommands::doUpdate(std::shared_ptr<Blackboard> 
 		{
 			LOG_INFO("Starting Python post processing.");
 			m_dialogView->showUnknownProgressDialog(
-				L"Finish Indexing", L"Run Python Post Processing");
+				L"索引完成", L"运行 Python 后处理");
 
 			targetStorage.clearCaches();
 			targetStorage.buildCaches();
@@ -512,17 +512,17 @@ void TaskExecuteCustomCommands::runIndexerCommand(
 		}
 		else
 		{
-			std::wstring statusText = L"command \"" + indexerCommand->getCommand() + L" " +
-				utility::join(arguments, L" ") + L"\" returned";
+			std::wstring statusText = L"命令 \"" + indexerCommand->getCommand() + L" " +
+				utility::join(arguments, L" ") + L"\" 返回";
 			if (out.exitCode != 0)
 			{
-				statusText += L" code \"" + std::to_wstring(out.exitCode) + L"\"";
+				statusText += L" 退出码 \"" + std::to_wstring(out.exitCode) + L"\"";
 			}
 			if (!out.error.empty())
 			{
-				statusText += L" with message \"" + out.error + L"\"";
+				statusText += L" ： \"" + out.error + L"\"";
 			}
-			statusText += L".";
+			statusText += L"。";
 
 			LOG_ERROR(statusText);
 			MessageShowStatus().dispatch();

@@ -67,8 +67,8 @@ QtCodeNavigator::QtCodeNavigator(QWidget* parent)
 			m_prevReferenceButton->setObjectName(QStringLiteral("reference_button_previous"));
 			m_nextReferenceButton->setObjectName(QStringLiteral("reference_button_next"));
 
-			m_prevReferenceButton->setToolTip(QStringLiteral("previous reference"));
-			m_nextReferenceButton->setToolTip(QStringLiteral("next reference"));
+			m_prevReferenceButton->setToolTip(QStringLiteral("上一处引用"));
+			m_nextReferenceButton->setToolTip(QStringLiteral("下一处引用"));
 
 			m_prevReferenceButton->setIconSize(QSize(12, 12));
 			m_nextReferenceButton->setIconSize(QSize(12, 12));
@@ -82,7 +82,7 @@ QtCodeNavigator::QtCodeNavigator(QWidget* parent)
 				m_nextReferenceButton, &QPushButton::clicked, this, &QtCodeNavigator::nextReference);
 
 			// m_refLabel = new QLabel("0 files  |  0 references");
-			m_refLabel = new QLabel(QStringLiteral("0 references"));
+			m_refLabel = new QLabel(QStringLiteral("0 个引用"));
 			m_refLabel->setObjectName(QStringLiteral("references_label"));
 			navLayout->addWidget(m_refLabel);
 
@@ -100,8 +100,8 @@ QtCodeNavigator::QtCodeNavigator(QWidget* parent)
 			m_nextLocalReferenceButton->setObjectName(
 				QStringLiteral("local_reference_button_next"));
 
-			m_prevLocalReferenceButton->setToolTip(QStringLiteral("previous local reference"));
-			m_nextLocalReferenceButton->setToolTip(QStringLiteral("next local reference"));
+			m_prevLocalReferenceButton->setToolTip(QStringLiteral("上一处本地引用"));
+			m_nextLocalReferenceButton->setToolTip(QStringLiteral("下一处本地引用"));
 
 			m_prevLocalReferenceButton->setIconSize(QSize(12, 12));
 			m_nextLocalReferenceButton->setIconSize(QSize(12, 12));
@@ -120,7 +120,7 @@ QtCodeNavigator::QtCodeNavigator(QWidget* parent)
 				this,
 				&QtCodeNavigator::nextLocalReference);
 
-			m_localRefLabel = new QLabel(QStringLiteral("0/0 local references"));
+			m_localRefLabel = new QLabel(QStringLiteral("0/0 个本地引用"));
 			m_localRefLabel->setObjectName(QStringLiteral("references_label"));
 			navLayout->addWidget(m_localRefLabel);
 
@@ -143,8 +143,8 @@ QtCodeNavigator::QtCodeNavigator(QWidget* parent)
 		m_listButton->setObjectName(QStringLiteral("mode_button_list"));
 		m_fileButton->setObjectName(QStringLiteral("mode_button_single"));
 
-		m_listButton->setToolTip(QStringLiteral("snippet list mode"));
-		m_fileButton->setToolTip(QStringLiteral("single file mode"));
+		m_listButton->setToolTip(QStringLiteral("片段列举模式"));
+		m_fileButton->setToolTip(QStringLiteral("单文件模式"));
 
 		m_listButton->setCheckable(true);
 		m_fileButton->setCheckable(true);
@@ -211,16 +211,16 @@ void QtCodeNavigator::updateReferenceCount(
 	{
 		m_refLabel->setText(
 			QString::number(referenceIndex + 1) + "/" + QString::number(referenceCount) +
-			" references");
+			" 个引用");
 	}
 	else
 	{
-		m_refLabel->setText(QString::number(referenceCount) + " references");
+		m_refLabel->setText(QString::number(referenceCount) + " 个引用");
 	}
 
 	m_refLabel->setMinimumWidth(
 		m_refLabel->fontMetrics().boundingRect(
-			QString(QString::number(referenceCount).size() * 2, 'a') + "/ references").width() +
+			QString(QString::number(referenceCount).size() * 2, 'a') + "/ 个引用").width() +
 		30);
 
 	m_prevReferenceButton->setEnabled(referenceCount > 1);
@@ -231,16 +231,16 @@ void QtCodeNavigator::updateReferenceCount(
 	{
 		m_localRefLabel->setText(
 			QString::number(localReferenceIndex + 1) + "/" + QString::number(localReferenceCount) +
-			" local references");
+			" 个本地引用");
 	}
 	else
 	{
-		m_localRefLabel->setText(QString::number(localReferenceCount) + " local references");
+		m_localRefLabel->setText(QString::number(localReferenceCount) + " 个本地引用");
 	}
 
 	m_localRefLabel->setMinimumWidth(
 		m_localRefLabel->fontMetrics().boundingRect(
-			QString(QString::number(localReferenceCount).size() * 2, 'a') + "/ local references").width() +
+			QString(QString::number(localReferenceCount).size() * 2, 'a') + "/ 个本地引用").width() +
 		30);
 
 	m_nextLocalReferenceButton->setVisible(localReferenceCount > 1);

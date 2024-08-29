@@ -82,7 +82,7 @@ QtStatusBar::QtStatusBar(): m_text(this), m_ideStatusText(this)
 		QHBoxLayout* layout = new QHBoxLayout();
 		layout->setContentsMargins(0, 0, 0, 0);
 
-		layout->addWidget(new QLabel(QStringLiteral("Indexing:")));
+		layout->addWidget(new QLabel(QStringLiteral("索引中:")));
 
 		m_indexingProgress = new QProgressBar();
 		m_indexingProgress->setMinimum(0);

@@ -102,7 +102,7 @@ int main(int argc, char* argv[])
 		std::cout << "ERROR: Please run Sourcetrail via the Sourcetrail.sh script!" << std::endl;
 	}
 
-	MessageStatus(std::wstring(L"Starting Sourcetrail version ") + version.toDisplayWString())
+	MessageStatus(std::wstring(L"启动 Sourcetrail ") + version.toDisplayWString())
 		.dispatch();
 
 	commandline::CommandLineParser commandLineParser(version.toDisplayString());

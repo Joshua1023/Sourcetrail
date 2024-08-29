@@ -31,26 +31,17 @@ QtProjectWizardContentPathsHeaderSearch::QtProjectWizardContentPathsHeaderSearch
 		{ showValidationResult(unresolvedIncludes); })
 	, m_indicateAsAdditional(indicateAsAdditional)
 {
-	setTitleString(m_indicateAsAdditional ? "Additional Include Paths" : "Include Paths");
+	setTitleString(m_indicateAsAdditional ? "附件 Include 路径" : "Include 路径");
 	setHelpString(
-		((m_indicateAsAdditional ? "<b>Note</b>: Use the Additional Include Paths to add paths "
-								   "that are missing in the "
-								   "referenced project file.<br /><br />"
+		((m_indicateAsAdditional ? "<b>注意</b>：使用附加包含路径添加引用的项目文件中缺少的路径。<br /><br />"
 								 : "") +
-		 std::string("Include Paths are used for resolving #include directives in the indexed "
-					 "source and header files. These paths are "
-					 "usually passed to the compiler with the '-I' or '-iquote' flags.<br />"
+		 std::string("Include 路径用于解析索引源文件和头文件中的 #include 指令。这些路径通常使用“-I”或“-iquote”标志传递给编译器。<br />"
 					 "<br />"
-					 "Add all paths #include directives throughout your project are relative to. "
-					 "If all #include directives are "
-					 "specified relative to the project's root directory, please add that root "
-					 "directory here.<br />"
+					 "添加整个项目中所有与 #include 指令相关的路径。如果所有 #include 指令都是相对于项目的根目录指定的，请在此处添加该根目录。<br />"
 					 "<br />"
-					 "If your project also includes files from external libraries (e.g. boost), "
-					 "please add these directories as well "
-					 "(e.g. add 'path/to/boost_home/include').<br />"
+					 "如果您的项目还包含来自外部库的文件（例如 boost），请也添加这些目录（例如添加 'path/to/boost_home/include'）。<br />"
 					 "<br />"
-					 "You can make use of environment variables with ${ENV_VAR}."))
+					 "您可以通过 ${ENV_VAR} 的方式使用环境变量。"))
 			.c_str());
 }
 
@@ -61,7 +52,7 @@ void QtProjectWizardContentPathsHeaderSearch::populate(QGridLayout* layout, int&
 	if (!m_indicateAsAdditional)
 	{
 		{
-			QPushButton* detectionButton = new QPushButton(QStringLiteral("auto-detect"));
+			QPushButton* detectionButton = new QPushButton(QStringLiteral("自动检测"));
 			detectionButton->setObjectName(QStringLiteral("windowButton"));
 			connect(
 				detectionButton,
@@ -73,7 +64,7 @@ void QtProjectWizardContentPathsHeaderSearch::populate(QGridLayout* layout, int&
 		}
 		{
 			QPushButton* validationButton = new QPushButton(
-				QStringLiteral("validate include directives"));
+				QStringLiteral("验证 include 指令"));
 			validationButton->setObjectName(QStringLiteral("windowButton"));
 			connect(
 				validationButton,
@@ -112,17 +103,13 @@ void QtProjectWizardContentPathsHeaderSearch::detectIncludesButtonClicked()
 	m_window->saveContent();
 
 	m_pathsDialog = std::make_shared<QtPathListDialog>(
-		"Detect Include Paths",
-		"<p>Automatically search for header files in the paths provided below to find missing "
-		"include paths for "
-		"unresolved include directives in your source code.</p>"
-		"<p>The \"Files & Directories to Index\" will be searched by default, but you can add "
-		"further paths, such "
-		"as directories of third-party libraries, if required.</p>",
+		"检测 Include 路径",
+		"<p>自动在下面提供的路径中搜索头文件，以查找源代码中未解析的 include 指令的缺失 include 路径。</p>"
+		"<p>默认情况下会搜索“要索引的文件/目录”，但是您可以根据需要添加其他路径，例如第三方库的目录。</p>",
 		QtPathListBox::SELECTION_POLICY_DIRECTORIES_ONLY);
 
 	m_pathsDialog->setup();
-	m_pathsDialog->updateNextButton(QStringLiteral("Start"));
+	m_pathsDialog->updateNextButton(QStringLiteral("开始"));
 	m_pathsDialog->setCloseVisible(true);
 
 	m_pathsDialog->setRelativeRootDirectory(m_settings->getProjectDirectoryPath());
@@ -173,7 +160,7 @@ void QtProjectWizardContentPathsHeaderSearch::validateIncludesButtonClicked()
 
 				{
 					dialogView->setParentWindow(m_window);
-					dialogView->showUnknownProgressDialog(L"Processing", L"Gathering Source Files");
+					dialogView->showUnknownProgressDialog(L"处理中", L"正在收集源文件");
 					ScopedFunctor dialogHider(
 						[&dialogView]() { dialogView->hideUnknownProgressDialog(); });
 
@@ -208,8 +195,8 @@ void QtProjectWizardContentPathsHeaderSearch::validateIncludesButtonClicked()
 						static_cast<size_t>(log2(sourceFilePaths.size())),
 						[&](const float progress) {
 							dialogView->showProgressDialog(
-								L"Processing",
-								std::to_wstring(int(progress * sourceFilePaths.size())) + L" Files",
+								L"正在处理",
+								std::to_wstring(int(progress * sourceFilePaths.size())) + L" 个文件",
 								int(progress * 100.0f));
 						});
 				}
@@ -247,7 +234,7 @@ void QtProjectWizardContentPathsHeaderSearch::finishedSelectDetectIncludesRootPa
 				std::vector<FilePath> headerSearchPaths;
 				{
 					dialogView->setParentWindow(m_window);
-					dialogView->showUnknownProgressDialog(L"Processing", L"Gathering Source Files");
+					dialogView->showUnknownProgressDialog(L"处理中", L"正在收集源文件");
 					ScopedFunctor dialogHider(
 						[&dialogView]() { dialogView->hideUnknownProgressDialog(); });
 
@@ -280,8 +267,8 @@ void QtProjectWizardContentPathsHeaderSearch::finishedSelectDetectIncludesRootPa
 						static_cast<size_t>(log2(sourceFilePaths.size())),
 						[&](const float progress) {
 							dialogView->showProgressDialog(
-								L"Processing",
-								std::to_wstring(int(progress * sourceFilePaths.size())) + L" Files",
+								L"正在处理",
+								std::to_wstring(int(progress * sourceFilePaths.size())) + L" 个文件",
 								int(progress * 100.0f));
 						});
 				}
@@ -343,8 +330,7 @@ void QtProjectWizardContentPathsHeaderSearch::showDetectedIncludesResult(
 	{
 		QtMessageBox msgBox(m_window);
 		msgBox.setText(
-			"<p>No additional include paths have been detected while searching the provided "
-			"paths.</p>");
+			"<p>搜索提供的路径时未检测到任何附加 include 路径。</p>");
 		msgBox.execModal();
 	}
 	else
@@ -356,17 +342,16 @@ void QtProjectWizardContentPathsHeaderSearch::showDetectedIncludesResult(
 		}
 
 		m_filesDialog = new QtTextEditDialog(
-			"Detected Include Paths",
-			("<p>The following <b>" + std::to_string(additionalHeaderSearchPaths.size()) +
-			 "</b> include paths have been "
-			 "detected and will be added to the include paths of this Source Group.<b>")
+			"检测到的 Include 路径",
+			("<p>以下<b>" + std::to_string(additionalHeaderSearchPaths.size()) +
+			 "</b> 条 include 路径已被检测到并将添加到该源文件组的 include 路径中。<b>")
 				.c_str(),
 			m_window);
 
 		m_filesDialog->setup();
 		m_filesDialog->setReadOnly(true);
 		m_filesDialog->setCloseVisible(true);
-		m_filesDialog->updateNextButton(QStringLiteral("Add"));
+		m_filesDialog->updateNextButton(QStringLiteral("添加"));
 
 		m_filesDialog->setText(detailedText);
 		m_filesDialog->showWindow();
@@ -391,7 +376,7 @@ void QtProjectWizardContentPathsHeaderSearch::showValidationResult(
 	{
 		QtMessageBox msgBox(m_window);
 		msgBox.setText(QStringLiteral(
-			"<p>All include directives throughout the indexed files have been resolved.</p>"));
+			"<p>索引文件中的所有 include 指令均已解析。</p>"));
 		msgBox.execModal();
 	}
 	else
@@ -417,15 +402,10 @@ void QtProjectWizardContentPathsHeaderSearch::showValidationResult(
 		}
 
 		m_filesDialog = new QtTextEditDialog(
-			"Unresolved Include Directives",
-			("<p>The indexed files contain <b>" + std::to_string(unresolvedIncludes.size()) +
-			 "</b> include directive" + (unresolvedIncludes.size() == 1 ? "" : "s") +
-			 " that could not be resolved correctly. Please check the details "
-			 "and add the respective header search paths.</p>"
-			 "<p><b>Note</b>: This is only a quick pass that does not regard block commenting or "
-			 "conditional preprocessor "
-			 "directives. This means that some of the unresolved includes may actually not be "
-			 "required by the indexer.</p>")
+			"未解析的 Include 指令",
+			("<p>被索引文件中包含 <b>" + std::to_string(unresolvedIncludes.size()) +
+			 "</b> 条未能正确解析的 include 指令。请检查详细信息并添加相应的头文件搜索路径。</p>"
+			 "<p><b>注意</b>：这只是一次快速检查，不考虑块注释或条件预处理器指令。这意味着索引器实际上可能不需要某些未解析的 includes。</p>")
 				.c_str(),
 			m_window);
 

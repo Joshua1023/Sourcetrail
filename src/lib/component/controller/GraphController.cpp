@@ -211,7 +211,7 @@ void GraphController::handleMessage(MessageActivateTrail* message)
 {
 	TRACE("trail activate");
 
-	MessageStatus(L"Retrieving graph data", false, true).dispatch();
+	MessageStatus(L"检索图数据", false, true).dispatch();
 
 	m_activeEdgeIds.clear();
 
@@ -247,7 +247,7 @@ void GraphController::handleMessage(MessageActivateTrail* message)
 
 	if (message->originId && message->targetId && !graph->getNodeById(message->targetId))
 	{
-		MessageStatus(L"No trail graph found.", true).dispatch();
+		MessageStatus(L"未找到踪迹图。", true).dispatch();
 
 		Application::getInstance()->handleDialog(
 			L"No custom trail was found between the specified symbols with the specified "
@@ -267,7 +267,7 @@ void GraphController::handleMessage(MessageActivateTrail* message)
 
 		if (r == 1)
 		{
-			MessageStatus(L"Aborted graph display").dispatch();
+			MessageStatus(L"中止图显示").dispatch();
 			return;
 		}
 	}
@@ -280,7 +280,7 @@ void GraphController::handleMessage(MessageActivateTrail* message)
 	setActive(m_activeNodeIds, true);
 	setVisibility(true);
 
-	MessageStatus(L"Layouting graph", false, true).dispatch();
+	MessageStatus(L"正在布局图", false, true).dispatch();
 
 	if (!message->custom && message->edgeTypes & Edge::EDGE_INHERITANCE)
 	{
@@ -299,7 +299,7 @@ void GraphController::handleMessage(MessageActivateTrail* message)
 		}
 	}
 
-	MessageStatus(L"Displaying graph", false, true).dispatch();
+	MessageStatus(L"正在显示图", false, true).dispatch();
 
 	GraphView::GraphParams params;
 	params.centerActiveNode = message->isLast();
@@ -535,7 +535,7 @@ void GraphController::handleMessage(MessageGraphNodeHide* message)
 	{
 		if (node->active || node->hasActiveSubNode())
 		{
-			MessageStatus(L"Can't hide active node or node with active children", true).dispatch();
+			MessageStatus(L"无法隐藏活动节点或具有活动子节点的节点", true).dispatch();
 			return;
 		}
 

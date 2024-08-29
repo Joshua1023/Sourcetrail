@@ -9,22 +9,19 @@ QtProjectWizardContentPathPythonEnvironment::QtProjectWizardContentPathPythonEnv
 	std::shared_ptr<SourceGroupSettingsPythonEmpty> settings, QtProjectWizardWindow* window)
 	: QtProjectWizardContentPath(window), m_settings(settings)
 {
-	setTitleString("Python Environment");
+	setTitleString("Python 环境");
 	setHelpString(
-		"Here you can specify the path to the directory or to the executable of the (virtual) "
-		"Python environment that should be used to resolve "
-		"dependencies within the indexed source code. <br />"
+		"您可以在此处指定用于解析索引源代码中的依赖关系的目录路径或（虚拟）Python 环境的可执行文件路径。<br />"
 		"<br />"
-		"If you would run:<br />"
+		"比如您运行过：<br />"
 		"<br />"
 		"$ cd C:\\dev\\python\\envs<br />"
 		"$ virtualenv py37<br />"
 		"<br />"
-		"you would set it to \"C:\\dev\\python\\envs\\py37\" or "
-		"\"C:\\dev\\python\\envs\\py37\\Scripts\\python.exe\". <br />"
-		"Leave blank to use the default Python environment. You can make use of environment "
-		"variables with ${ENV_VAR}.");
-	setPlaceholderString("Use Default");
+		"那么就可以将本项设置为 \"C:\\dev\\python\\envs\\py37\" 或 "
+		"\"C:\\dev\\python\\envs\\py37\\Scripts\\python.exe\"。<br />"
+		"留空则使用默认 Python 环境。您可以使用 ${ENV_VAR} 使用环境变量。");
+	setPlaceholderString("使用默认环境");
 }
 
 void QtProjectWizardContentPathPythonEnvironment::populate(QGridLayout* layout, int& row)
@@ -60,7 +57,7 @@ void QtProjectWizardContentPathPythonEnvironment::onTextChanged(const QString& t
 	}
 	else
 	{
-		m_resultLabel->setText("Checking validity of Python environment...");
+		m_resultLabel->setText("正在检查 Python 环境的有效性...");
 		std::thread([=, this]() {
 			const utility::ProcessOutput out = utility::executeProcess(
 				ResourcePaths::getPythonIndexerFilePath().wstr(),
@@ -80,8 +77,7 @@ void QtProjectWizardContentPathPythonEnvironment::onTextChanged(const QString& t
 				else
 				{
 					m_resultLabel->setText(
-						"An error occurred while checking environment path. Unable to check "
-						"validity.");
+						"检查环境路径时出错。无法检查有效性。");
 				}
 			});
 		}).detach();

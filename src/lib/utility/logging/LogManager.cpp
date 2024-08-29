@@ -35,12 +35,12 @@ void LogManager::setLoggingEnabled(bool enabled)
 		if (enabled)
 		{
 			LOG_INFO(std::string("Enabled logging for Sourcetrail version ") + Version::getApplicationVersion().toDisplayString());
-			MessageStatus(L"Enabled console and file logging.").dispatch();
+			MessageStatus(L"启用控制台和文件日志记录。").dispatch();
 		}
 		else
 		{
 			LOG_INFO("Disabled logging");
-			MessageStatus(L"Disabled console and file logging.").dispatch();
+			MessageStatus(L"禁用控制台和文件日志记录。").dispatch();
 		}
 	}
 }

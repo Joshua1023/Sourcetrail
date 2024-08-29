@@ -23,30 +23,30 @@ QtIndexingReportDialog::QtIndexingReportDialog(
 
 	if (interrupted)
 	{
-		QtIndexingDialog::createTitleLabel(QStringLiteral("Interrupted Indexing"), m_layout);
+		QtIndexingDialog::createTitleLabel(QStringLiteral("中断索引"), m_layout);
 	}
 	else if (shallow)
 	{
-		QtIndexingDialog::createTitleLabel(QStringLiteral("Finished Shallow Indexing"), m_layout);
+		QtIndexingDialog::createTitleLabel(QStringLiteral("完成浅索引"), m_layout);
 	}
 	else
 	{
-		QtIndexingDialog::createTitleLabel(QStringLiteral("Finished Indexing"), m_layout);
+		QtIndexingDialog::createTitleLabel(QStringLiteral("完成索引"), m_layout);
 	}
 
 	m_layout->addSpacing(5);
 
 	QtIndexingDialog::createMessageLabel(m_layout)->setText(
-		QStringLiteral("Source files indexed:   ") + QString::number(indexedFileCount) + "/" +
+		QStringLiteral("被索引文件数：   ") + QString::number(indexedFileCount) + "/" +
 		QString::number(totalIndexedFileCount));
 
 	QtIndexingDialog::createMessageLabel(m_layout)->setText(
-		QStringLiteral("Total files completed:   ") + QString::number(completedFileCount) + "/" +
+		QStringLiteral("处理完成文件总数：   ") + QString::number(completedFileCount) + "/" +
 		QString::number(totalFileCount));
 
 	m_layout->addSpacing(12);
 	QtIndexingDialog::createMessageLabel(m_layout)->setText(
-		QStringLiteral("Time:   ") + QString::fromStdString(TimeStamp::secondsToString(time)));
+		QStringLiteral("花费时间：   ") + QString::fromStdString(TimeStamp::secondsToString(time)));
 
 	m_layout->addSpacing(12);
 	m_errorWidget = QtIndexingDialog::createErrorWidget(m_layout);
@@ -56,8 +56,7 @@ QtIndexingReportDialog::QtIndexingReportDialog(
 	if (shallow)
 	{
 		createMessageLabel(m_layout)->setText(QStringLiteral(
-			"<i>You can now browse your project while running a second pass for in-depth "
-			"indexing!</i>"));
+			"<i>您现在可以在再次运行深度索引的同时浏览您的项目！</i>"));
 		m_layout->addSpacing(12);
 	}
 
@@ -65,7 +64,7 @@ QtIndexingReportDialog::QtIndexingReportDialog(
 		QHBoxLayout* buttons = new QHBoxLayout();
 		if (interrupted)
 		{
-			QPushButton* discardButton = new QPushButton(QStringLiteral("Discard"));
+			QPushButton* discardButton = new QPushButton(QStringLiteral("废弃"));
 			discardButton->setObjectName(QStringLiteral("windowButton"));
 			connect(
 				discardButton, &QPushButton::clicked, this, &QtIndexingReportDialog::onDiscardPressed);
@@ -74,7 +73,7 @@ QtIndexingReportDialog::QtIndexingReportDialog(
 		else if (shallow)
 		{
 			QPushButton* startInDepthButton = new QPushButton(
-				QStringLiteral("Start In-Depth Indexing"));
+				QStringLiteral("开始深度索引"));
 			startInDepthButton->setObjectName(QStringLiteral("windowButton"));
 			connect(
 				startInDepthButton,
@@ -87,8 +86,8 @@ QtIndexingReportDialog::QtIndexingReportDialog(
 		buttons->addStretch();
 
 		QPushButton* confirmButton = new QPushButton(
-			interrupted ? QStringLiteral("Keep")
-						: (shallow ? QStringLiteral("Later") : QStringLiteral("OK")));
+			interrupted ? QStringLiteral("保留")
+						: (shallow ? QStringLiteral("稍后处理") : QStringLiteral("好的")));
 		confirmButton->setObjectName(QStringLiteral("windowButton"));
 		confirmButton->setDefault(true);
 		connect(
@@ -115,15 +114,11 @@ void QtIndexingReportDialog::updateErrorCount(size_t errorCount, size_t fatalCou
 {
 	if (m_errorWidget && errorCount)
 	{
-		QString str = QString::number(errorCount) + QStringLiteral(" Error");
-		if (errorCount > 1)
-		{
-			str += QStringLiteral("s");
-		}
+		QString str = QString::number(errorCount) + QStringLiteral(" 个错误");
 
 		if (fatalCount)
 		{
-			str += QStringLiteral(" (") + QString::number(fatalCount) + QStringLiteral(" Fatal)");
+			str += QStringLiteral("（") + QString::number(fatalCount) + QStringLiteral(" 致命错误）");
 		}
 
 		QPushButton* errorCount = m_errorWidget->findChild<QPushButton*>(

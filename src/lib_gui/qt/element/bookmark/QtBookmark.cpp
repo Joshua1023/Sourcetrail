@@ -28,13 +28,13 @@ QtBookmark::QtBookmark(ControllerProxy<BookmarkController>* controllerProxy)
 
 	m_activateButton = new QPushButton();
 	m_activateButton->setObjectName(QStringLiteral("activate_button"));
-	m_activateButton->setToolTip(QStringLiteral("Activate bookmark"));
+	m_activateButton->setToolTip(QStringLiteral("打开书签"));
 	m_activateButton->setAttribute(Qt::WA_LayoutUsesWidgetRect);
 	buttonsLayout->addWidget(m_activateButton);
 
 	m_toggleCommentButton = new QPushButton();
 	m_toggleCommentButton->setObjectName(QStringLiteral("comment_button"));
-	m_toggleCommentButton->setToolTip(QStringLiteral("Show Comment"));
+	m_toggleCommentButton->setToolTip(QStringLiteral("显示备注"));
 	m_toggleCommentButton->setAttribute(Qt::WA_LayoutUsesWidgetRect);
 	m_toggleCommentButton->setIconSize(QSize(20, 20));
 	utility::setWidgetRetainsSpaceWhenHidden(m_toggleCommentButton);
@@ -49,7 +49,7 @@ QtBookmark::QtBookmark(ControllerProxy<BookmarkController>* controllerProxy)
 
 	m_editButton = new QPushButton();
 	m_editButton->setObjectName(QStringLiteral("edit_button"));
-	m_editButton->setToolTip(QStringLiteral("Edit bookmark"));
+	m_editButton->setToolTip(QStringLiteral("修改书签"));
 	m_editButton->setAttribute(Qt::WA_LayoutUsesWidgetRect);
 	m_editButton->setIconSize(QSize(20, 20));
 	m_editButton->setIcon(QPixmap(QString::fromStdWString(
@@ -60,7 +60,7 @@ QtBookmark::QtBookmark(ControllerProxy<BookmarkController>* controllerProxy)
 
 	m_deleteButton = new QPushButton();
 	m_deleteButton->setObjectName(QStringLiteral("delete_button"));
-	m_deleteButton->setToolTip(QStringLiteral("Delete bookmark"));
+	m_deleteButton->setToolTip(QStringLiteral("删除书签"));
 	m_deleteButton->setAttribute(Qt::WA_LayoutUsesWidgetRect);
 	m_deleteButton->setIconSize(QSize(20, 20));
 	m_deleteButton->setIcon(QPixmap(
@@ -209,10 +209,10 @@ void QtBookmark::editClicked()
 void QtBookmark::deleteClicked()
 {
 	QtMessageBox msgBox;
-	msgBox.setText(QStringLiteral("Delete Bookmark"));
-	msgBox.setInformativeText(QStringLiteral("Do you really want to delete this bookmark?"));
-	QPushButton *deleteButton = msgBox.addButton(QStringLiteral("Delete"), QtMessageBox::ButtonRole::YesRole);
-	msgBox.addButton(QStringLiteral("Keep"), QtMessageBox::ButtonRole::NoRole);
+	msgBox.setText(QStringLiteral("删除书签"));
+	msgBox.setInformativeText(QStringLiteral("确定删除该书签？"));
+	QPushButton *deleteButton = msgBox.addButton(QStringLiteral("删除"), QtMessageBox::ButtonRole::YesRole);
+	msgBox.addButton(QStringLiteral("保留"), QtMessageBox::ButtonRole::NoRole);
 	msgBox.setIcon(QtMessageBox::Icon::Question);
 	if (msgBox.execModal() == deleteButton)	 // QtMessageBox::Yes
 	{

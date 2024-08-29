@@ -154,7 +154,7 @@ void QtDialogView::startIndexingDialog(
 			std::shared_ptr<QTimer> timer = std::make_shared<QTimer>();
 			timer->setSingleShot(true);
 			connect(timer.get(), &QTimer::timeout, [=, this]() {
-				showUnknownProgress(L"Preparing Indexing", L"Processing Files", true);
+				showUnknownProgress(L"准备索引", L"处理文件", true);
 			});
 			timer->start(200);
 
@@ -211,7 +211,7 @@ void QtDialogView::updateIndexingDialog(
 			{
 				stati.push_back(
 					L"[" + std::to_wstring(startedFileCount) + L"/" +
-					std::to_wstring(totalFileCount) + L"] Indexing file: " + path.wstr());
+					std::to_wstring(totalFileCount) + L"] 索引文件：" + path.wstr());
 			}
 			MessageStatus(stati, false, false, m_dialogsVisible).dispatch();
 		}
@@ -247,7 +247,7 @@ void QtDialogView::updateCustomIndexingDialog(
 			m_windowStack.getTopWindow());
 		if (window)
 		{
-			window->updateTitle(QStringLiteral("Executing Commands"));
+			window->updateTitle(QStringLiteral("执行命令"));
 		}
 	});
 }

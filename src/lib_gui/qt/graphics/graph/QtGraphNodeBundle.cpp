@@ -25,7 +25,7 @@ QtGraphNodeBundle::QtGraphNodeBundle(
 
 	this->setAcceptHoverEvents(true);
 
-	this->setToolTip(QStringLiteral("bundle"));
+	this->setToolTip(QStringLiteral("节点集"));
 }
 
 QtGraphNodeBundle::~QtGraphNodeBundle() = default;

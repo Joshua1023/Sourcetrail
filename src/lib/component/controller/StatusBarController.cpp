@@ -56,11 +56,11 @@ void StatusBarController::handleMessage(MessageIndexingStatus* message)
 
 void StatusBarController::handleMessage(MessagePingReceived* message)
 {
-	std::wstring status = L"No IDE connected";
+	std::wstring status = L"没有连接 IDE";
 
 	if (!message->ideName.empty())
 	{
-		status = L"Connected to ";
+		status = L"连接到 ";
 		status += message->ideName;
 	}
 

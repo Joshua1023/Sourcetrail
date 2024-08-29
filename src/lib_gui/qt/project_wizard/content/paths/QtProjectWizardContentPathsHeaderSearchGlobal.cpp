@@ -14,17 +14,15 @@ QtProjectWizardContentPathsHeaderSearchGlobal::QtProjectWizardContentPathsHeader
 		  QtPathListBox::SELECTION_POLICY_DIRECTORIES_ONLY,
 		  true)
 {
-	setTitleString(QStringLiteral("Global Include Paths"));
+	setTitleString(QStringLiteral("全局 Include 路径"));
 	setHelpString(QString::fromStdString(
-		"The Global Include Paths will be used in all your projects in addition to the project "
-		"specific Include Paths. "
-		"These paths are usually passed to the compiler with the '-isystem' flag.<br />"
+		"除了项目特定的 include 路径外，全局 include 路径还将用于您的所有项目。这些路径通常使用“-isystem”标志传递给编译器。<br />"
 		"<br />"
-		"Use them to add system header paths (See <a "
+		"使用它们添加系统头文件路径（参考 <a "
 		"href=\"" +
 		utility::getDocumentationLink() +
 		"#finding-system-header-locations\">"
-		"Finding System Header Locations</a> or use the auto detection below)."));
+		"查找系统头文件位置</a> 或者使用下方的自动检测）。"));
 
 	m_pathDetector = utility::getCxxHeaderPathDetector();
 	m_makePathsRelativeToProjectFileLocation = false;
@@ -72,18 +70,12 @@ bool QtProjectWizardContentPathsHeaderSearchGlobal::check()
 		if (compilerHeaderPaths.size())
 		{
 			QtMessageBox msgBox(m_window);
-			msgBox.setText(QStringLiteral("Multiple Compiler Headers"));
+			msgBox.setText(QStringLiteral("多编译器头文件"));
 			msgBox.setInformativeText(
-				"Your Global Include Paths contain other paths that hold C/C++ compiler headers, "
-				"probably those of your local C/C++ compiler. They are possibly in conflict with the "
-				"compiler headers of "
-				"Sourcetrail's C/C++ indexer. This can lead to compatibility errors during indexing. "
-				"Do "
-				"you want to remove "
-				"these paths?");
+				"您的全局 include 路径包含其他 C/C++ 编译器头文件的路径，可能是您本地 C/C++ 编译器的路径。它们可能与 Sourcetrail 的 C/C++ 索引器的编译器头文件冲突，可能会导致索引期间出现兼容性错误。是否要移除这些路径？");
 			msgBox.setDetailedText(compilerHeaderPaths);
-			QPushButton *removeButton = msgBox.addButton(QStringLiteral("Remove"), QtMessageBox::ButtonRole::YesRole);
-			msgBox.addButton(QStringLiteral("Keep"), QtMessageBox::ButtonRole::NoRole);
+			QPushButton *removeButton = msgBox.addButton(QStringLiteral("移除"), QtMessageBox::ButtonRole::YesRole);
+			msgBox.addButton(QStringLiteral("保留"), QtMessageBox::ButtonRole::NoRole);
 			msgBox.setIcon(QtMessageBox::Icon::Question);
 			if (msgBox.execModal() == removeButton)	 // QtMessageBox::Yes
 			{

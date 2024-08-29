@@ -20,16 +20,8 @@ void QtProjectWizardContentSourceGroupInfoText::populate(QGridLayout* layout, in
 	layoutHorz->addSpacing(60);
 
 	QLabel* infoLabel = new QLabel(
-		"<p>Please add at least one source group to your project. A source group specifies which "
-		"source files should be "
-		"analyzed by Sourcetrail and includes all parameters required to analyze those source "
-		"files. A Sourcetrail project "
-		"may contain multiple source groups, which may be necessary if you want to analyze source "
-		"files from different "
-		"projects that do not share the same parameters.</p>"
-		"<p><b>Hint</b>: If your project contains source code for multiple build targets, you can "
-		"add all of those source "
-		"files with one single source group as long as they all share the same parameters.</p>");
+		"<p>请向您的项目添加至少一个源文件组。源文件组指定哪些源文件应由 Sourcetrail 分析，并包含分析这些源文件所需的所有参数。一个 Sourcetrail 项目可能包含多个源文件组，如果您想分析来自不同项目且不共享相同参数的源文件，这可能是必要的。</p>"
+		"<p><b>提示</b>: 如果您的项目包含多个构建目标的源代码，您可以使用一个源文件组添加所有这些源文件，只要它们都共享相同的参数。</p>");
 	infoLabel->setObjectName(QStringLiteral("info"));
 	infoLabel->setWordWrap(true);
 	layoutHorz->addWidget(infoLabel);

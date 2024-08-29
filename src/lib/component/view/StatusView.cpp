@@ -6,5 +6,5 @@ StatusView::~StatusView() = default;
 
 std::string StatusView::getName() const
 {
-	return "Status";
+	return "状态";
 }

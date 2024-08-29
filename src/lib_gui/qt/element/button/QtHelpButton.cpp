@@ -13,7 +13,7 @@ QtHelpButton::QtHelpButton(const QtHelpButtonInfo& info, QWidget* parent)
 	setAttribute(Qt::WA_LayoutUsesWidgetRect);	  // fixes layouting on Mac
 	setMouseTracking(true);
 
-	setToolTip(QStringLiteral("help"));
+	setToolTip(QStringLiteral("帮助"));
 	setIconSize(QSize(16, 16));
 	setObjectName(QStringLiteral("helpButton"));
 

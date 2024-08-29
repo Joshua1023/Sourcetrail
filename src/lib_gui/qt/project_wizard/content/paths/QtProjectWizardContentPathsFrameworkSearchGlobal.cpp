@@ -12,17 +12,15 @@ QtProjectWizardContentPathsFrameworkSearchGlobal::QtProjectWizardContentPathsFra
 		  QtPathListBox::SELECTION_POLICY_DIRECTORIES_ONLY,
 		  true)
 {
-	setTitleString(QStringLiteral("Global Framework Search Paths"));
+	setTitleString(QStringLiteral("全局框架搜索路径"));
 	setHelpString(QString::fromStdString(
-		"The Global Framework Search Paths will be used in all your projects - in addition to the "
-		"project specific "
-		"Framework Search Paths.<br />"
+		"除了项目特定的框架搜索路径之外，全局框架搜索路径还将用于您的所有项目。<br />"
 		"<br />"
-		"They define where MacOS framework containers (.framework) are found "
-		"(See <a href=\"" +
+		"它们定义了 MacOS 框架容器（.framework）的位置 "
+		"（参考 <a href=\"" +
 		utility::getDocumentationLink() +
 		"#finding-system-header-locations\">"
-		"Finding System Header Locations</a> or use the auto detection below)."));
+		"查找系统头文件位置</a> 或使用下方的自动检测）。"));
 
 	m_pathDetector = utility::getCxxFrameworkPathDetector();
 	m_makePathsRelativeToProjectFileLocation = false;

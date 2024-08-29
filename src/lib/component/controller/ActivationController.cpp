@@ -134,7 +134,7 @@ void ActivationController::handleMessage(MessageResetZoom*  /*message*/)
 		MessageRefreshUI().dispatch();
 	}
 
-	MessageStatus(L"Font size: " + std::to_wstring(fontSizeStd)).dispatch();
+	MessageStatus(L"字号：" + std::to_wstring(fontSizeStd)).dispatch();
 }
 
 void ActivationController::handleMessage(MessageSearch* message)
@@ -203,6 +203,6 @@ void ActivationController::handleMessage(MessageZoom* message)
 	settings->setFontSize(fontSize + (message->zoomIn ? 1 : -1));
 	settings->save();
 
-	MessageStatus(L"Font size: " + std::to_wstring(settings->getFontSize())).dispatch();
+	MessageStatus(L"字号：" + std::to_wstring(settings->getFontSize())).dispatch();
 	MessageRefreshUI().dispatch();
 }

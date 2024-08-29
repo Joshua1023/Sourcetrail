@@ -21,7 +21,7 @@ QtProjectWizardContentExtensions::QtProjectWizardContentExtensions(
 
 void QtProjectWizardContentExtensions::populate(QGridLayout* layout, int& row)
 {
-	QLabel* sourceLabel = createFormLabel(QStringLiteral("Source File Extensions"));
+	QLabel* sourceLabel = createFormLabel(QStringLiteral("源文件扩展名"));
 	layout->addWidget(sourceLabel, row, QtProjectWizardWindow::FRONT_COL, Qt::AlignTop);
 
 	QString cxxAddition;
@@ -37,7 +37,7 @@ void QtProjectWizardContentExtensions::populate(QGridLayout* layout, int& row)
 #endif
 
 	addHelpButton(
-		QStringLiteral("Source File Extensions"),
+		QStringLiteral("源文件扩展名"),
 		QStringLiteral(
 			"Define extensions for source files including the dot (e.g. \".cpp\" or \".java\").") +
 			cxxAddition,

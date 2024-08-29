@@ -87,8 +87,8 @@ void QtLicenseWindow::populateWindow(QWidget* widget)
 
 void QtLicenseWindow::windowReady()
 {
-	updateTitle(QStringLiteral("License"));
-	updateCloseButton(QStringLiteral("Close"));
+	updateTitle(QStringLiteral("许可"));
+	updateCloseButton(QStringLiteral("关闭"));
 
 	setNextVisible(false);
 	setPreviousVisible(false);

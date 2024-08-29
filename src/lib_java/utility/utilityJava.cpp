@@ -77,8 +77,8 @@ bool prepareJavaEnvironmentAndDisplayOccurringErrors()
 	if (!JavaEnvironmentFactory::getInstance())
 	{
 		std::wstring dialogMessage =
-			L"Sourcetrail was unable to initialize Java environment on this machine.\n"
-			"Please make sure to provide the correct Java Path in the preferences.";
+			L"Sourcetrail 无法在此机器上初始化 Java 环境。\n"
+			"请确保在设置中提供正确的 Java 路径。";
 
 		if (!errorString.empty())
 		{
@@ -97,7 +97,7 @@ std::set<FilePath> fetchRootDirectories(const std::set<FilePath>& sourceFilePath
 {
 	std::shared_ptr<DialogView> dialogView = Application::getInstance()->getDialogView(
 		DialogView::UseCase::PROJECT_SETUP);
-	dialogView->showUnknownProgressDialog(L"Preparing Project", L"Gathering Root\nDirectories");
+	dialogView->showUnknownProgressDialog(L"项目准备中", L"正在收集根目录");
 
 	ScopedFunctor dialogHider([&dialogView]() { dialogView->hideUnknownProgressDialog(); });
 

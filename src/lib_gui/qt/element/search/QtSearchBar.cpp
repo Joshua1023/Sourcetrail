@@ -23,7 +23,7 @@ QtSearchBar::QtSearchBar()
 	m_homeButton = new QtSearchBarButton(
 		ResourcePaths::getGuiDirectoryPath().concatenate(L"search_view/images/home.png"));
 	m_homeButton->setObjectName(QStringLiteral("home_button"));
-	m_homeButton->setToolTip(QStringLiteral("to overview"));
+	m_homeButton->setToolTip(QStringLiteral("回到概览页"));
 	layout->addWidget(m_homeButton);
 	connect(m_homeButton, &QPushButton::clicked, this, &QtSearchBar::homeButtonClicked);
 
@@ -49,7 +49,7 @@ QtSearchBar::QtSearchBar()
 	m_searchButton = new QtSearchBarButton(
 		ResourcePaths::getGuiDirectoryPath().concatenate(L"search_view/images/search.png"));
 	m_searchButton->setObjectName(QStringLiteral("search_button"));
-	m_searchButton->setToolTip(QStringLiteral("search"));
+	m_searchButton->setToolTip(QStringLiteral("查找"));
 	layout->addWidget(m_searchButton);
 
 	connect(m_searchButton, &QPushButton::clicked, m_searchBox, &QtSmartSearchBox::startSearch);

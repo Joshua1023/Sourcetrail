@@ -425,13 +425,13 @@ void QtProjectWizard::populateWindow(QWidget* widget)
 		menuLayout->setContentsMargins(0, 0, 0, 0);
 		menuLayout->setSpacing(0);
 
-		m_generalButton = new QPushButton(QStringLiteral("General"));
+		m_generalButton = new QPushButton(QStringLiteral("常用"));
 		m_generalButton->setObjectName(QStringLiteral("general_button"));
 		m_generalButton->setCheckable(true);
 		connect(m_generalButton, &QPushButton::clicked, this, &QtProjectWizard::generalButtonClicked);
 		menuLayout->addWidget(m_generalButton);
 
-		QLabel* sourceGroupLabel = new QLabel(QStringLiteral("Source Groups:"));
+		QLabel* sourceGroupLabel = new QLabel(QStringLiteral("源文件组:"));
 		menuLayout->addWidget(sourceGroupLabel);
 
 		m_sourceGroupList = new QListWidget();
@@ -463,9 +463,9 @@ void QtProjectWizard::populateWindow(QWidget* widget)
 		m_removeButton->setIconSize(QSize(20, 20));
 		m_duplicateButton->setIconSize(QSize(20, 20));
 
-		addButton->setToolTip(QStringLiteral("Add Source Group"));
-		m_removeButton->setToolTip(QStringLiteral("Remove Source Group"));
-		m_duplicateButton->setToolTip(QStringLiteral("Copy Source Group"));
+		addButton->setToolTip(QStringLiteral("添加源文件组"));
+		m_removeButton->setToolTip(QStringLiteral("删除源文件组"));
+		m_duplicateButton->setToolTip(QStringLiteral("复制源文件组"));
 
 		addButton->setObjectName(QStringLiteral("action_button"));
 		m_removeButton->setObjectName(QStringLiteral("action_button"));
@@ -519,18 +519,18 @@ void QtProjectWizard::windowReady()
 {
 	if (m_editing)
 	{
-		updateTitle(QStringLiteral("Edit Project"));
-		updateNextButton(QStringLiteral("Save"));
+		updateTitle(QStringLiteral("修改项目配置"));
+		updateNextButton(QStringLiteral("保存"));
 	}
 	else
 	{
-		updateTitle(QStringLiteral("New Project"));
-		updateNextButton(QStringLiteral("Create"));
+		updateTitle(QStringLiteral("新建项目"));
+		updateNextButton(QStringLiteral("创建"));
 		setNextEnabled(false);
 	}
 
-	updateSubTitle(QStringLiteral("Overview"));
-	updatePreviousButton(QStringLiteral("Add Source Group"));
+	updateSubTitle(QStringLiteral("概览"));
+	updatePreviousButton(QStringLiteral("添加源文件组"));
 
 	connect(this, &QtProjectWizard::previous, this, &QtProjectWizard::newSourceGroup);
 	connect(this, &QtProjectWizard::next, this, &QtProjectWizard::createProject);
@@ -768,10 +768,10 @@ void QtProjectWizard::removeSelectedSourceGroup()
 	}
 
 	QtMessageBox msgBox(this);
-	msgBox.setText(QStringLiteral("Remove Source Group"));
-	msgBox.setInformativeText(QStringLiteral("Do you really want to remove this source group from the project?"));
-	QPushButton *yesButton = msgBox.addButton(QStringLiteral("Yes"), QtMessageBox::ButtonRole::YesRole);
-	msgBox.addButton(QStringLiteral("No"), QtMessageBox::ButtonRole::NoRole);
+	msgBox.setText(QStringLiteral("删除源文件组"));
+	msgBox.setInformativeText(QStringLiteral("确认从该项目中删除此源文件组？"));
+	QPushButton *yesButton = msgBox.addButton(QStringLiteral("是"), QtMessageBox::ButtonRole::YesRole);
+	msgBox.addButton(QStringLiteral("否"), QtMessageBox::ButtonRole::NoRole);
 	msgBox.setIcon(QtMessageBox::Icon::Question);
 	if (msgBox.execModal() == yesButton)	 // QtMessageBox::Yes
 	{
@@ -911,7 +911,7 @@ void QtProjectWizard::newSourceGroup()
 	window->show();
 	window->setNextEnabled(false);
 	window->setPreviousEnabled(false);
-	window->updateSubTitle(QStringLiteral("Type Selection"));
+	window->updateSubTitle(QStringLiteral("类型选择"));
 }
 
 void QtProjectWizard::newSourceGroupFromVS()
@@ -1034,13 +1034,12 @@ void QtProjectWizard::createProject()
 	m_projectSettings->setAllSourceGroupSettings(m_allSourceGroupSettings);
 	if (!m_projectSettings->save(path))
 	{
-		MessageStatus(L"Unable to save project to location: " + path.wstr()).dispatch();
+		MessageStatus(L"无法将项目保存：" + path.wstr()).dispatch();
 
 		QtMessageBox msgBox(this);
-		msgBox.setText(QStringLiteral("Could not create Project"));
+		msgBox.setText(QStringLiteral("无法创建项目"));
 		msgBox.setInformativeText(QString::fromStdWString(
-			L"<p>Sourcetrail was unable to save the project to the specified path. Please pick a "
-			L"different project location.</p>"));
+			L"<p>Sourcetrail 无法将项目保存到指定路径。请选择其他项目位置。</p>"));
 		msgBox.addButton(QStringLiteral("Ok"), QtMessageBox::ButtonRole::AcceptRole);
 		msgBox.execModal();
 
@@ -1062,7 +1061,7 @@ void QtProjectWizard::createProject()
 	}
 	else
 	{
-		MessageStatus(L"Created project: " + path.wstr()).dispatch();
+		MessageStatus(L"创建项目：" + path.wstr()).dispatch();
 	}
 
 	MessageLoadProject(path, settingsChanged).dispatch();

@@ -109,31 +109,22 @@ QtProjectWizardContentPathsIndexedHeaders::QtProjectWizardContentPathsIndexedHea
 {
 	m_showFilesString = QLatin1String("");
 
-	setTitleString(QStringLiteral("Header Files & Directories to Index"));
+	setTitleString(QStringLiteral("要索引的头文件/目录"));
 	setHelpString(QString::fromStdString(
-		"The provided " + m_projectKindName +
-		" already specifies which source files are part of your project. But Sourcetrail still "
-		"needs to know which header files to index as part of your project and which to skip. "
-		"Choosing to skip indexing "
-		"your system headers or external frameworks will significantly improve the overall "
-		"indexing performance.<br />"
+		"当前项目已经指定了哪些源文件是项目的一部分。但 Sourcetrail 仍然需要知道哪些头文件作为项目的一部分进行索引以及哪些要跳过。选择跳过对系统头文件或外部框架进行索引将显著提高整体索引性能。<br />"
 		"<br />"
-		"Use this list to define which header files should be indexed by Sourcetrail. Provide a "
-		"directory to recursively "
-		"add all contained files.<br />"
+		"使用此列表定义哪些头文件应由 Sourcetrail 索引。提供一个目录以递归添加所有包含的文件。<br />"
 		"<br />"
-		"You can make use of environment variables with ${ENV_VAR}.<br />"
+		"您可以通过 ${ENV_VAR} 的方式使用环境变量。<br />"
 		"<br />"
-		"<b>Hint</b>: Just enter the root path of your project if you want Sourcetrail to index "
-		"all contained headers it "
-		"encounters.<br />"));
+		"<b>提示</b>：如果您希望 Sourcetrail 索引其遇到的所有包含的头文件，只需输入项目的根目录。<br />"));
 }
 
 void QtProjectWizardContentPathsIndexedHeaders::populate(QGridLayout* layout, int& row)
 {
 	QtProjectWizardContentPaths::populate(layout, row);
 
-	QPushButton* button = new QPushButton(QString::fromStdString("Select from " + m_projectKindName));
+	QPushButton* button = new QPushButton(QString::fromStdString("选择自 " + m_projectKindName));
 	button->setObjectName(QStringLiteral("windowButton"));
 	connect(
 		button, &QPushButton::clicked, this, &QtProjectWizardContentPathsIndexedHeaders::buttonClicked);
@@ -166,12 +157,11 @@ bool QtProjectWizardContentPathsIndexedHeaders::check()
 	{
 		QtMessageBox msgBox(m_window);
 		msgBox.setText(
-			QStringLiteral("You didn't specify any Header Files & Directories to Index."));
+			QStringLiteral("您没有指定任何要索引的头文件和目录。"));
 		msgBox.setInformativeText(QString::fromStdString(
-			"Sourcetrail will only index the source files listed in the " + m_projectKindName +
-			" file and none of the included header files."));
-		QPushButton *continueButton = msgBox.addButton(QStringLiteral("Continue"), QtMessageBox::ButtonRole::YesRole);
-		msgBox.addButton(QStringLiteral("Cancel"), QtMessageBox::ButtonRole::NoRole);
+			"Sourcetrail 将仅索引项目文件中列出的源文件，而不会索引任何包含的头文件。"));
+		QPushButton *continueButton = msgBox.addButton(QStringLiteral("继续"), QtMessageBox::ButtonRole::YesRole);
+		msgBox.addButton(QStringLiteral("取消"), QtMessageBox::ButtonRole::NoRole);
 		msgBox.setDefaultButton(continueButton);
 
 		if (msgBox.execModal() != continueButton)
@@ -197,17 +187,15 @@ void QtProjectWizardContentPathsIndexedHeaders::buttonClicked()
 			if (!codeblocksProjectPath.exists())
 			{
 				QtMessageBox msgBox(m_window);
-				msgBox.setText(QStringLiteral("The provided Code::Blocks project path does not exist."));
+				msgBox.setText(QStringLiteral("提供的 Code::Blocks 项目路径不存在。"));
 				msgBox.setDetailedText(QString::fromStdWString(codeblocksProjectPath.wstr()));
 				msgBox.execModal();
 				return;
 			}
 
 			m_filesDialog = new QtSelectPathsDialog(
-				"Select from Include Paths",
-				"The list contains all Include Paths found in the Code::Blocks project. Red paths "
-				"do not exist. Select the "
-				"paths containing the header files you want to index with Sourcetrail.",
+				"从 Include 路径中选择",
+				"该列表包含在 Code::Blocks 项目中找到的所有 include 路径。红色路径不存在。选择包含要使用 Sourcetrail 索引的头文件的路径。",
 				m_window);
 			m_filesDialog->setup();
 
@@ -242,17 +230,15 @@ void QtProjectWizardContentPathsIndexedHeaders::buttonClicked()
 			if (!cdbPath.exists())
 			{
 				QtMessageBox msgBox(m_window);
-				msgBox.setText(QStringLiteral("The provided Compilation Database path does not exist."));
+				msgBox.setText(QStringLiteral("提供的编译数据库路径不存在。"));
 				msgBox.setDetailedText(QString::fromStdWString(cdbPath.wstr()));
 				msgBox.execModal();
 				return;
 			}
 
 			m_filesDialog = new QtSelectPathsDialog(
-				"Select from Include Paths",
-				"The list contains all Include Paths found in the Compilation Database. Red paths "
-				"do not exist. Select the "
-				"paths containing the header files you want to index with Sourcetrail.",
+				"从 Include 路径中选择",
+				"该列表包含在编译数据库中找到的所有包含路径。红色路径不存在。选择包含要使用 Sourcetrail 索引的头文件的路径。",
 				m_window);
 			m_filesDialog->setup();
 

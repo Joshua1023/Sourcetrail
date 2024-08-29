@@ -6,5 +6,5 @@ ErrorView::~ErrorView() = default;
 
 std::string ErrorView::getName() const
 {
-	return "Errors";
+	return "错误";
 }

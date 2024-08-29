@@ -106,7 +106,7 @@ std::string Application::getUUID()
 
 void Application::loadSettings()
 {
-	MessageStatus(L"Load settings: " + UserPaths::getAppSettingsFilePath().wstr()).dispatch();
+	MessageStatus(L"读取配置：" + UserPaths::getAppSettingsFilePath().wstr()).dispatch();
 
 	std::shared_ptr<ApplicationSettings> settings = ApplicationSettings::getInstance();
 	settings->load(UserPaths::getAppSettingsFilePath());
@@ -216,7 +216,7 @@ void Application::handleMessage(MessageCloseProject*  /*message*/)
 {
 	if (m_project && m_project->isIndexing())
 	{
-		MessageStatus(L"Cannot close the project while indexing.", true, false).dispatch();
+		MessageStatus(L"索引时无法关闭项目。", true, false).dispatch();
 		return;
 	}
 
@@ -253,7 +253,7 @@ void Application::handleMessage(MessageLoadProject* message)
 
 	if (m_project && m_project->isIndexing())
 	{
-		MessageStatus(L"Cannot load another project while indexing.", true, false).dispatch();
+		MessageStatus(L"索引时无法加载其他项目。", true, false).dispatch();
 		return;
 	}
 
@@ -267,7 +267,7 @@ void Application::handleMessage(MessageLoadProject* message)
 	}
 	else
 	{
-		MessageStatus(L"Loading Project: " + projectSettingsFilePath.wstr(), false, true).dispatch();
+		MessageStatus(L"正在读取项目：" + projectSettingsFilePath.wstr(), false, true).dispatch();
 
 		m_project.reset();
 
@@ -297,7 +297,7 @@ void Application::handleMessage(MessageLoadProject* message)
 			else
 			{
 				LOG_ERROR_STREAM(<< "Failed to load project.");
-				MessageStatus(L"Failed to load project: " + projectSettingsFilePath.wstr(), true)
+				MessageStatus(L"无法读取项目：" + projectSettingsFilePath.wstr(), true)
 					.dispatch();
 			}
 
@@ -305,24 +305,24 @@ void Application::handleMessage(MessageLoadProject* message)
 		}
 		catch (std::exception& e)
 		{
-			const std::wstring message = L"Failed to load project at \"" +
-				projectSettingsFilePath.wstr() + L"\" with exception: " +
+			const std::wstring message = L"无法读取项目 \"" +
+				projectSettingsFilePath.wstr() + L"\" ： " +
 				utility::decodeFromUtf8(e.what());
 			LOG_ERROR(message);
 			MessageStatus(message, true).dispatch();
 		}
 		catch (CppSQLite3Exception& e)
 		{
-			const std::wstring message = L"Failed to load project at \"" +
-				projectSettingsFilePath.wstr() + L"\" with sqlite exception: " +
+			const std::wstring message = L"无法读取项目 \"" +
+				projectSettingsFilePath.wstr() + L"\" ： " +
 				utility::decodeFromUtf8(e.errorMessage());
 			LOG_ERROR(message);
 			MessageStatus(message, true).dispatch();
 		}
 		catch (...)
 		{
-			const std::wstring message = L"Failed to load project at \"" +
-				projectSettingsFilePath.wstr() + L"\" with unknown exception.";
+			const std::wstring message = L"无法读取项目 \"" +
+				projectSettingsFilePath.wstr() + L"\" 发生未知错误。";
 			LOG_ERROR(message);
 			MessageStatus(message, true).dispatch();
 		}
@@ -362,7 +362,7 @@ void Application::handleMessage(MessageRefreshUI* message)
 
 void Application::handleMessage(MessageSwitchColorScheme* message)
 {
-	MessageStatus(L"Switch color scheme: " + message->colorSchemePath.wstr()).dispatch();
+	MessageStatus(L"切换配色方案到：" + message->colorSchemePath.wstr()).dispatch();
 
 	loadStyle(message->colorSchemePath);
 	MessageRefreshUI().noStyleReload().dispatch();
@@ -501,8 +501,8 @@ bool Application::checkSharedMemory()
 	if (error.size())
 	{
 		MessageStatus(
-			L"Error on accessing shared memory. Indexing not possible. "
-			"Please restart computer or run as admin: " +
+			L"访问共享内存时出错。无法建立索引。"
+			"请重启计算机：" +
 				error,
 			true)
 			.dispatch();

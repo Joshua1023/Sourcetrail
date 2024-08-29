@@ -109,7 +109,7 @@ void Project::load(std::shared_ptr<DialogView> dialogView)
 {
 	if (m_refreshStage != RefreshStageType::NONE)
 	{
-		MessageStatus(L"Cannot load another project while indexing.", true, false).dispatch();
+		MessageStatus(L"索引时无法加载其他项目。", true, false).dispatch();
 		return;
 	}
 
@@ -144,7 +144,7 @@ void Project::load(std::shared_ptr<DialogView> dialogView)
 					if (!swapToTempStorageFile(dbPath, tempDbPath, dialogView))
 					{
 						m_state = PROJECT_STATE_NOT_LOADED;
-						MessageStatus(L"Unable to load project", true, false).dispatch();
+						MessageStatus(L"无法加载项目", true, false).dispatch();
 						return;
 					}
 				}
@@ -226,7 +226,7 @@ void Project::load(std::shared_ptr<DialogView> dialogView)
 		{
 			MessageIndexingFinished().dispatch();
 		}
-		MessageStatus(L"Finished Loading", false, false).dispatch();
+		MessageStatus(L"加载完成", false, false).dispatch();
 	}
 	else
 	{
@@ -234,33 +234,27 @@ void Project::load(std::shared_ptr<DialogView> dialogView)
 		{
 		case PROJECT_STATE_NEEDS_MIGRATION:
 			MessageStatus(
-				L"Project could not be loaded and needs to be re-indexed after automatic migration "
-				L"to latest "
-				"version.",
+				L"无法加载项目，自动迁移到最新版本后需要重新索引。",
 				false,
 				false)
 				.dispatch();
 			break;
 		case PROJECT_STATE_EMPTY:
 			MessageStatus(
-				L"Project could not load any symbols because the index database is empty. Please "
-				L"re-index the "
-				"project.",
+				L"由于索引数据库为空，项目无法加载任何符号。请重新索引该项目。",
 				false,
 				false)
 				.dispatch();
 			break;
 		case PROJECT_STATE_OUTVERSIONED:
 			MessageStatus(
-				L"Project could not be loaded because the indexed data format is incompatible to "
-				L"the current "
-				"version of Sourcetrail. Please re-index the project.",
+				L"无法加载项目，因为索引数据格式与当前版本的 Sourcetrail 不兼容。请重新索引该项目。",
 				false,
 				false)
 				.dispatch();
 			break;
 		default:
-			MessageStatus(L"Project could not be loaded.", false, false).dispatch();
+			MessageStatus(L"无法加载项目。", false, false).dispatch();
 		}
 	}
 
@@ -449,7 +443,7 @@ void Project::buildIndex(RefreshInfo info, std::shared_ptr<DialogView> dialogVie
 {
 	if (m_refreshStage == RefreshStageType::INDEXING)
 	{
-		MessageStatus(L"Cannot refresh project while indexing.", true, false).dispatch();
+		MessageStatus(L"索引时无法刷新项目。", true, false).dispatch();
 		return;
 	}
 
@@ -457,11 +451,11 @@ void Project::buildIndex(RefreshInfo info, std::shared_ptr<DialogView> dialogVie
 		std::wstring message;
 		if (info.mode != REFRESH_ALL_FILES && info.filesToClear.empty() && info.filesToIndex.empty())
 		{
-			message = L"Nothing to refresh, all files are up-to-date.";
+			message = L"无需更新索引，所有文件都是最新的。";
 		}
 		else if (m_sourceGroups.empty())
 		{
-			message = L"Nothing to refresh, no Source Groups loaded.";
+			message = L"无需更新索引，未加载源文件组。";
 		}
 
 		if (!message.empty())
@@ -511,7 +505,7 @@ void Project::buildIndex(RefreshInfo info, std::shared_ptr<DialogView> dialogVie
 								L"whole project instead?</p>",
 							{L"Full Re-Index", L"Cancel"}) == 1)
 					{
-						MessageStatus(L"Cannot partially clear project. Indexing aborted.").dispatch();
+						MessageStatus(L"无法部分清理项目。索引已中止。").dispatch();
 						m_refreshStage = RefreshStageType::NONE;
 						dialogView->clearDialogs();
 						return;
@@ -529,10 +523,10 @@ void Project::buildIndex(RefreshInfo info, std::shared_ptr<DialogView> dialogVie
 		}
 	}
 
-	MessageStatus(L"Preparing Indexing", false, true).dispatch();
+	MessageStatus(L"准备索引", false, true).dispatch();
 	MessageErrorCountClear().dispatch();
 
-	dialogView->showUnknownProgressDialog(L"Preparing Indexing", L"Setting up Indexers");
+	dialogView->showUnknownProgressDialog(L"准备索引", L"设置索引器");
 	MessageIndexingStatus(true, 0).dispatch();
 
 	m_storageCache->clear();
@@ -702,7 +696,7 @@ void Project::buildIndex(RefreshInfo info, std::shared_ptr<DialogView> dialogVie
 		taskSequential->addTask(	// we don't need to hide this dialog again, because it's
 									// overridden by other dialogs later on.
 			std::make_shared<TaskLambda>([dialogView]() {
-				dialogView->showUnknownProgressDialog(L"Finish Indexing", L"Saving\nRemaining Data");
+				dialogView->showUnknownProgressDialog(L"索引完成", L"保存剩余数据");
 			}));
 
 		// add task that injects the remaining intermediate storages into the persistent storage
@@ -769,7 +763,7 @@ void Project::buildIndex(RefreshInfo info, std::shared_ptr<DialogView> dialogVie
 
 	m_refreshStage = RefreshStageType::INDEXING;
 	MessageStatus(
-		L"Starting Indexing: " + std::to_wstring(sourceFileCount) + L" source files", false, true)
+		L"开始索引：" + std::to_wstring(sourceFileCount) + L" 个源文件", false, true)
 		.dispatch();
 	MessageIndexingStarted().dispatch();
 }

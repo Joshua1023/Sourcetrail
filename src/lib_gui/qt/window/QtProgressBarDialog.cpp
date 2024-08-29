@@ -21,7 +21,7 @@ QtProgressBarDialog::QtProgressBarDialog(float topRatio, bool  /*hideable*/, QWi
 	m_title->setAlignment(Qt::AlignRight | Qt::AlignBottom);
 	m_title->show();
 
-	m_percentLabel = new QLabel(QStringLiteral("0% Progress"));
+	m_percentLabel = new QLabel(QStringLiteral("0%"));
 	m_percentLabel->setObjectName(QStringLiteral("percent"));
 	m_layout->addWidget(m_percentLabel, 0, Qt::AlignRight);
 
@@ -73,7 +73,7 @@ void QtProgressBarDialog::updateProgress(size_t progress)
 	size_t percent = std::min<size_t>(std::max<size_t>(progress, 0), 100);
 
 	m_progressBar->showProgress(percent);
-	m_percentLabel->setText(QString::number(percent) + "% Progress");
+	m_percentLabel->setText(QString::number(percent) + "% 已完成");
 	m_percentLabel->show();
 	setGeometries();
 }

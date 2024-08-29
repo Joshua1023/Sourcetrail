@@ -40,8 +40,8 @@ QtCodeFileTitleBar::QtCodeFileTitleBar(QWidget* parent, bool isHovering, bool is
 	m_collapseButton = new QtSelfRefreshIconButton(
 		QLatin1String(""), imageDir.getConcatenated(L"snippet_arrow_down.png"), "code/file/title", this);
 
-	m_expandButton->setToolTip(QStringLiteral("expand"));
-	m_collapseButton->setToolTip(QStringLiteral("collapse"));
+	m_expandButton->setToolTip(QStringLiteral("展开"));
+	m_collapseButton->setToolTip(QStringLiteral("收起"));
 
 	for (QtSelfRefreshIconButton* button: {m_expandButton, m_collapseButton})
 	{
@@ -76,10 +76,10 @@ QtCodeFileTitleBar::QtCodeFileTitleBar(QWidget* parent, bool isHovering, bool is
 
 	titleLayout->addStretch(3);
 
-	m_showErrorsButton = new QPushButton(QStringLiteral("show errors"));
+	m_showErrorsButton = new QPushButton(QStringLiteral("显示错误"));
 	m_showErrorsButton->setObjectName(QStringLiteral("screen_button"));
 	m_showErrorsButton->setToolTip(
-		QStringLiteral("Show all errors causing this file to be incomplete"));
+		QStringLiteral("显示所有导致此文件不完整的错误"));
 	m_showErrorsButton->setAttribute(Qt::WA_LayoutUsesWidgetRect);	  // fixes layouting on Mac
 	m_showErrorsButton->hide();
 	titleLayout->addWidget(m_showErrorsButton);
@@ -99,7 +99,7 @@ QtCodeFileTitleBar::QtCodeFileTitleBar(QWidget* parent, bool isHovering, bool is
 		inactiveColor);
 	m_snippetButton->addState(
 		QtIconStateButton::STATE_DISABLED, imageDir.getConcatenated(L"snippet_inactive.png"));
-	m_snippetButton->setToolTip(QStringLiteral("show snippets"));
+	m_snippetButton->setToolTip(QStringLiteral("显示片段"));
 
 	m_maximizeButton = new QtIconStateButton(this);
 	m_maximizeButton->addState(
@@ -110,7 +110,7 @@ QtCodeFileTitleBar::QtCodeFileTitleBar(QWidget* parent, bool isHovering, bool is
 		inactiveColor);
 	m_maximizeButton->addState(
 		QtIconStateButton::STATE_DISABLED, imageDir.getConcatenated(L"maximize_inactive.png"));
-	m_maximizeButton->setToolTip(QStringLiteral("maximize"));
+	m_maximizeButton->setToolTip(QStringLiteral("最大化"));
 
 	for (QtIconStateButton* button: {m_snippetButton, m_maximizeButton})
 	{

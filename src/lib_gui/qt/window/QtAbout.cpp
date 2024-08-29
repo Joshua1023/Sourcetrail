@@ -66,14 +66,15 @@ void QtAbout::setupAbout()
 		layoutHorz1->addStretch();
 
 		QLabel* developerLabel = new QLabel(
-			"<b>Authors:</b><br />"
+			"<b>原作者：</b><br />"
 			"<a href=\"https://github.com/petermost/Sourcetrail/blob/master/unused_coati_software_files/AUTHORS.txt\" "
 			"style=\"color: white;\">The Coati Software Developer</a><br />"
-			"<br />"
-			"<b>Maintainer:</b><br />"
 			"Peter Most<br />"
 			"<br />"
-			"<b>Repository:</b><br />"
+			"<b>维护者：</b><br />"
+			"Joshua<br />"
+			"<br />"
+			"<b>仓库地址：</b><br />"
 			"<a href=\"https://github.com/petermost/Sourcetrail\" "
 			"style=\"color: white;\">github.com/petermost/Sourcetrail</a><br />");
 

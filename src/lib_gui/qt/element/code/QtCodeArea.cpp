@@ -1124,18 +1124,18 @@ void QtCodeArea::annotateText()
 
 void QtCodeArea::createActions()
 {
-	m_copyAction = new QAction(tr("Copy Selection"), this);
-	m_copyAction->setStatusTip(tr("Copy selection to clipboard"));
-	m_copyAction->setToolTip(tr("Copy selection to clipboard"));
+	m_copyAction = new QAction(tr("复制选中内容"), this);
+	m_copyAction->setStatusTip(tr("复制选中内容到剪贴板"));
+	m_copyAction->setToolTip(tr("复制选中内容到剪贴板"));
 	m_copyAction->setEnabled(false);
 	connect(m_copyAction, &QAction::triggered, this, &QPlainTextEdit::copy);
 
-	m_setIDECursorPositionAction = new QAction(tr("Show in IDE (Ctrl + Left Click)"), this);
+	m_setIDECursorPositionAction = new QAction(tr("在 IDE 中显示(Ctrl + 左键点击)"), this);
 	if constexpr (utility::Platform::isMac()) {
-		m_setIDECursorPositionAction->setText(tr("Show in IDE (Cmd + Left Click)"));
+		m_setIDECursorPositionAction->setText(tr("在 IDE 中显示(Cmd + 左键点击)"));
 	}
-	m_setIDECursorPositionAction->setStatusTip(tr("Set the IDE Cursor to this code position"));
-	m_setIDECursorPositionAction->setToolTip(tr("Set the IDE Cursor to this code position"));
+	m_setIDECursorPositionAction->setStatusTip(tr("将 IDE 光标设置为此代码位置"));
+	m_setIDECursorPositionAction->setToolTip(tr("将 IDE 光标设置为此代码位置"));
 	connect(
 		m_setIDECursorPositionAction, &QAction::triggered, this, &QtCodeArea::setIDECursorPosition);
 }

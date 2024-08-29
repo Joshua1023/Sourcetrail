@@ -46,20 +46,20 @@ void QtBookmarkBrowser::setupBookmarkBrowser()
 
 		headerLayout->addStrut(150);
 
-		QLabel* title = new QLabel(QStringLiteral("Bookmarks"));
+		QLabel* title = new QLabel(QStringLiteral("书签"));
 		title->setObjectName(QStringLiteral("title"));
 		headerLayout->addWidget(title);
 
 		headerLayout->addSpacing(40);
 
-		QLabel* filterLabel = new QLabel(QStringLiteral("Show:"));
+		QLabel* filterLabel = new QLabel(QStringLiteral("显示："));
 		filterLabel->setObjectName(QStringLiteral("filter_label"));
 		headerLayout->addWidget(filterLabel);
 
 		m_filterComboBox = new QComboBox();
-		m_filterComboBox->addItem(QStringLiteral("All"));
-		m_filterComboBox->addItem(QStringLiteral("Nodes"));
-		m_filterComboBox->addItem(QStringLiteral("Edges"));
+		m_filterComboBox->addItem(QStringLiteral("所有"));
+		m_filterComboBox->addItem(QStringLiteral("节点"));
+		m_filterComboBox->addItem(QStringLiteral("边"));
 		m_filterComboBox->setObjectName(QStringLiteral("filter_box"));
 		headerLayout->addWidget(m_filterComboBox);
 
@@ -71,14 +71,14 @@ void QtBookmarkBrowser::setupBookmarkBrowser()
 
 		headerLayout->addSpacing(40);
 
-		QLabel* orderLabel = new QLabel(QStringLiteral("Sort by:"));
+		QLabel* orderLabel = new QLabel(QStringLiteral("排序方式："));
 		orderLabel->setObjectName(QStringLiteral("order_label"));
 		headerLayout->addWidget(orderLabel);
 
-		m_orderNames.push_back("Name asc.");
-		m_orderNames.push_back("Name des.");
-		m_orderNames.push_back("Date asc.");
-		m_orderNames.push_back("Date des.");
+		m_orderNames.push_back("名称升序");
+		m_orderNames.push_back("名称降序");
+		m_orderNames.push_back("日期升序");
+		m_orderNames.push_back("日期降序");
 
 		m_orderComboBox = new QComboBox(this);
 		m_orderComboBox->addItem(m_orderNames[0].c_str());
@@ -109,7 +109,7 @@ void QtBookmarkBrowser::setupBookmarkBrowser()
 		m_bookmarkTree->setSelectionMode(QAbstractItemView::SelectionMode::NoSelection);
 		m_bookmarkTree->header()->close();
 		m_bookmarkTree->setIndentation(0);
-		m_bookmarkTree->setHeaderLabel(QStringLiteral("Bookmarks"));
+		m_bookmarkTree->setHeaderLabel(QStringLiteral("书签"));
 
 		connect(m_bookmarkTree, &QTreeWidget::itemClicked, this, &QtBookmarkBrowser::treeItemClicked);
 
@@ -122,7 +122,7 @@ void QtBookmarkBrowser::setupBookmarkBrowser()
 		bodyLayout->addLayout(buttonLayout);
 		setPreviousVisible(false);
 		setCloseVisible(false);
-		updateNextButton(QStringLiteral("Close"));
+		updateNextButton(QStringLiteral("关闭"));
 	}
 }
 

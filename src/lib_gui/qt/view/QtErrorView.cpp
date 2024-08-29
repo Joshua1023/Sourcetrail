@@ -57,9 +57,9 @@ QtErrorView::QtErrorView(ViewLayout* viewLayout)
 	m_table->setColumnHidden(Column::ID, true);
 
 	QStringList headers;
-	headers << QStringLiteral("ID") << QStringLiteral("Type") << QStringLiteral("Message")
-			<< QStringLiteral("File") << QStringLiteral("Line") << QStringLiteral("Indexed")
-			<< QStringLiteral("Translation Unit");
+	headers << QStringLiteral("ID") << QStringLiteral("类型") << QStringLiteral("信息")
+			<< QStringLiteral("文件") << QStringLiteral("所在行") << QStringLiteral("是否被索引")
+			<< QStringLiteral("翻译单元");
 	m_model->setHorizontalHeaderLabels(headers);
 
 	connect(m_table, &QTableView::clicked, [=, this](const QModelIndex& index) {
@@ -86,13 +86,13 @@ QtErrorView::QtErrorView(ViewLayout* viewLayout)
 
 	{
 		m_showFatals = createFilterCheckbox(
-			QStringLiteral("Fatals"), m_errorFilter.fatal, checkboxes);
+			QStringLiteral("致命错误"), m_errorFilter.fatal, checkboxes);
 		m_showErrors = createFilterCheckbox(
-			QStringLiteral("Errors"), m_errorFilter.error, checkboxes);
+			QStringLiteral("错误"), m_errorFilter.error, checkboxes);
 		m_showNonIndexedFatals = createFilterCheckbox(
-			QStringLiteral("Fatals in non-indexed files"), m_errorFilter.unindexedFatal, checkboxes);
+			QStringLiteral("未被索引文件中的致命错误"), m_errorFilter.unindexedFatal, checkboxes);
 		m_showNonIndexedErrors = createFilterCheckbox(
-			QStringLiteral("Errors in non-indexed files"), m_errorFilter.unindexedError, checkboxes);
+			QStringLiteral("未被索引文件中的错误"), m_errorFilter.unindexedError, checkboxes);
 
 		m_helpButton = new QtHelpButton(createErrorHelpButtonInfo());
 		m_helpButton->setObjectName(QStringLiteral("help_button"));
@@ -125,11 +125,11 @@ QtErrorView::QtErrorView(ViewLayout* viewLayout)
 
 	{
 		m_editButton = new QtSelfRefreshIconButton(
-			QStringLiteral("Edit Project"),
+			QStringLiteral("修改项目配置"),
 			ResourcePaths::getGuiDirectoryPath().concatenate(L"code_view/images/edit.png"),
 			"window/button");
 		m_editButton->setObjectName(QStringLiteral("screen_button"));
-		m_editButton->setToolTip(QStringLiteral("edit project"));
+		m_editButton->setToolTip(QStringLiteral("修改项目配置"));
 		connect(m_editButton, &QPushButton::clicked, []() { MessageProjectEdit().dispatch(); });
 
 		checkboxes->addWidget(m_editButton);
@@ -186,16 +186,15 @@ void QtErrorView::addErrors(
 
 		m_allLabel->setVisible(limited);
 		m_allLabel->setText(
-			"<b>Only displaying first " + QString::number(m_errorFilter.limit) + " errors</b>");
+			"<b>只显示前" + QString::number(m_errorFilter.limit) + " 个错误</b>");
 
 		m_allButton->setVisible(limited);
-		m_allButton->setText("Show all " + QString::number(errorCount.total));
+		m_allButton->setText("显示所有 " + QString::number(errorCount.total) + " 个错误");
 
 		m_errorLabel->setVisible(!limited);
 		m_errorLabel->setText(
-			"<b>displaying " + QString::number(errorCount.total) + " error" +
-			(errorCount.total != 1 ? "s" : "") +
-			(errorCount.fatal > 0 ? " (" + QString::number(errorCount.fatal) + " fatal)"
+			"<b>显示 " + QString::number(errorCount.total) + " 个错误" +
+			(errorCount.fatal > 0 ? "（" + QString::number(errorCount.fatal) + " 个致命错误）"
 								  : QLatin1String("")) +
 			"</b>");
 	});
@@ -300,7 +299,7 @@ void QtErrorView::addErrorToTable(const ErrorInfo& error)
 	m_model->setItem(
 		rowNumber,
 		Column::TYPE,
-		new QStandardItem(error.fatal ? QStringLiteral("FATAL") : QStringLiteral("ERROR")));
+		new QStandardItem(error.fatal ? QStringLiteral("致命错误") : QStringLiteral("错误")));
 	if (error.fatal)
 	{
 		m_model->item(rowNumber, Column::TYPE)->setForeground(QBrush(Qt::red));
@@ -321,7 +320,7 @@ void QtErrorView::addErrorToTable(const ErrorInfo& error)
 	m_model->setItem(
 		rowNumber,
 		Column::INDEXED,
-		new QStandardItem(error.indexed ? QStringLiteral("yes") : QStringLiteral("no")));
+		new QStandardItem(error.indexed ? QStringLiteral("是") : QStringLiteral("否")));
 
 	m_model->setItem(
 		rowNumber,

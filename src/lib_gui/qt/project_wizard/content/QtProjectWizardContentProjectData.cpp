@@ -20,7 +20,7 @@ QtProjectWizardContentProjectData::QtProjectWizardContentProjectData(
 
 void QtProjectWizardContentProjectData::populate(QGridLayout* layout, int& row)
 {
-	QLabel* nameLabel = createFormLabel(QStringLiteral("Sourcetrail Project Name"));
+	QLabel* nameLabel = createFormLabel(QStringLiteral("Sourcetrail 项目名"));
 	m_projectName = new QLineEdit();
 	m_projectName->setObjectName(QStringLiteral("name"));
 	m_projectName->setAttribute(Qt::WA_MacShowFocusRect, false);
@@ -36,7 +36,7 @@ void QtProjectWizardContentProjectData::populate(QGridLayout* layout, int& row)
 	layout->setRowMinimumHeight(row, 30);
 	row++;
 
-	QLabel* locationLabel = createFormLabel(QStringLiteral("Sourcetrail Project Location"));
+	QLabel* locationLabel = createFormLabel(QStringLiteral("Sourcetrail 项目位置"));
 	m_projectFileLocation = new QtLocationPicker(this);
 	m_projectFileLocation->setPickDirectory(true);
 	m_projectFileLocation->setEnabled(!m_disableNameEditing);
@@ -44,8 +44,8 @@ void QtProjectWizardContentProjectData::populate(QGridLayout* layout, int& row)
 	layout->addWidget(locationLabel, row, QtProjectWizardWindow::FRONT_COL, Qt::AlignRight);
 	layout->addWidget(m_projectFileLocation, row, QtProjectWizardWindow::BACK_COL, Qt::AlignTop);
 	addHelpButton(
-		QStringLiteral("Sourcetrail Project Location"),
-		QStringLiteral("The directory the Sourcetrail project file (.srctrlprj) will be saved to."),
+		QStringLiteral("Sourcetrail 项目位置"),
+		QStringLiteral("Sourcetrail 项目文件 (.srctrlprj) 将保存到该位置。"),
 		layout,
 		row);
 	layout->setRowMinimumHeight(row, 30);
@@ -71,7 +71,7 @@ bool QtProjectWizardContentProjectData::check()
 	if (m_projectName->text().isEmpty())
 	{
 		QtMessageBox msgBox(m_window);
-		msgBox.setText(QStringLiteral("Please enter a project name."));
+		msgBox.setText(QStringLiteral("请输入项目名"));
 		msgBox.execModal();
 		return false;
 	}
@@ -80,8 +80,7 @@ bool QtProjectWizardContentProjectData::check()
 	{
 		QtMessageBox msgBox(m_window);
 		msgBox.setText(
-			"The provided project name is not a valid file name. Please adjust the name "
-			"accordingly.");
+			"提供的项目名不是有效的文件名。请相应调整名称。");
 		msgBox.execModal();
 		return false;
 	}
@@ -90,7 +89,7 @@ bool QtProjectWizardContentProjectData::check()
 	{
 		QtMessageBox msgBox(m_window);
 		msgBox.setText(
-			QStringLiteral("Please define the location for the Sourcetrail project file."));
+			QStringLiteral("请定义 Sourcetrail 项目文件的位置。"));
 		msgBox.execModal();
 		return false;
 	}
@@ -101,8 +100,7 @@ bool QtProjectWizardContentProjectData::check()
 	{
 		QtMessageBox msgBox(m_window);
 		msgBox.setText(
-			"The specified location seems to be invalid. Please make sure that the used "
-			"environment variables are unambiguous.");
+			"指定的位置似乎无效。请确保使用的环境变量没有歧义。");
 		msgBox.execModal();
 		return false;
 	}
@@ -110,8 +108,7 @@ bool QtProjectWizardContentProjectData::check()
 	{
 		QtMessageBox msgBox(m_window);
 		msgBox.setText(
-			"The specified location seems to be invalid. Please specify an absolute directory "
-			"path.");
+			"指定的位置似乎无效。请指定绝对目录路径。");
 		msgBox.execModal();
 		return false;
 	}
@@ -119,8 +116,7 @@ bool QtProjectWizardContentProjectData::check()
 	{
 		QtMessageBox msgBox(m_window);
 		msgBox.setText(
-			"The specified location seems to be invalid. Please check the characters used in the "
-			"path.");
+			"指定的位置似乎无效。请检查路径中使用的字符。");
 		msgBox.execModal();
 		return false;
 	}
@@ -128,10 +124,10 @@ bool QtProjectWizardContentProjectData::check()
 	{
 		QtMessageBox msgBox(m_window);
 		msgBox.setText(QStringLiteral(
-			"The specified location does not exist. Do you want to create the directory?"));
-		msgBox.addButton(QStringLiteral("Abort"), QtMessageBox::ButtonRole::NoRole);
+			"指定的位置不存在。是否要创建目录？"));
+		msgBox.addButton(QStringLiteral("否"), QtMessageBox::ButtonRole::NoRole);
 		QPushButton* createButton = msgBox.addButton(
-			QStringLiteral("Create"), QtMessageBox::ButtonRole::YesRole);
+			QStringLiteral("是"), QtMessageBox::ButtonRole::YesRole);
 		msgBox.setDefaultButton(createButton);
 		msgBox.setIcon(QtMessageBox::Icon::Question);
 		if (msgBox.execModal() == createButton)	 // QtMessageBox::Yes

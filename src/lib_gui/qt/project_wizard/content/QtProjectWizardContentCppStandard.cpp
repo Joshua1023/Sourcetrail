@@ -16,7 +16,7 @@ void QtProjectWizardContentCppStandard::populate(QGridLayout* layout, int& row)
 {
 	m_standard = new QComboBox();
 	layout->addWidget(
-		createFormLabel(QStringLiteral("C++ Standard")),
+		createFormLabel(QStringLiteral("C++ 标准")),
 		row,
 		QtProjectWizardWindow::FRONT_COL,
 		Qt::AlignRight);

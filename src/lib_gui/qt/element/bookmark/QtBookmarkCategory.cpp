@@ -22,7 +22,7 @@ QtBookmarkCategory::QtBookmarkCategory(ControllerProxy<BookmarkController>* cont
 
 	m_expandButton = new QPushButton();
 	m_expandButton->setObjectName(QStringLiteral("category_expand_button"));
-	m_expandButton->setToolTip(QStringLiteral("Show/Hide bookmarks in this category"));
+	m_expandButton->setToolTip(QStringLiteral("显示/隐藏该分类下的书签"));
 	m_expandButton->setAttribute(Qt::WA_LayoutUsesWidgetRect);
 	m_expandButton->setIcon(QPixmap(QString::fromStdWString(
 		ResourcePaths::getGuiDirectoryPath().concatenate(L"bookmark_view/images/arrow_down.png").wstr())));
@@ -40,7 +40,7 @@ QtBookmarkCategory::QtBookmarkCategory(ControllerProxy<BookmarkController>* cont
 	m_deleteButton = new QPushButton();
 	m_deleteButton->setObjectName(QStringLiteral("category_delete_button"));
 	m_deleteButton->setToolTip(
-		QStringLiteral("Delete this Bookmark Category and the containing Bookmarks"));
+		QStringLiteral("删除该书签分类及其包含的书签"));
 	m_deleteButton->setAttribute(Qt::WA_LayoutUsesWidgetRect);
 	m_deleteButton->setIconSize(QSize(20, 20));
 	m_deleteButton->setIcon(QPixmap(
@@ -122,10 +122,10 @@ void QtBookmarkCategory::leaveEvent(QEvent*  /*event*/)
 void QtBookmarkCategory::deleteClicked()
 {
 	QtMessageBox msgBox;
-	msgBox.setText(QStringLiteral("Delete Category"));
-	msgBox.setInformativeText(QStringLiteral("Do you really want to delete this category AND all containing bookmarks?"));
-	QPushButton *deleteButton = msgBox.addButton(QStringLiteral("Delete"), QtMessageBox::ButtonRole::YesRole);
-	msgBox.addButton(QStringLiteral("Keep"), QtMessageBox::ButtonRole::NoRole);
+	msgBox.setText(QStringLiteral("删除分类"));
+	msgBox.setInformativeText(QStringLiteral("确认删除该分类及其包含的书签？"));
+	QPushButton *deleteButton = msgBox.addButton(QStringLiteral("删除"), QtMessageBox::ButtonRole::YesRole);
+	msgBox.addButton(QStringLiteral("保留"), QtMessageBox::ButtonRole::NoRole);
 	msgBox.setIcon(QtMessageBox::Icon::Question);
 	if (msgBox.execModal() == deleteButton)	 // QtMessageBox::Yes
 	{

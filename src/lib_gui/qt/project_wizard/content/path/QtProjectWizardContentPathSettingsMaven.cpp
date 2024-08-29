@@ -8,13 +8,13 @@ QtProjectWizardContentPathSettingsMaven::QtProjectWizardContentPathSettingsMaven
 	std::shared_ptr<SourceGroupSettingsJavaMaven> settings, QtProjectWizardWindow* window)
 	: QtProjectWizardContentPath(window), m_settings(settings)
 {
-	setTitleString("Maven Settings File (settings.xml)");
+	setTitleString("Maven 设置文件 (settings.xml)");
 	setHelpString(
-		"If your project uses a custom Maven settings file, specify it here. "
-		"If you leave this option empty, the default Maven settings will be used.<br />"
+		"如果您的项目使用自定义 Maven 设置文件，请在此处指定。"
+		"如果将此选项留空，则将使用默认的 Maven 设置。<br />"
 		"<br />"
-		"You can make use of environment variables with ${ENV_VAR}.");
-	setPlaceholderString("Use Default");
+		"您可以通过 ${ENV_VAR} 的方式使用环境变量。");
+	setPlaceholderString("使用默认设置文件");
 	setFileEndings({L".xml"});
 }
 

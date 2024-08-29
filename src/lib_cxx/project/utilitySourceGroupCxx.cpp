@@ -55,7 +55,7 @@ std::shared_ptr<Task> createBuildPchTask(
 	return std::make_shared<TaskLambda>(
 		[dialogView, storageProvider, pchInputFilePath, pchOutputFilePath, compilerFlags]() {
 			dialogView->showUnknownProgressDialog(
-				L"Preparing Indexing", L"Processing Precompiled Headers");
+				L"准备索引", L"准备预编译头");
 			LOG_INFO(
 				L"Generating precompiled header output for input file \"" +
 				pchInputFilePath.wstr() + L"\" at location \"" + pchOutputFilePath.wstr() + L"\"");

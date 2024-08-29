@@ -29,9 +29,9 @@ QtCodeFileTitleButton::QtCodeFileTitleButton(QWidget* parent)
 
 	connect(this, &QtCodeFileTitleButton::clicked, this, &QtCodeFileTitleButton::clickedTitle);
 
-	m_openInTabAction = new QAction(QStringLiteral("Open in New Tab"), this);
-	m_openInTabAction->setStatusTip(QStringLiteral("Opens the file in a new tab"));
-	m_openInTabAction->setToolTip(QStringLiteral("Opens the file in a new tab"));
+	m_openInTabAction = new QAction(QStringLiteral("在新标签页中打开"), this);
+	m_openInTabAction->setStatusTip(QStringLiteral("在新标签页中打开文件"));
+	m_openInTabAction->setToolTip(QStringLiteral("在新标签页中打开文件"));
 	m_openInTabAction->setEnabled(false);
 	connect(m_openInTabAction, &QAction::triggered, this, &QtCodeFileTitleButton::openInTab);
 }
@@ -63,7 +63,7 @@ void QtCodeFileTitleButton::setProject(const std::wstring& name)
 	m_filePath = FilePath();
 
 	setText(QString::fromStdWString(name));
-	setToolTip(QStringLiteral("edit project"));
+	setToolTip(QStringLiteral("修改项目配置"));
 
 	updateIcon();
 }

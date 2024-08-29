@@ -106,8 +106,8 @@ void IDECommunicationController::handleSetActiveTokenMessage(
 			if (!selectedLocationIds.empty())
 			{
 				MessageStatus(
-					L"Activating source location from plug-in succeeded: " + filePath.wstr() +
-					L", row: " + std::to_wstring(message.row) + L", col: " +
+					L"从插件激活源位置成功：" + filePath.wstr() +
+					L", 行：" + std::to_wstring(message.row) + L", 列：" +
 					std::to_wstring(message.column))
 					.dispatch();
 
@@ -125,8 +125,8 @@ void IDECommunicationController::handleSetActiveTokenMessage(
 		else
 		{
 			MessageStatus(
-				L"Activating source location from plug-in failed. File " + filePath.wstr() +
-					L" was not found in the project.",
+				L"从插件激活源位置失败。文件 " + filePath.wstr() +
+					L" 在项目中未找到。",
 				true)
 				.dispatch();
 		}
@@ -185,7 +185,7 @@ void IDECommunicationController::handleMessage(MessageIDECreateCDB*  /*message*/
 {
 	std::wstring networkMessage = NetworkProtocolHelper::buildCreateCDBMessage();
 
-	MessageStatus(L"Requesting IDE to create Compilation Database via plug-in.").dispatch();
+	MessageStatus(L"通过插件请求 IDE 创建编译数据库。").dispatch();
 
 	sendMessage(networkMessage);
 }
@@ -196,8 +196,8 @@ void IDECommunicationController::handleMessage(MessageMoveIDECursor* message)
 		message->filePath, message->row, message->column);
 
 	MessageStatus(
-		L"Jump to source location via plug-in: " + message->filePath.wstr() + L", row: " +
-		std::to_wstring(message->row) + L", col: " + std::to_wstring(message->column))
+		L"通过插件跳转到源位置：" + message->filePath.wstr() + L", 行：" +
+		std::to_wstring(message->row) + L", 列：" + std::to_wstring(message->column))
 		.dispatch();
 
 	sendMessage(networkMessage);

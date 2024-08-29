@@ -19,7 +19,7 @@ void TaskFinishParsing::terminate()
 {
 	m_dialogView->clearDialogs();
 
-	MessageStatus(L"An unknown exception was thrown during indexing.", true, false).dispatch();
+	MessageStatus(L"索引期间发生了未知异常。", true, false).dispatch();
 	MessageIndexingFinished().dispatch();
 }
 
@@ -32,7 +32,7 @@ Task::TaskState TaskFinishParsing::doUpdate(std::shared_ptr<Blackboard> blackboa
 {
 	TimeStamp start = TimeStamp::now();
 
-	m_dialogView->showUnknownProgressDialog(L"Finish Indexing", L"Optimizing database");
+	m_dialogView->showUnknownProgressDialog(L"索引完成", L"优化数据库");
 	m_storage->optimizeMemory();
 	m_dialogView->hideUnknownProgressDialog();
 
@@ -67,15 +67,14 @@ Task::TaskState TaskFinishParsing::doUpdate(std::shared_ptr<Blackboard> blackboa
 	ErrorCountInfo errorInfo = m_storage->getErrorCount();
 
 	std::wstring status;
-	status += L"Finished indexing: ";
+	status += L"索引完成：";
 	status += std::to_wstring(indexedSourceFileCount) + L"/" + std::to_wstring(sourceFileCount) +
-		L" source files indexed; ";
+		L" 个源文件被索引；";
 	status += utility::decodeFromUtf8(TimeStamp::secondsToString(time));
-	status += L"; " + std::to_wstring(errorInfo.total) + L" error" +
-		(errorInfo.total != 1 ? L"s" : L"");
+	status += L"; " + std::to_wstring(errorInfo.total) + L" 个错误";
 	if (errorInfo.fatal > 0)
 	{
-		status += L" (" + std::to_wstring(errorInfo.fatal) + L" fatal)";
+		status += L" （" + std::to_wstring(errorInfo.fatal) + L" 个致命错误）";
 	}
 	MessageStatus(status, false, false).dispatch();
 

@@ -31,7 +31,7 @@ QtLocationPicker::QtLocationPicker(QWidget* parent): QWidget(parent)
 		ResourcePaths::getGuiDirectoryPath().concatenate(L"window/dots_hover.png"));
 	m_button->setIconSize(QSize(16, 16));
 	m_button->setObjectName(QStringLiteral("dotsButton"));
-	m_button->setToolTip(QStringLiteral("pick file"));
+	m_button->setToolTip(QStringLiteral("选择文件"));
 	connect(m_button, &QPushButton::clicked, this, &QtLocationPicker::onHandleButtonPressed);
 	layout->addWidget(m_button);
 
@@ -107,11 +107,11 @@ void QtLocationPicker::onHandleButtonPressed()
 	QString fileName;
 	if (m_pickDirectory)
 	{
-		fileName = QtFileDialog::getExistingDirectory(this, tr("Select Directory"), path);
+		fileName = QtFileDialog::getExistingDirectory(this, tr("选择文件夹"), path);
 	}
 	else
 	{
-		fileName = QtFileDialog::getOpenFileName(this, tr("Open File"), path, m_fileFilter);
+		fileName = QtFileDialog::getOpenFileName(this, tr("打开文件"), path, m_fileFilter);
 	}
 
 	if (!fileName.isEmpty())

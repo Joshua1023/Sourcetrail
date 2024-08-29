@@ -29,7 +29,7 @@ QtBookmarkButtonsView::QtBookmarkButtonsView(ViewLayout* viewLayout)
 	m_createBookmarkButton = new QtSearchBarButton(
 		ResourcePaths::getGuiDirectoryPath().concatenate(L"bookmark_view/images/edit_bookmark_icon.png"));
 	m_createBookmarkButton->setObjectName(QStringLiteral("bookmark_button"));
-	m_createBookmarkButton->setToolTip(QStringLiteral("create a bookmark for the active symbol"));
+	m_createBookmarkButton->setToolTip(QStringLiteral("为当前符号创建书签"));
 	m_createBookmarkButton->setEnabled(false);
 	layout->addWidget(m_createBookmarkButton);
 
@@ -42,7 +42,7 @@ QtBookmarkButtonsView::QtBookmarkButtonsView(ViewLayout* viewLayout)
 	m_showBookmarksButton = new QtSearchBarButton(
 		ResourcePaths::getGuiDirectoryPath().concatenate(L"bookmark_view/images/bookmark_list_icon.png"));
 	m_showBookmarksButton->setObjectName(QStringLiteral("show_bookmark_button"));
-	m_showBookmarksButton->setToolTip(QStringLiteral("Show bookmarks"));
+	m_showBookmarksButton->setToolTip(QStringLiteral("显示书签"));
 	layout->addWidget(m_showBookmarksButton);
 
 	connect(
@@ -105,12 +105,12 @@ void QtBookmarkButtonsView::createBookmarkClicked()
 	else if (m_createButtonState == MessageBookmarkButtonState::ALREADY_CREATED)
 	{
 		QtMessageBox msgBox;
-		msgBox.setText(QStringLiteral("Edit Bookmark"));
+		msgBox.setText(QStringLiteral("编译书签"));
 		msgBox.setInformativeText(
-			QStringLiteral("Do you want to edit or delete the bookmark for this symbol?"));
-		QPushButton *editButton = msgBox.addButton(QStringLiteral("Edit"), QtMessageBox::ButtonRole::YesRole);
-		QPushButton *deleteButton = msgBox.addButton(QStringLiteral("Delete"), QtMessageBox::ButtonRole::NoRole);
-		QPushButton* cancelButton = msgBox.addButton( QStringLiteral("Cancel"), QtMessageBox::ButtonRole::RejectRole);
+			QStringLiteral("您是否要编辑或删除此符号的书签？"));
+		QPushButton *editButton = msgBox.addButton(QStringLiteral("编辑"), QtMessageBox::ButtonRole::YesRole);
+		QPushButton *deleteButton = msgBox.addButton(QStringLiteral("删除"), QtMessageBox::ButtonRole::NoRole);
+		QPushButton* cancelButton = msgBox.addButton( QStringLiteral("取消"), QtMessageBox::ButtonRole::RejectRole);
 		msgBox.setDefaultButton(cancelButton);
 		msgBox.setIcon(QtMessageBox::Icon::Question);
 

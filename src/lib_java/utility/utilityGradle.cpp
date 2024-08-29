@@ -71,7 +71,7 @@ std::vector<FilePath> gradleGetAllSourceDirectories(
 			{
 				// TODO: move error handling to caller of this function
 				const std::wstring dialogMessage =
-					L"The following error occurred while executing a Gradle command:\n\n" +
+					L"执行 Gradle 命令时发生以下错误：\n\n" +
 					utility::decodeFromUtf8(utility::replace(output, "\r\n", "\n"));
 				MessageStatus(dialogMessage, true, false).dispatch();
 				if (Application::getInstance())
@@ -101,7 +101,7 @@ std::vector<FilePath> gradleGetAllSourceDirectories(
 			{
 				// TODO: move error handling to caller of this function
 				const std::wstring dialogMessage =
-					L"The following error occurred while executing a Gradle command:\n\n" +
+					L"执行 Gradle 命令时发生以下错误：\n\n" +
 					utility::decodeFromUtf8(utility::replace(output, "\r\n", "\n"));
 				MessageStatus(dialogMessage, true, false).dispatch();
 				Application::getInstance()->handleDialog(dialogMessage);

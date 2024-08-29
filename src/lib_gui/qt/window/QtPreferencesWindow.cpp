@@ -51,8 +51,8 @@ void QtPreferencesWindow::windowReady()
 {
 	QtProjectWizardWindow::windowReady();
 
-	updateTitle(QStringLiteral("PREFERENCES"));
-	updateNextButton(QStringLiteral("Save"));
+	updateTitle(QStringLiteral("设置"));
+	updateNextButton(QStringLiteral("保存"));
 	setPreviousVisible(false);
 
 	loadContent();

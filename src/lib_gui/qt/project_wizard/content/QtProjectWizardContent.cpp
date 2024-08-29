@@ -35,12 +35,12 @@ std::vector<FilePath> QtProjectWizardContent::getFilePaths() const
 
 QString QtProjectWizardContent::getFileNamesTitle() const
 {
-	return QStringLiteral("File List");
+	return QStringLiteral("文件列表");
 }
 
 QString QtProjectWizardContent::getFileNamesDescription() const
 {
-	return QStringLiteral("files");
+	return QStringLiteral("文件");
 }
 
 bool QtProjectWizardContent::isRequired() const

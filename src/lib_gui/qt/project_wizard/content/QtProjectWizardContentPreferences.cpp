@@ -41,13 +41,13 @@ void QtProjectWizardContentPreferences::populate(QGridLayout* layout, int& row)
 	ApplicationSettings* appSettings = ApplicationSettings::getInstance().get();
 
 	// ui
-	addTitle(QStringLiteral("USER INTERFACE"), layout, row);
+	addTitle(QStringLiteral("用户界面"), layout, row);
 
 	// font face
 	m_fontFacePlaceHolder = new QtComboBoxPlaceHolder();
 	m_fontFace = new QFontComboBox();
 	m_fontFace->setEditable(false);
-	addLabelAndWidget(QStringLiteral("Font Face"), m_fontFacePlaceHolder, layout, row);
+	addLabelAndWidget(QStringLiteral("字体"), m_fontFacePlaceHolder, layout, row);
 
 	int rowNum = row;
 	connect(
@@ -70,7 +70,7 @@ void QtProjectWizardContentPreferences::populate(QGridLayout* layout, int& row)
 
 	// font size
 	m_fontSize = addComboBox(
-		QStringLiteral("Font Size"),
+		QStringLiteral("字号"),
 		appSettings->getFontSizeMin(),
 		appSettings->getFontSizeMax(),
 		QLatin1String(""),
@@ -78,14 +78,14 @@ void QtProjectWizardContentPreferences::populate(QGridLayout* layout, int& row)
 		row);
 
 	// tab width
-	m_tabWidth = addComboBox(QStringLiteral("Tab Width"), 1, 16, QLatin1String(""), layout, row);
+	m_tabWidth = addComboBox(QStringLiteral("标签宽度"), 1, 16, QLatin1String(""), layout, row);
 
 	// text encoding
-	m_textEncoding = addComboBox(QStringLiteral("Text Encoding"), QLatin1String(""), layout, row);
+	m_textEncoding = addComboBox(QStringLiteral("文本编码"), QLatin1String(""), layout, row);
 	m_textEncoding->addItems(TextCodec::availableCodecs());
 
 	// color scheme
-	m_colorSchemes = addComboBox(QStringLiteral("Color Scheme"), QLatin1String(""), layout, row);
+	m_colorSchemes = addComboBox(QStringLiteral("配色方案"), QLatin1String(""), layout, row);
 	for (size_t i = 0; i < m_colorSchemePaths.size(); i++)
 	{
 		m_colorSchemes->insertItem(
@@ -100,27 +100,26 @@ void QtProjectWizardContentPreferences::populate(QGridLayout* layout, int& row)
 
 	// animations
 	m_useAnimations = addCheckBox(
-		QStringLiteral("Animations"),
-		QStringLiteral("Enable animations"),
-		QStringLiteral("<p>Enable animations throughout the user interface.</p>"),
+		QStringLiteral("动画"),
+		QStringLiteral("启动动画"),
+		QStringLiteral("<p>在整个用户界面启用动画</p>"),
 		layout,
 		row);
 
 	// built-in types
 	m_showBuiltinTypes = addCheckBox(
-		QStringLiteral("Built-in Types"),
-		QStringLiteral("Show built-in types in graph when referenced"),
-		QStringLiteral("<p>Enable display of referenced built-in types in the graph view.</p>"),
+		QStringLiteral("内置类型"),
+		QStringLiteral("引用时在图(graph)中显示内置类型"),
+		QStringLiteral("<p>引用时在图(graph)中显示内置类型</p>"),
 		layout,
 		row);
 
 	// directory in code
 	m_showDirectoryInCode = addCheckBox(
-		QStringLiteral("Directory in File Title"),
-		QStringLiteral("Show directory of file in code title"),
+		QStringLiteral("显示文件相对路径"),
+		QStringLiteral("在代码标题中显示文件相对路径"),
 		QStringLiteral(
-			"<p>Enable display of the parent directory of a code file relative to the project "
-			"file.</p>"),
+			"<p>在代码标题中显示文件相对路径</p>"),
 		layout,
 		row);
 	layout->setRowMinimumHeight(row - 1, 30);
@@ -133,33 +132,30 @@ void QtProjectWizardContentPreferences::populate(QGridLayout* layout, int& row)
 	if constexpr (utility::Platform::isLinux())
 	{
 		// screen
-		addTitle(QStringLiteral("SCREEN"), layout, row);
+		addTitle(QStringLiteral("屏幕"), layout, row);
 
-		QLabel* hint = new QLabel(QStringLiteral("<changes need restart>"));
+		QLabel* hint = new QLabel(QStringLiteral("<重启才能生效>"));
 		hint->setStyleSheet(QStringLiteral("color: grey"));
 		layout->addWidget(hint, row - 1, QtProjectWizardWindow::BACK_COL, Qt::AlignRight);
 
 		// auto scaling
 		m_screenAutoScalingInfoLabel = new QLabel(QLatin1String(""));
 		m_screenAutoScaling = addComboBoxWithWidgets(
-			QStringLiteral("Auto Scaling to DPI"),
+			QStringLiteral("自动缩放至 DPI"),
 			QStringLiteral(
-				"<p>Define if automatic scaling to screen DPI resolution is active. "
-				"This setting manipulates the environment flag QT_AUTO_SCREEN_SCALE_FACTOR of the "
-				"Qt "
-				"framework "
+				"<p>定义自动缩放至屏幕 DPI 分辨率是否处于活动状态。"
+				"此设置改变 Qt 框架的环境变量 QT_AUTO_SCREEN_SCALE_FACTOR"
 				"(<a "
 				"href=\"http://doc.qt.io/qt-5/highdpi.html\">http://doc.qt.io/qt-5/highdpi.html</"
-				"a>). "
-				"Choose 'system' to stick to the setting of your current environment.</p>"
-				"<p>Changes to this setting require a restart of the application to take "
-				"effect.</p>"),
+				"a>)。"
+				"选择'系统'和当前环境的设置保持一致。</p>"
+				"<p>对此设置的更改需要重新启动程序才能生效。</p>"),
 			{m_screenAutoScalingInfoLabel},
 			layout,
 			row);
-		m_screenAutoScaling->addItem(QStringLiteral("system"), -1);
-		m_screenAutoScaling->addItem(QStringLiteral("off"), 0);
-		m_screenAutoScaling->addItem(QStringLiteral("on"), 1);
+		m_screenAutoScaling->addItem(QStringLiteral("系统"), -1);
+		m_screenAutoScaling->addItem(QStringLiteral("关闭"), 0);
+		m_screenAutoScaling->addItem(QStringLiteral("打开"), 1);
 		connect(
 			m_screenAutoScaling,
 			qOverload<int>(&QComboBox::activated),
@@ -169,20 +165,19 @@ void QtProjectWizardContentPreferences::populate(QGridLayout* layout, int& row)
 		// scale factor
 		m_screenScaleFactorInfoLabel = new QLabel(QLatin1String(""));
 		m_screenScaleFactor = addComboBoxWithWidgets(
-			QStringLiteral("Scale Factor"),
+			QStringLiteral("缩放系数"),
 			QStringLiteral(
-				"<p>Define a screen scale factor for the user interface of the application. "
-				"This setting manipulates the environment flag QT_SCALE_FACTOR of the Qt framework "
+				"<p>为程序的用户界面定义屏幕缩放系数。"
+				"此设置改变 Qt 框架的环境变量 QT_SCALE_FACTOR"
 				"(<a "
 				"href=\"http://doc.qt.io/qt-5/highdpi.html\">http://doc.qt.io/qt-5/highdpi.html</"
 				"a>). "
-				"Choose 'system' to stick to the setting of your current environment.</p>"
-				"<p>Changes to this setting require a restart of the application to take "
-				"effect.</p>"),
+				"选择'系统'和当前环境的设置保持一致。</p>"
+				"<p>对此设置的更改需要重新启动程序才能生效。</p>"),
 			{m_screenScaleFactorInfoLabel},
 			layout,
 			row);
-		m_screenScaleFactor->addItem(QStringLiteral("system"), -1.0);
+		m_screenScaleFactor->addItem(QStringLiteral("系统"), -1.0);
 		m_screenScaleFactor->addItem(QStringLiteral("25%"), 0.25);
 		m_screenScaleFactor->addItem(QStringLiteral("50%"), 0.5);
 		m_screenScaleFactor->addItem(QStringLiteral("75%"), 0.75);
@@ -204,38 +199,37 @@ void QtProjectWizardContentPreferences::populate(QGridLayout* layout, int& row)
 	}
 
 	// Controls
-	addTitle(QStringLiteral("CONTROLS"), layout, row);
+	addTitle(QStringLiteral("控制"), layout, row);
 
 	// scroll speed
 	m_scrollSpeed = addLineEdit(
-		QStringLiteral("Scroll Speed"),
+		QStringLiteral("滚动速度"),
 		QStringLiteral(
-			"<p>Set a multiplier for the in app scroll speed.</p>"
-			"<p>A value between 0 and 1 results in slower scrolling while a value higher than 1 "
-			"increases scroll speed.</p>"),
+			"<p>设置应用内滚动速度的倍数。</p>"
+			"<p>0 到 1 之间的值会导致滚动速度变慢，而大于 1 的值则会加快滚动速度。</p>"),
 		layout,
 		row);
 
 	// graph zooming
 	QString modifierName = utility::Platform::isMac() ? QStringLiteral("Cmd") : QStringLiteral("Ctrl");
 	m_graphZooming = addCheckBox(
-		QStringLiteral("Graph Zoom"),
-		QStringLiteral("Zoom graph on mouse wheel"),
-		QStringLiteral("<p>Enable graph zoom using mouse wheel only, instead of using ") +
-			modifierName + QStringLiteral(" + Mouse Wheel.</p>"),
+		QStringLiteral("缩放"),
+		QStringLiteral("使用鼠标滚轮缩放图(graph)"),
+		QStringLiteral("<p>只需要使用鼠标滚轮即可对图(graph)进行缩放，无需 ") +
+			modifierName + QStringLiteral(" + 鼠标滚轮。</p>"),
 		layout,
 		row);
 
 	addGap(layout, row);
 
 	// output
-	addTitle(QStringLiteral("OUTPUT"), layout, row);
+	addTitle(QStringLiteral("输出"), layout, row);
 
 	// logging
 	m_loggingEnabled = addCheckBox(
-		QStringLiteral("Logging"),
-		QStringLiteral("Enable console and file logging"),
-		QStringLiteral("<p>Show logs in the console and save this information in files.</p>"),
+		QStringLiteral("日志"),
+		QStringLiteral("启用控制台和文件日志记录"),
+		QStringLiteral("<p>在控制台中显示日志并将此信息保存在文件中。</p>"),
 		layout,
 		row);
 	connect(
@@ -245,22 +239,20 @@ void QtProjectWizardContentPreferences::populate(QGridLayout* layout, int& row)
 		&QtProjectWizardContentPreferences::loggingEnabledChanged);
 
 	m_verboseIndexerLoggingEnabled = addCheckBox(
-		QStringLiteral("Indexer Logging"),
-		QStringLiteral("Enable verbose indexer logging"),
+		QStringLiteral("索引日志"),
+		QStringLiteral("启用详细索引器日志记录"),
 		QStringLiteral(
-			"<p>Enable additional logs of abstract syntax tree traversal during indexing. This "
-			"information can help "
-			"tracking down crashes that occur during indexing.</p>"
-			"<p><b>Warning</b>: This slows down indexing performance a lot.</p>"),
+			"<p>在索引过程中启用抽象语法树遍历的附加日志。此信息可帮助追踪索引过程中发生的崩溃。</p>"
+			"<p><b>警告</b>：这会大大降低索引性能。</p>"),
 		layout,
 		row);
 
 	m_logPath = new QtLocationPicker(this);
 	m_logPath->setPickDirectory(true);
-	addLabelAndWidget(QStringLiteral("Log Directory Path"), m_logPath, layout, row);
+	addLabelAndWidget(QStringLiteral("日志文件夹"), m_logPath, layout, row);
 	addHelpButton(
-		QStringLiteral("Log Directory Path"),
-		QStringLiteral("<p>Log file will be saved to this path.</p>"),
+		QStringLiteral("日志文件夹"),
+		QStringLiteral("<p>日志文件会被保存在该路径下。</p>"),
 		layout,
 		row);
 	row++;
@@ -268,42 +260,41 @@ void QtProjectWizardContentPreferences::populate(QGridLayout* layout, int& row)
 	addGap(layout, row);
 
 	// Plugins
-	addTitle(QStringLiteral("PLUGIN"), layout, row);
+	addTitle(QStringLiteral("插件"), layout, row);
 
 	// Sourcetrail port
 	m_sourcetrailPort = addLineEdit(
-		QStringLiteral("Sourcetrail Port"),
-		QStringLiteral("<p>Port number that Sourcetrail uses to listen for incoming messages from "
-					   "plugins.</p>"),
+		QStringLiteral("Sourcetrail 端口"),
+		QStringLiteral("<p>Sourcetrail 用于监听插件传入消息的端口号。</p>"),
 		layout,
 		row);
 
 	// Sourcetrail port
 	m_pluginPort = addLineEdit(
-		QStringLiteral("Plugin Port"),
+		QStringLiteral("插件端口"),
 		QStringLiteral(
-			"<p>Port number that Sourcetrail uses to sends outgoing messages to plugins.</p>"),
+			"<p>Sourcetrail 用于向插件发送传出消息的端口号。</p>"),
 		layout,
 		row);
 
 	addGap(layout, row);
 
 	// indexing
-	addTitle(QStringLiteral("INDEXING"), layout, row);
+	addTitle(QStringLiteral("索引"), layout, row);
 
 	// indexer threads
 	m_threadsInfoLabel = new QLabel(QLatin1String(""));
 	utility::setWidgetRetainsSpaceWhenHidden(m_threadsInfoLabel);
 	m_threads = addComboBoxWithWidgets(
-		QStringLiteral("Indexer Threads"),
+		QStringLiteral("索引使用线程数"),
 		0,
 		24,
 		QStringLiteral(
-			"<p>Set the number of threads used to work on indexing your project in parallel.</p>"),
+			"<p>设置用于并行索引项目的线程数。</p>"),
 		{m_threadsInfoLabel},
 		layout,
 		row);
-	m_threads->setItemText(0, QStringLiteral("default"));
+	m_threads->setItemText(0, QStringLiteral("默认"));
 	connect(
 		m_threads,
 		qOverload<int>(&QComboBox::activated),
@@ -312,12 +303,11 @@ void QtProjectWizardContentPreferences::populate(QGridLayout* layout, int& row)
 
 	// multi process indexing
 	m_multiProcessIndexing = addCheckBox(
-		QStringLiteral("Multi Process<br />C/C++ Indexing"),
-		QStringLiteral("Run C/C++ indexer threads in different process"),
+		QStringLiteral("多进程<br />C/C++ 索引"),
+		QStringLiteral("在不同进程中运行 C/C++ 索引线程"),
 		QStringLiteral(
-			"<p>Enable C/C++ indexer threads to run in different process.</p>"
-			"<p>This prevents the application from crashing due to unforeseen exceptions while "
-			"indexing.</p>"),
+			"<p>使 C/C++ 索引器线程在不同的进程中运行。</p>"
+			"<p>这可以防止程序因索引时出现不可预见的异常而崩溃。</p>"),
 		layout,
 		row);
 
@@ -346,20 +336,20 @@ void QtProjectWizardContentPreferences::populate(QGridLayout* layout, int& row)
 		const std::string javaArchitectureString = utility::Platform::getArchitectureName();
 
 		addLabelAndWidget(
-			("Java Path (" + javaArchitectureString + ")").c_str(), m_javaPath, layout, row);
+			("Java 路径 (" + javaArchitectureString + ")").c_str(), m_javaPath, layout, row);
 
 		const std::string javaVersionString = javaArchitectureString + " Java";
 
 		addHelpButton(
-			QStringLiteral("Java Path"),
-			("<p>Only required for indexing Java projects.</p>"
-			 "<p>Provide the location of the jvm library inside the installation of your " +
+			QStringLiteral("Java 路径"),
+			("<p>只有索引 Java 项目才需要此选项。</p>"
+			 "<p>提供 " +
 			 javaVersionString +
-			 " runtime environment (for information on how to set this take a look at "
+			 " 运行时环境安装中 jvm 库的位置 (查看 "
 			 "<a href=\"" +
 			 utility::getDocumentationLink() +
 			 "#finding-java-runtime-library-location\">"
-			 "Finding Java Runtime Library Location</a> or use the auto detection below)</p>")
+			 "Finding Java Runtime Library Location</a> 获取更多信息或使用下方的自动检测)</p>")
 				.c_str(),
 			layout,
 			row);
@@ -371,16 +361,14 @@ void QtProjectWizardContentPreferences::populate(QGridLayout* layout, int& row)
 
 	{
 		// JRE System Library
-		const QString title = QStringLiteral("JRE System Library");
+		const QString title = QStringLiteral("JRE 系统库");
 		QLabel* label = createFormLabel(title);
 		layout->addWidget(label, row, QtProjectWizardWindow::FRONT_COL, Qt::AlignTop);
 
 		addHelpButton(
-			QStringLiteral("JRE System Library"),
-			QStringLiteral("<p>Only required for indexing Java projects.</p>"
-						   "<p>Add the jar files of your JRE System Library. These jars can be "
-						   "found inside your "
-						   "JRE install directory.</p>"),
+			QStringLiteral("JRE 系统库"),
+			QStringLiteral("<p>只有索引 Java 项目才需要此选项。</p>"
+						   "<p>添加 JRE 系统库的 jar 文件。这些 jar 文件可以在 JRE 安装目录中找到。</p>"),
 			layout,
 			row);
 
@@ -406,14 +394,12 @@ void QtProjectWizardContentPreferences::populate(QGridLayout* layout, int& row)
 		} else
 			LOG_WARNING("No placeholders and filters set for Maven path selection");
 
-		addLabelAndWidget(QStringLiteral("Maven Path"), m_mavenPath, layout, row);
+		addLabelAndWidget(QStringLiteral("Maven 路径"), m_mavenPath, layout, row);
 
 		addHelpButton(
-			QStringLiteral("Maven Path"),
-			QStringLiteral("<p>Only required for indexing projects using Maven.</p>"
-						   "<p>Provide the location of your installed Maven executable. You can "
-						   "also use the auto "
-						   "detection below.</p>"),
+			QStringLiteral("Maven 路径"),
+			QStringLiteral("<p>只有索引使用 Maven 的项目才需要此选项。</p>"
+						   "<p>提供已安装 Maven 可执行文件的位置。也可以使用下方的自动检测。</p>"),
 			layout,
 			row);
 		row++;
@@ -428,18 +414,11 @@ void QtProjectWizardContentPreferences::populate(QGridLayout* layout, int& row)
 	addTitle(QStringLiteral("Python"), layout, row);
 
 	m_pythonPostProcessing = addCheckBox(
-		QStringLiteral("Post Processing"),
-		QStringLiteral("Add ambiguous edges for unsolved references (recommended)"),
-		QStringLiteral("<p>Enable a post processing step to solve unsolved references after the "
-					   "indexing is done. "
+		QStringLiteral("后处理"),
+		QStringLiteral("为未处理的引用添加歧义边（推荐）"),
+		QStringLiteral("<p>索引完成后，启用后处理步骤来解决未处理的引用。"
 					   "</p>"
-					   "<p>These references will be marked \"ambiguous\" to indicate that some of "
-					   "these edges may "
-					   "never "
-					   "be encountered during runtime of the indexed code because the post "
-					   "processing only relies "
-					   "on "
-					   "symbol names and types.</p>"),
+					   "<p>这些引用将被标记为'歧义'，以表明其中一些边可能永远不会在索引代码的运行过程中遇到，因为后期处理仅依赖于符号名称和类型。</p>"),
 		layout,
 		row);
 
@@ -653,7 +632,7 @@ void QtProjectWizardContentPreferences::indexerThreadsChanges(int index)
 	if (index == 0)
 	{
 		m_threadsInfoLabel->setText(
-			("detected " + std::to_string(utility::getIdealThreadCount()) + " threads to be ideal.")
+			("合适的线程数为" + std::to_string(utility::getIdealThreadCount()))
 				.c_str());
 		m_threadsInfoLabel->show();
 	}
@@ -670,15 +649,15 @@ void QtProjectWizardContentPreferences::uiAutoScalingChanges(int index)
 		QString autoScale(qgetenv("QT_AUTO_SCREEN_SCALE_FACTOR_SOURCETRAIL"));
 		if (autoScale == QLatin1String("1"))
 		{
-			autoScale = QStringLiteral("on");
+			autoScale = QStringLiteral("打开");
 		}
 		else
 		{
-			autoScale = QStringLiteral("off");
+			autoScale = QStringLiteral("关闭");
 		}
 
 		m_screenAutoScalingInfoLabel->setText(
-			QStringLiteral("detected: '") + autoScale + QStringLiteral("'"));
+			QStringLiteral("检测到: '") + autoScale + QStringLiteral("'"));
 		m_screenAutoScalingInfoLabel->show();
 	}
 	else
@@ -700,7 +679,7 @@ void QtProjectWizardContentPreferences::uiScaleFactorChanges(int index)
 		}
 
 		m_screenScaleFactorInfoLabel->setText(
-			QStringLiteral("detected: '") + scale + QStringLiteral("%'"));
+			QStringLiteral("检测到: '") + scale + QStringLiteral("%'"));
 		m_screenScaleFactorInfoLabel->show();
 	}
 	else
@@ -717,7 +696,7 @@ void QtProjectWizardContentPreferences::addJavaPathDetection(QGridLayout* layout
 		return;
 	}
 
-	QLabel* label = new QLabel(QStringLiteral("Auto detection from:"));
+	QLabel* label = new QLabel(QStringLiteral("自动检测自:"));
 
 	m_javaPathDetectorBox = new QComboBox();
 
@@ -726,7 +705,7 @@ void QtProjectWizardContentPreferences::addJavaPathDetection(QGridLayout* layout
 		m_javaPathDetectorBox->addItem(detectorName.c_str());
 	}
 
-	QPushButton* button = new QPushButton(QStringLiteral("detect"));
+	QPushButton* button = new QPushButton(QStringLiteral("检测"));
 	button->setObjectName(QStringLiteral("windowButton"));
 	connect(
 		button,
@@ -757,7 +736,7 @@ void QtProjectWizardContentPreferences::addJreSystemLibraryPathsDetection(QGridL
 		return;
 	}
 
-	QLabel* label = new QLabel(QStringLiteral("Auto detection from:"));
+	QLabel* label = new QLabel(QStringLiteral("自动检测自:"));
 
 	m_jreSystemLibraryPathsDetectorBox = new QComboBox();
 
@@ -766,7 +745,7 @@ void QtProjectWizardContentPreferences::addJreSystemLibraryPathsDetection(QGridL
 		m_jreSystemLibraryPathsDetectorBox->addItem(detectorName.c_str());
 	}
 
-	QPushButton* button = new QPushButton(QStringLiteral("detect"));
+	QPushButton* button = new QPushButton(QStringLiteral("检测"));
 	button->setObjectName(QStringLiteral("windowButton"));
 	connect(
 		button,
@@ -796,7 +775,7 @@ void QtProjectWizardContentPreferences::addMavenPathDetection(QGridLayout* layou
 		return;
 	}
 
-	QLabel* label = new QLabel(QStringLiteral("Auto detection from:"));
+	QLabel* label = new QLabel(QStringLiteral("自动检测自:"));
 
 	m_mavenPathDetectorBox = new QComboBox();
 
@@ -805,7 +784,7 @@ void QtProjectWizardContentPreferences::addMavenPathDetection(QGridLayout* layou
 		m_mavenPathDetectorBox->addItem(detectorName.c_str());
 	}
 
-	QPushButton* button = new QPushButton(QStringLiteral("detect"));
+	QPushButton* button = new QPushButton(QStringLiteral("检测"));
 	button->setObjectName(QStringLiteral("windowButton"));
 	connect(
 		button,

@@ -10,18 +10,18 @@ QtProjectWizardContentPathsExclude::QtProjectWizardContentPathsExclude(
 	: QtProjectWizardContentPaths(
 		  settings, window, QtPathListBox::SELECTION_POLICY_FILES_AND_DIRECTORIES, false)
 {
-	setTitleString(QStringLiteral("Excluded Files & Directories"));
+	setTitleString(QStringLiteral("排除文件/文件夹"));
 	setHelpString(
-		"<p>These paths define the files and directories that will be left out from indexing.</p>"
-		"<p>Hints:"
+		"<p>这些路径定义了将从索引中排除的文件和文件夹。</p>"
+		"<p>提示："
 		"<ul>"
-		"<li>You can use the wildcard \"*\" which represents characters except \"\\\" or \"/\" "
-		"(e.g. \"src/*/test.h\" matches \"src/app/test.h\" but does not match "
-		"\"src/app/widget/test.h\" or \"src/test.h\")</li>"
-		"<li>You can use the wildcard \"**\" which represents arbitrary characters (e.g. "
-		"\"src**test.h\" matches \"src/app/test.h\" as well as \"src/app/widget/test.h\" or "
-		"\"src/test.h\")</li>"
-		"<li>You can make use of environment variables with ${ENV_VAR}</li>"
+		"<li>您可以使用通配符 \"*\"，它代表除\"\\\" 或 \"/\" 以外的字符"
+		"（例如 \"src/*/test.h\" 与 \"src/app/test.h\" 匹配，但不与"
+		"\"src/app/widget/test.h\" 或 \"src/test.h\" 匹配）</li>"
+		"<li>您可以使用通配符 \"**\" 来匹配任意字符 (例如 "
+		"\"src**test.h\" 与 \"src/app/test.h\"、\"src/app/widget/test.h\" 或 "
+		"\"src/test.h\" 都匹配)</li>"
+		"<li>您可以通过 ${ENV_VAR} 的方式使用环境变量。</li>"
 		"</ul></p>");
 }
 

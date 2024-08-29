@@ -55,8 +55,8 @@ void QtPathListDialog::populateWindow(QWidget* widget)
 
 void QtPathListDialog::windowReady()
 {
-	updateNextButton(QStringLiteral("Save"));
-	updateCloseButton(QStringLiteral("Cancel"));
+	updateNextButton(QStringLiteral("保存"));
+	updateCloseButton(QStringLiteral("取消"));
 
 	setPreviousVisible(false);
 

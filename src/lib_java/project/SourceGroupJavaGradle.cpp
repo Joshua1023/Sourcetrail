@@ -79,7 +79,7 @@ bool SourceGroupJavaGradle::prepareGradleData()
 		ScopedFunctor dialogHider([&dialogView]() { dialogView->hideUnknownProgressDialog(); });
 
 		dialogView->showUnknownProgressDialog(
-			L"Preparing Project", L"Gradle\nExporting Dependencies");
+			L"项目准备中", L"Gradle\n正在导出依赖");
 
 		bool success = utility::gradleCopyDependencies(
 			projectRootPath,
@@ -100,7 +100,7 @@ std::vector<FilePath> SourceGroupJavaGradle::doGetAllSourcePaths() const
 		std::shared_ptr<DialogView> dialogView = Application::getInstance()->getDialogView(
 			DialogView::UseCase::PROJECT_SETUP);
 		dialogView->showUnknownProgressDialog(
-			L"Preparing Project", L"Gradle\nFetching Source Directories");
+			L"项目准备中", L"Gradle\n正在获取源文件目录");
 
 		const FilePath projectRootPath =
 			m_settings->getGradleProjectFilePathExpandedAndAbsolute().getParentDirectory();

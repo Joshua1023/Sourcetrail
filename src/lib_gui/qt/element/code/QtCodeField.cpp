@@ -79,12 +79,12 @@ QtCodeField::QtCodeField(
 	setTabStopDistance(appSettings->getCodeTabWidth() * fontMetrics().boundingRect('9').width());
 
 	m_openInTabAction = new QAction(
-		QStringLiteral("Open in New Tab (Ctrl + Shift + Left Click)"), this);
+		QStringLiteral("在新标签页中打开 (Ctrl + Shift + 左键单击)"), this);
 	if constexpr (utility::Platform::isMac()) {
-		m_openInTabAction->setText(QStringLiteral("Open in New Tab (Cmd + Shift + Left Click)"));
+		m_openInTabAction->setText(QStringLiteral("在新标签页中打开 (Cmd + Shift + 左键单击)"));
 	}
-	m_openInTabAction->setStatusTip(QStringLiteral("Opens the node in a new tab"));
-	m_openInTabAction->setToolTip(QStringLiteral("Opens the node in a new tab"));
+	m_openInTabAction->setStatusTip(QStringLiteral("在新标签页中打开该节点"));
+	m_openInTabAction->setToolTip(QStringLiteral("在新标签页中打开该节点"));
 	m_openInTabAction->setEnabled(false);
 	connect(m_openInTabAction, &QAction::triggered, this, &QtCodeField::openInTab);
 }

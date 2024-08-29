@@ -82,7 +82,7 @@ QtGraphView::QtGraphView(ViewLayout* viewLayout)
 				ResourcePaths::getGuiDirectoryPath().concatenate(L"graph_view/images/graph.png"),
 				"search/button");
 			m_expandButton->setObjectName(QStringLiteral("expand_button"));
-			m_expandButton->setToolTip(QStringLiteral("show trail controls"));
+			m_expandButton->setToolTip(QStringLiteral("显示踪迹控制"));
 			m_expandButton->setIconSize(QSize(16, 16));
 			m_expandButton->setGeometry(0, 0, 26, 26);
 			connect(m_expandButton, &QPushButton::clicked, this, &QtGraphView::clickedExpand);
@@ -100,7 +100,7 @@ QtGraphView::QtGraphView(ViewLayout* viewLayout)
 				"search/button",
 				ui);
 			m_collapseButton->setObjectName(QStringLiteral("collapse_button"));
-			m_collapseButton->setToolTip(QStringLiteral("hide trail controls"));
+			m_collapseButton->setToolTip(QStringLiteral("隐藏踪迹控制"));
 			m_collapseButton->setIconSize(QSize(16, 16));
 			connect(m_collapseButton, &QPushButton::clicked, this, &QtGraphView::clickedCollapse);
 
@@ -108,7 +108,7 @@ QtGraphView::QtGraphView(ViewLayout* viewLayout)
 				QLatin1String(""), FilePath(), "search/button", ui);
 			m_customTrailButton->setObjectName(QStringLiteral("trail_button"));
 			m_customTrailButton->setIconSize(QSize(16, 16));
-			m_customTrailButton->setToolTip(QStringLiteral("custom trail"));
+			m_customTrailButton->setToolTip(QStringLiteral("自定义踪迹"));
 			m_customTrailButton->setIconPath(
 				ResourcePaths::getGuiDirectoryPath().concatenate(L"graph_view/images/graph_custom.png"));
 			connect(
@@ -130,12 +130,12 @@ QtGraphView::QtGraphView(ViewLayout* viewLayout)
 
 			m_trailDepthLabel = new QLabel(ui);
 			m_trailDepthLabel->setObjectName(QStringLiteral("depth_label"));
-			m_trailDepthLabel->setToolTip(QStringLiteral("adjust trail depth"));
+			m_trailDepthLabel->setToolTip(QStringLiteral("调整踪迹深度"));
 			m_trailDepthLabel->setAlignment(Qt::AlignCenter);
 
 			m_trailDepthSlider = new QSlider(Qt::Vertical, ui);
 			m_trailDepthSlider->setObjectName(QStringLiteral("depth_slider"));
-			m_trailDepthSlider->setToolTip(QStringLiteral("adjust trail depth"));
+			m_trailDepthSlider->setToolTip(QStringLiteral("调整踪迹深度"));
 			m_trailDepthSlider->setMinimum(1);
 			m_trailDepthSlider->setMaximum(26);
 			m_trailDepthSlider->setValue(5);
@@ -183,8 +183,8 @@ QtGraphView::QtGraphView(ViewLayout* viewLayout)
 		m_groupFileButton->setObjectName(QStringLiteral("group_right_button"));
 		m_groupNamespaceButton->setObjectName(QStringLiteral("group_left_button"));
 
-		m_groupFileButton->setToolTip(QStringLiteral("group by file"));
-		m_groupNamespaceButton->setToolTip(QStringLiteral("group by package/namespace/module"));
+		m_groupFileButton->setToolTip(QStringLiteral("按文件分组"));
+		m_groupNamespaceButton->setToolTip(QStringLiteral("按包/命名空间/模块分组"));
 
 		m_groupFileButton->setCheckable(true);
 		m_groupNamespaceButton->setCheckable(true);
@@ -756,7 +756,7 @@ void QtGraphView::trailDepthChanged(int)
 {
 	if (m_trailDepthSlider->value() == m_trailDepthSlider->maximum())
 	{
-		m_trailDepthLabel->setText(QStringLiteral("inf"));
+		m_trailDepthLabel->setText(QStringLiteral("无限制"));
 	}
 	else
 	{
@@ -903,26 +903,26 @@ void QtGraphView::updateTrailButtons()
 
 	if (message.edgeTypes & Edge::EDGE_CALL)
 	{
-		m_backwardTrailButton->setToolTip(QStringLiteral("show caller graph"));
-		m_forwardTrailButton->setToolTip(QStringLiteral("show callee graph"));
+		m_backwardTrailButton->setToolTip(QStringLiteral("显示调用图"));
+		m_forwardTrailButton->setToolTip(QStringLiteral("显示被调用图"));
 	}
 	else if (message.edgeTypes & Edge::EDGE_INHERITANCE)
 	{
-		m_backwardTrailButton->setToolTip(QStringLiteral("show base hierarchy"));
-		m_forwardTrailButton->setToolTip(QStringLiteral("show derived hierarchy"));
+		m_backwardTrailButton->setToolTip(QStringLiteral("显示基础层次结构"));
+		m_forwardTrailButton->setToolTip(QStringLiteral("显示派生层次结构"));
 
 		backwardImagePath = L"graph_up.png";
 		forwardImagePath = L"graph_down.png";
 	}
 	else if (message.edgeTypes & Edge::EDGE_INCLUDE)
 	{
-		m_backwardTrailButton->setToolTip(QStringLiteral("show including files hierarchy"));
-		m_forwardTrailButton->setToolTip(QStringLiteral("show included files hierarchy"));
+		m_backwardTrailButton->setToolTip(QStringLiteral("显示包含文件层次结构"));
+		m_forwardTrailButton->setToolTip(QStringLiteral("显示被包含文件层次结构"));
 	}
 	else
 	{
-		m_backwardTrailButton->setToolTip(QStringLiteral("no trail for active symbol"));
-		m_forwardTrailButton->setToolTip(QStringLiteral("no trail for active symbol"));
+		m_backwardTrailButton->setToolTip(QStringLiteral("活动符号无踪迹"));
+		m_forwardTrailButton->setToolTip(QStringLiteral("活动符号无踪迹"));
 	}
 
 	m_forwardTrailButton->setIconPath(
@@ -994,7 +994,7 @@ void QtGraphView::switchToNewGraphData()
 
 	if (m_oldGraph && m_oldGraph->getTrailMode() != Graph::TRAIL_NONE)
 	{
-		MessageStatus(L"Finished graph display").dispatch();
+		MessageStatus(L"完成图显示").dispatch();
 	}
 }
 

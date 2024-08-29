@@ -10,7 +10,7 @@ QtIndexingProgressDialog::QtIndexingProgressDialog(bool  /*hideable*/, QWidget* 
 {
 	setSizeGripStyle(false);
 
-	updateTitle(QStringLiteral("Indexing Files"));
+	updateTitle(QStringLiteral("正在索引文件"));
 
 	m_filePathLabel = new QLabel();
 	m_filePathLabel->setObjectName(QStringLiteral("filePath"));
@@ -25,14 +25,14 @@ QtIndexingProgressDialog::QtIndexingProgressDialog(bool  /*hideable*/, QWidget* 
 	{
 		QHBoxLayout* buttons = new QHBoxLayout();
 
-		QPushButton* stopButton = new QPushButton(QStringLiteral("Stop"));
+		QPushButton* stopButton = new QPushButton(QStringLiteral("停止"));
 		stopButton->setObjectName(QStringLiteral("windowButton"));
 		connect(stopButton, &QPushButton::clicked, this, &QtIndexingProgressDialog::onStopPressed);
 		buttons->addWidget(stopButton);
 
 		buttons->addStretch();
 
-		QPushButton* hideButton = new QPushButton(QStringLiteral("Hide"));
+		QPushButton* hideButton = new QPushButton(QStringLiteral("隐藏"));
 		hideButton->setObjectName(QStringLiteral("windowButton"));
 		hideButton->setDefault(true);
 		connect(hideButton, &QPushButton::clicked, this, &QtIndexingProgressDialog::onHidePressed);
@@ -54,8 +54,7 @@ void QtIndexingProgressDialog::updateIndexingProgress(
 	size_t fileCount, size_t totalFileCount, const FilePath& sourcePath)
 {
 	updateMessage(
-		QString::number(fileCount) + "/" + QString::number(totalFileCount) + " File" +
-		(totalFileCount > 1 ? "s" : ""));
+		QString::number(fileCount) + "/" + QString::number(totalFileCount) + " 文件");
 
 	size_t progress = 0;
 	if (totalFileCount > 0)
@@ -75,15 +74,11 @@ void QtIndexingProgressDialog::updateErrorCount(size_t errorCount, size_t fatalC
 {
 	if (m_errorWidget && errorCount)
 	{
-		QString str = QString::number(errorCount) + " Error";
-		if (errorCount > 1)
-		{
-			str += QLatin1String("s");
-		}
+		QString str = QString::number(errorCount) + " 个错误";
 
 		if (fatalCount)
 		{
-			str += " (" + QString::number(fatalCount) + " Fatal)";
+			str += "（" + QString::number(fatalCount) + " 个致命错误）";
 		}
 
 		QPushButton* errorCount = m_errorWidget->findChild<QPushButton*>(

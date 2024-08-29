@@ -58,7 +58,7 @@ void QtSelectPathsDialog::setPathsList(
 		if (!s.exists())
 		{
 			item->setForeground(Qt::red);
-			item->setToolTip(QStringLiteral("Path does not exist"));
+			item->setToolTip(QStringLiteral("路径不存在"));
 			item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
 			item->setCheckState(Qt::Unchecked);
 		}
@@ -97,7 +97,7 @@ void QtSelectPathsDialog::populateWindow(QWidget* widget)
 	QHBoxLayout* buttonLayout = new QHBoxLayout();
 	buttonLayout->setContentsMargins(0, 0, 0, 0);
 
-	QPushButton* checkAllButton = new QPushButton(QStringLiteral("check all"));
+	QPushButton* checkAllButton = new QPushButton(QStringLiteral("选择全部"));
 	checkAllButton->setObjectName(QStringLiteral("windowButton"));
 	connect(checkAllButton, &QPushButton::clicked, [=, this]() {
 		m_list->selectAll();
@@ -106,7 +106,7 @@ void QtSelectPathsDialog::populateWindow(QWidget* widget)
 	});
 	buttonLayout->addWidget(checkAllButton);
 
-	QPushButton* unCheckAllButton = new QPushButton(QStringLiteral("uncheck all"));
+	QPushButton* unCheckAllButton = new QPushButton(QStringLiteral("取消全部"));
 	unCheckAllButton->setObjectName(QStringLiteral("windowButton"));
 	connect(unCheckAllButton, &QPushButton::clicked, [=, this]() {
 		m_list->selectAll();
@@ -115,12 +115,12 @@ void QtSelectPathsDialog::populateWindow(QWidget* widget)
 	});
 	buttonLayout->addWidget(unCheckAllButton);
 
-	QPushButton* checkSelectedButton = new QPushButton(QStringLiteral("check selected"));
+	QPushButton* checkSelectedButton = new QPushButton(QStringLiteral("选择已选"));
 	checkSelectedButton->setObjectName(QStringLiteral("windowButton"));
 	connect(checkSelectedButton, &QPushButton::clicked, [=, this]() { checkSelected(true); });
 	buttonLayout->addWidget(checkSelectedButton);
 
-	QPushButton* unCheckSelectedButton = new QPushButton(QStringLiteral("uncheck selected"));
+	QPushButton* unCheckSelectedButton = new QPushButton(QStringLiteral("取消已选"));
 	unCheckSelectedButton->setObjectName(QStringLiteral("windowButton"));
 	connect(unCheckSelectedButton, &QPushButton::clicked, [=, this]() { checkSelected(false); });
 	buttonLayout->addWidget(unCheckSelectedButton);
@@ -132,8 +132,8 @@ void QtSelectPathsDialog::populateWindow(QWidget* widget)
 
 void QtSelectPathsDialog::windowReady()
 {
-	updateNextButton(QStringLiteral("Save"));
-	updateCloseButton(QStringLiteral("Cancel"));
+	updateNextButton(QStringLiteral("保存"));
+	updateCloseButton(QStringLiteral("取消"));
 
 	setPreviousVisible(false);
 

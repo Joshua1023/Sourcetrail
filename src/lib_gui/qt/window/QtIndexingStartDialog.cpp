@@ -17,7 +17,7 @@ QtIndexingStartDialog::QtIndexingStartDialog(
 {
 	setSizeGripStyle(false);
 
-	QtIndexingDialog::createTitleLabel(QStringLiteral("Start Indexing"), m_layout);
+	QtIndexingDialog::createTitleLabel(QStringLiteral("开始索引"), m_layout);
 	m_layout->addSpacing(5);
 
 	m_clearLabel = QtIndexingDialog::createMessageLabel(m_layout);
@@ -38,26 +38,17 @@ QtIndexingStartDialog::QtIndexingStartDialog(
 	modeTitleLayout->setSpacing(7);
 
 	QLabel* modeLabel = QtIndexingDialog::createMessageLabel(modeTitleLayout);
-	modeLabel->setText(QStringLiteral("Mode:"));
+	modeLabel->setText(QStringLiteral("模式："));
 	modeLabel->setAlignment(Qt::AlignLeft);
 
 	QtHelpButton* helpButton = new QtHelpButton(QtHelpButtonInfo(
-		QStringLiteral("Indexing Modes"),
-		QString("<b>Updated files:</b> Reindexes all files that were modified since the last "
-				"indexing, all new files and all files depending "
-				"on those.<br /><br />"
-				"<b>Incomplete & updated files:</b> Reindexes all files that had errors during "
-				"last indexing, all updated files and all files "
-				"depending on those.<br /><br />"
-				"<b>All files:</b> Deletes the previous index and reindexes all files from "
-				"scratch.<br /><br />") +
+		QStringLiteral("索引模式"),
+		QString("<b>增量更新：</b>重新索引自上次索引以来修改的所有文件、所有新文件以及所有依赖于这些文件的文件。<br /><br />"
+				"<b>补充增量更新：</b>重新索引上次索引期间出现错误的所有文件、所有更新的文件以及所有依赖于这些文件的文件。<br /><br />"
+				"<b>全量更新：</b>删除先前的索引并从头开始重新索引所有文件。<br /><br />") +
 			(enabledShallowOption
-				 ? "<br /><b>Shallow Python Indexing:</b> References within your code base (calls, "
-				   "usages, etc.) are resolved by name, which is "
-				   "imprecise but much faster than in-depth indexing.<br />"
-				   "<i>Hint: Use this option for a quick first indexing pass and start browsing "
-				   "the code base "
-				   "while running a second pass for in-depth indexing.<br /><br />"
+				 ? "<br /><b>浅层 Python 索引：</b>通过名称解析代码库中的引用（调用、使用等），虽然不精确，但比深度索引快得多。<br />"
+				   "<i>提示：使用此选项可以快速进行第一次索引，然后开始浏览代码库，同时运行第二次索引以进行深度索引。<br /><br />"
 				 : "")));
 	helpButton->setColor(Qt::white);
 	modeTitleLayout->addWidget(helpButton);
@@ -68,11 +59,11 @@ QtIndexingStartDialog::QtIndexingStartDialog(
 	modeLayout->addSpacing(5);
 
 	m_refreshModeButtons.emplace(
-		REFRESH_UPDATED_FILES, new QRadioButton(QStringLiteral("Updated files")));
+		REFRESH_UPDATED_FILES, new QRadioButton(QStringLiteral("增量更新")));
 	m_refreshModeButtons.emplace(
 		REFRESH_UPDATED_AND_INCOMPLETE_FILES,
-		new QRadioButton(QStringLiteral("Incomplete && updated files")));
-	m_refreshModeButtons.emplace(REFRESH_ALL_FILES, new QRadioButton(QStringLiteral("All files")));
+		new QRadioButton(QStringLiteral("补充增量更新")));
+	m_refreshModeButtons.emplace(REFRESH_ALL_FILES, new QRadioButton(QStringLiteral("全量更新")));
 
 	std::function<void(bool)> func = [=, this](bool checked) {
 		if (!checked)
@@ -111,7 +102,7 @@ QtIndexingStartDialog::QtIndexingStartDialog(
 	if (enabledShallowOption)
 	{
 		QCheckBox* shallowIndexingCheckBox = new QCheckBox(
-			QStringLiteral("Shallow Python Indexing"));
+			QStringLiteral("浅层 Python 索引"));
 		connect(shallowIndexingCheckBox, &QCheckBox::toggled, [=, this]() {
 			emit setShallowIndexing(shallowIndexingCheckBox->isChecked());
 		});
@@ -126,14 +117,14 @@ QtIndexingStartDialog::QtIndexingStartDialog(
 
 	{
 		QHBoxLayout* buttons = new QHBoxLayout();
-		QPushButton* cancelButton = new QPushButton(QStringLiteral("Cancel"));
+		QPushButton* cancelButton = new QPushButton(QStringLiteral("取消"));
 		cancelButton->setObjectName(QStringLiteral("windowButton"));
 		connect(cancelButton, &QPushButton::clicked, this, &QtIndexingStartDialog::onCancelPressed);
 		buttons->addWidget(cancelButton);
 
 		buttons->addStretch();
 
-		QPushButton* startButton = new QPushButton(QStringLiteral("Start"));
+		QPushButton* startButton = new QPushButton(QStringLiteral("开始"));
 		startButton->setObjectName(QStringLiteral("windowButton"));
 		startButton->setDefault(true);
 		connect(startButton, &QPushButton::clicked, this, &QtIndexingStartDialog::onStartPressed);
@@ -160,8 +151,8 @@ void QtIndexingStartDialog::updateRefreshInfo(const RefreshInfo& info)
 	size_t clearCount = info.filesToClear.size();
 	size_t indexCount = info.filesToIndex.size();
 
-	m_clearLabel->setText("Files to clear: " + QString::number(clearCount));
-	m_indexLabel->setText("Source files to index: " + QString::number(indexCount));
+	m_clearLabel->setText("要清理的文件数：" + QString::number(clearCount));
+	m_indexLabel->setText("要索引的源文件数：" + QString::number(indexCount));
 
 	m_clearLabel->setVisible(clearCount && info.mode != REFRESH_ALL_FILES);
 	m_indexLabel->setVisible(true);

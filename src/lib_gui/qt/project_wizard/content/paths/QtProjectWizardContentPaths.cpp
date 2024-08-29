@@ -88,13 +88,12 @@ bool QtProjectWizardContentPaths::check()
 		if (!missingPaths.isEmpty())
 		{
 			QtMessageBox msgBox(m_window);
-			msgBox.setText(QString("Some provided paths do not exist at \"%1\". Do you want to "
-								   "remove them before continuing?")
+			msgBox.setText(QString("提供的某些路径在 \"%1\" 处不存在。是否要先移除它们再继续？")
 							   .arg(m_titleString));
 			msgBox.setDetailedText(missingPaths);
-			QPushButton* removeButton = msgBox.addButton(QStringLiteral("Remove"), QtMessageBox::YesRole);
-			QPushButton* keepButton = msgBox.addButton(QStringLiteral("Keep"), QtMessageBox::ButtonRole::NoRole);
-			QPushButton* cancelButton = msgBox.addButton(QStringLiteral("Cancel"), QtMessageBox::ButtonRole::RejectRole);
+			QPushButton* removeButton = msgBox.addButton(QStringLiteral("移除"), QtMessageBox::YesRole);
+			QPushButton* keepButton = msgBox.addButton(QStringLiteral("保留"), QtMessageBox::ButtonRole::NoRole);
+			QPushButton* cancelButton = msgBox.addButton(QStringLiteral("取消"), QtMessageBox::ButtonRole::RejectRole);
 
 			QAbstractButton *clickedButton = msgBox.execModal();
 
@@ -134,7 +133,7 @@ void QtProjectWizardContentPaths::addDetection(QGridLayout* layout, int row)
 		return;
 	}
 
-	QLabel* label = new QLabel(QStringLiteral("Auto detection from:"));
+	QLabel* label = new QLabel(QStringLiteral("自动检测自:"));
 
 	m_detectorBox = new QComboBox();
 
@@ -143,7 +142,7 @@ void QtProjectWizardContentPaths::addDetection(QGridLayout* layout, int row)
 		m_detectorBox->addItem(detectorName.c_str());
 	}
 
-	QPushButton* button = new QPushButton(QStringLiteral("detect"));
+	QPushButton* button = new QPushButton(QStringLiteral("检测"));
 	button->setObjectName(QStringLiteral("windowButton"));
 	connect(button, &QPushButton::clicked, this, &QtProjectWizardContentPaths::detectionClicked);
 

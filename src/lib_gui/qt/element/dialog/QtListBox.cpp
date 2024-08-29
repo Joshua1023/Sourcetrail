@@ -61,7 +61,7 @@ QtListBox::QtListBox(QWidget* parent, const QString& listName): QFrame(parent), 
 		ResourcePaths::getGuiDirectoryPath().concatenate(L"window/plus_hover.png"));
 	m_addButton->setIconSize(QSize(16, 16));
 	m_addButton->setObjectName(QStringLiteral("plusButton"));
-	m_addButton->setToolTip(QStringLiteral("add line"));
+	m_addButton->setToolTip(QStringLiteral("增加一行"));
 	barLayout->addWidget(m_addButton);
 
 	m_removeButton = new QtIconButton(
@@ -69,7 +69,7 @@ QtListBox::QtListBox(QWidget* parent, const QString& listName): QFrame(parent), 
 		ResourcePaths::getGuiDirectoryPath().concatenate(L"window/minus_hover.png"));
 	m_removeButton->setIconSize(QSize(16, 16));
 	m_removeButton->setObjectName(QStringLiteral("minusButton"));
-	m_removeButton->setToolTip(QStringLiteral("remove line"));
+	m_removeButton->setToolTip(QStringLiteral("删除一行"));
 	barLayout->addWidget(m_removeButton);
 
 	barLayout->addStretch();
@@ -81,7 +81,7 @@ QtListBox::QtListBox(QWidget* parent, const QString& listName): QFrame(parent), 
 		ResourcePaths::getGuiDirectoryPath().concatenate(L"code_view/images/edit.png"), FilePath());
 	editButton->setIconSize(QSize(16, 16));
 	editButton->setObjectName(QStringLiteral("editButton"));
-	editButton->setToolTip(QStringLiteral("edit plain text"));
+	editButton->setToolTip(QStringLiteral("修改文本"));
 	barLayout->addWidget(editButton);
 
 	buttonContainer->setLayout(barLayout);

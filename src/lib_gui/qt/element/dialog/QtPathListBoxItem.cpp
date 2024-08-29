@@ -38,11 +38,11 @@ void QtPathListBoxItem::handleButtonPress()
 	{
 	case QtPathListBox::SELECTION_POLICY_FILES_ONLY:
 		list.append(QtFileDialog::getOpenFileName(
-			this, QStringLiteral("Select Directory"), path, QLatin1String("")));
+			this, QStringLiteral("选择文件夹"), path, QLatin1String("")));
 		break;
 	case QtPathListBox::SELECTION_POLICY_DIRECTORIES_ONLY:
 		list.append(
-			QtFileDialog::getExistingDirectory(this, QStringLiteral("Select Directory"), path));
+			QtFileDialog::getExistingDirectory(this, QStringLiteral("选择文件夹"), path));
 		break;
 	case QtPathListBox::SELECTION_POLICY_FILES_AND_DIRECTORIES:
 		list = QtFileDialog::getFileNamesAndDirectories(this, path);

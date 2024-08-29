@@ -21,7 +21,7 @@ bool SourceGroupCxxCodeblocks::prepareIndexing()
 	if (!codeblocksProjectPath.empty() && !codeblocksProjectPath.exists())
 	{
 		std::wstring error =
-			L"Can't refresh project. The referenced Code::Blocks project does not exist anymore: " +
+			L"无法更新索引。引用的 Code::Blocks 项目不再存在：" +
 			codeblocksProjectPath.wstr();
 		MessageStatus(error, true).dispatch();
 		Application::getInstance()->handleDialog(error, {L"Ok"});

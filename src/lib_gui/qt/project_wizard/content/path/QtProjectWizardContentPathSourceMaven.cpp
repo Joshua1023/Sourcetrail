@@ -18,11 +18,11 @@ QtProjectWizardContentPathSourceMaven::QtProjectWizardContentPathSourceMaven(
 	std::shared_ptr<SourceGroupSettingsJavaMaven> settings, QtProjectWizardWindow* window)
 	: QtProjectWizardContentPath(window), m_settings(settings)
 {
-	setTitleString("Maven Project File (pom.xml)");
+	setTitleString("Maven 项目文件 (pom.xml)");
 	setHelpString(
-		"Enter the path to the main pom.xml file of your Maven project.<br />"
+		"输入 Maven 项目主 pom.xml 文件的路径。<br />"
 		"<br />"
-		"You can make use of environment variables with ${ENV_VAR}.");
+		"您可以通过 ${ENV_VAR} 的方式使用环境变量。");
 	setFileEndings({L".xml"});
 	setIsRequired(true);
 }
@@ -80,7 +80,7 @@ std::vector<FilePath> QtProjectWizardContentPathSourceMaven::getFilePaths() cons
 
 		dialogView->setParentWindow(m_window);
 		dialogView->showUnknownProgressDialog(
-			L"Preparing Project", L"Maven\nGenerating Source Files");
+			L"项目准备中", L"Maven\n正在生成源文件");
 
 		const std::wstring errorMessage = utility::mavenGenerateSources(
 			mavenPath, mavenSettingsPath, mavenProjectRoot);

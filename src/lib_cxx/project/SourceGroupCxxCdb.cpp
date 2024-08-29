@@ -27,8 +27,7 @@ bool SourceGroupCxxCdb::prepareIndexing()
 	if (!cdbPath.empty() && !cdbPath.exists())
 	{
 		std::wstring error =
-			L"Can't refresh project. The compilation database of the project does not exist "
-			L"anymore: " +
+			L"无法更新索引。该项目的编译数据库不再存在：" +
 			cdbPath.wstr();
 		MessageStatus(error, true).dispatch();
 		Application::getInstance()->handleDialog(error, {L"Ok"});

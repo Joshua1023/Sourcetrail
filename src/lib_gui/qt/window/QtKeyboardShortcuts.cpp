@@ -40,7 +40,7 @@ void QtKeyboardShortcuts::populateWindow(QWidget* widget)
 
 	QLabel* generalLabel = new QLabel(this);
 	generalLabel->setObjectName(QStringLiteral("general_label"));
-	generalLabel->setText(QStringLiteral("General Shortcuts"));
+	generalLabel->setText(QStringLiteral("常用快捷键"));
 	layout->addWidget(generalLabel);
 
 	layout->addWidget(createGeneralShortcutsTable());
@@ -49,7 +49,7 @@ void QtKeyboardShortcuts::populateWindow(QWidget* widget)
 
 	QLabel* codeLabel = new QLabel(this);
 	codeLabel->setObjectName(QStringLiteral("code_label"));
-	codeLabel->setText(QStringLiteral("Code View Shortcuts"));
+	codeLabel->setText(QStringLiteral("代码视图快捷键"));
 	layout->addWidget(codeLabel);
 
 	layout->addWidget(createCodeViewShortcutsTable());
@@ -58,7 +58,7 @@ void QtKeyboardShortcuts::populateWindow(QWidget* widget)
 
 	QLabel* graphLabel = new QLabel(this);
 	graphLabel->setObjectName(QStringLiteral("graph_label"));
-	graphLabel->setText(QStringLiteral("Graph View Shortcuts"));
+	graphLabel->setText(QStringLiteral("图视图快捷键"));
 	layout->addWidget(graphLabel);
 
 	layout->addWidget(createGraphViewShortcutsTable());
@@ -72,8 +72,8 @@ void QtKeyboardShortcuts::populateWindow(QWidget* widget)
 
 void QtKeyboardShortcuts::windowReady()
 {
-	updateTitle(QStringLiteral("Keyboard Shortcuts"));
-	updateCloseButton(QStringLiteral("Close"));
+	updateTitle(QStringLiteral("键盘快捷键"));
+	updateCloseButton(QStringLiteral("关闭"));
 
 	setNextVisible(false);
 	setPreviousVisible(false);
@@ -129,8 +129,8 @@ QtShortcutTable* QtKeyboardShortcuts::createTableWidget(const std::string& objec
 	table->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
 	table->setColumnCount(2);
-	table->setHorizontalHeaderItem(0, new QTableWidgetItem(QStringLiteral("Command")));
-	table->setHorizontalHeaderItem(1, new QTableWidgetItem(QStringLiteral("Shortcut")));
+	table->setHorizontalHeaderItem(0, new QTableWidgetItem(QStringLiteral("命令")));
+	table->setHorizontalHeaderItem(1, new QTableWidgetItem(QStringLiteral("快捷键")));
 
 	return table;
 }
@@ -154,60 +154,60 @@ QTableWidget* QtKeyboardShortcuts::createGeneralShortcutsTable()
 
 	addShortcuts(
 		table,
-		{Shortcut(QStringLiteral("Switch Focus between Graph and Code"), QStringLiteral("Tab")),
+		{Shortcut(QStringLiteral("在图视图和代码视图间切换焦点"), QStringLiteral("Tab")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Larger Font"), QStringLiteral("Ctrl + +"), QStringLiteral("Cmd + +")),
+			 QStringLiteral("增大字体"), QStringLiteral("Ctrl + +"), QStringLiteral("Cmd + +")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Smaller Font"), QStringLiteral("Ctrl + -"), QStringLiteral("Cmd + -")),
+			 QStringLiteral("减小字体"), QStringLiteral("Ctrl + -"), QStringLiteral("Cmd + -")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Reset Font Size"), QStringLiteral("Ctrl + 0"), QStringLiteral("Cmd + 0")),
+			 QStringLiteral("重置字体大小"), QStringLiteral("Ctrl + 0"), QStringLiteral("Cmd + 0")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Back"),
+			 QStringLiteral("返回"),
 			 QStringLiteral("Alt + Left | Z | Y | Backspace"),
 			 QStringLiteral("Cmd + [ | Z | Y | Backspace")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Forward"),
+			 QStringLiteral("前进"),
 			 QStringLiteral("Alt + Right | Shift + Z | Shift + Y"),
 			 QStringLiteral("Cmd + ] | Shift + Z | Shift + Y")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Refresh"), QStringLiteral("F5"), QStringLiteral("Cmd + R")),
+			 QStringLiteral("更新索引"), QStringLiteral("F5"), QStringLiteral("Cmd + R")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Full Refresh"),
+			 QStringLiteral("重新索引"),
 			 QStringLiteral("Shift + F5"),
 			 QStringLiteral("Cmd + Shift + R")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Find Symbol"), QStringLiteral("Ctrl + F"), QStringLiteral("Cmd + F")),
+			 QStringLiteral("符号查找"), QStringLiteral("Ctrl + F"), QStringLiteral("Cmd + F")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Find Text"),
+			 QStringLiteral("文本查找"),
 			 QStringLiteral("Ctrl + Shift + F"),
 			 QStringLiteral("Cmd + Shift + F")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Find On-Screen"),
+			 QStringLiteral("当前页面查找"),
 			 QStringLiteral("Ctrl + D | /"),
 			 QStringLiteral("Cmd + D | /")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("New Project"), QStringLiteral("Ctrl + N"), QStringLiteral("Cmd + N")),
+			 QStringLiteral("新建项目"), QStringLiteral("Ctrl + N"), QStringLiteral("Cmd + N")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Open Project"), QStringLiteral("Ctrl + O"), QStringLiteral("Cmd + O")),
+			 QStringLiteral("打开项目"), QStringLiteral("Ctrl + O"), QStringLiteral("Cmd + O")),
 		 Shortcut::winMacOrLinux(
-			 QStringLiteral("Close Window"),
+			 QStringLiteral("退出"),
 			 QStringLiteral("Alt + F4"),
 			 QStringLiteral("Cmd + W"),
 			 QStringLiteral("Ctrl + W")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Hide Window"), QStringLiteral(""), QStringLiteral("Cmd + H")),
+			 QStringLiteral("隐藏窗口"), QStringLiteral(""), QStringLiteral("Cmd + H")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("To Overview"),
+			 QStringLiteral("前往概览页"),
 			 QStringLiteral("Ctrl + Home"),
 			 QStringLiteral("Cmd + Home | Cmd + Up")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Preferences"), QStringLiteral("Ctrl + ,"), QStringLiteral("Cmd + ,")),
+			 QStringLiteral("设置"), QStringLiteral("Ctrl + ,"), QStringLiteral("Cmd + ,")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Bookmark Active Symbol"),
+			 QStringLiteral("为当前符号创建书签"),
 			 QStringLiteral("Ctrl + S"),
 			 QStringLiteral("Cmd + S")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Bookmark Manager"),
+			 QStringLiteral("书签管理器"),
 			 QStringLiteral("Ctrl + B"),
 			 QStringLiteral("Cmd + B"))});
 
@@ -220,31 +220,31 @@ QTableWidget* QtKeyboardShortcuts::createCodeViewShortcutsTable()
 
 	addShortcuts(
 		table,
-		{Shortcut(QStringLiteral("Move Focus Within Code"), QStringLiteral("WASD | HJKL | Arrows")),
+		{Shortcut(QStringLiteral("在代码内移动焦点"), QStringLiteral("WASD | HJKL | Arrows")),
 		 Shortcut(
-			 QStringLiteral("Move Focus to Closest Reference"),
+			 QStringLiteral("将焦点移至最近的引用"),
 			 QStringLiteral("Shift + WASD | Shift + HJKL | Shift + Arrows")),
-		 Shortcut(QStringLiteral("Activate Location"), QStringLiteral("Enter | E")),
+		 Shortcut(QStringLiteral("激活位置"), QStringLiteral("Enter | E")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Activate Location in New Tab"),
+			 QStringLiteral("在新标签页中激活位置"),
 			 QStringLiteral("Ctrl + Shift + Enter | Ctrl + Shift + E"),
 			 QStringLiteral("Cmd + Shift + Enter | Cmd + Shift + E")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Next Reference"), QStringLiteral("Ctrl + G"), QStringLiteral("Cmd + G")),
+			 QStringLiteral("下一处引用"), QStringLiteral("Ctrl + G"), QStringLiteral("Cmd + G")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Previous Reference"),
+			 QStringLiteral("上一处引用"),
 			 QStringLiteral("Ctrl + Shift + G"),
 			 QStringLiteral("Cmd + Shift + G")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Next Local Reference"),
+			 QStringLiteral("下一处本地引用"),
 			 QStringLiteral("Ctrl + L"),
 			 QStringLiteral("Cmd + L")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Previous Local Reference"),
+			 QStringLiteral("上一处本地引用"),
 			 QStringLiteral("Ctrl + Shift + L"),
 			 QStringLiteral("Cmd + Shift + L")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Scroll Code Area"),
+			 QStringLiteral("滚动代码区域"),
 			 QStringLiteral("Ctrl + Arrows"),
 			 QStringLiteral("Cmd + Arrows"))});
 
@@ -257,31 +257,31 @@ QTableWidget* QtKeyboardShortcuts::createGraphViewShortcutsTable()
 
 	addShortcuts(
 		table,
-		{Shortcut(QStringLiteral("Move Focus Within Nodes"), QStringLiteral("WASD | HJKL | Arrows")),
+		{Shortcut(QStringLiteral("在节点内移动焦点"), QStringLiteral("WASD | HJKL | Arrows")),
 		 Shortcut(
-			 QStringLiteral("Move Focus Within Edges"),
+			 QStringLiteral("在边内移动焦点"),
 			 QStringLiteral("Shift + WASD | Shift + HJKL | Shift + Arrows")),
-		 Shortcut(QStringLiteral("Activate Node/Edge"), QStringLiteral("Enter | E")),
-		 Shortcut(QStringLiteral("Expand/Collapse Node"), QStringLiteral("Shift + Enter | Shift + E")),
+		 Shortcut(QStringLiteral("激活节点/边"), QStringLiteral("Enter | E")),
+		 Shortcut(QStringLiteral("展开/收起节点"), QStringLiteral("Shift + Enter | Shift + E")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Activate Node in New Tab"),
+			 QStringLiteral("在新标签页激活节点"),
 			 QStringLiteral("Ctrl + Shift + Enter | Ctrl + Shift + E"),
 			 QStringLiteral("Cmd + Shift + Enter | Cmd + Shift + E")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Scroll Graph Area"),
+			 QStringLiteral("滚动图区域"),
 			 QStringLiteral("Ctrl + Arrows"),
 			 QStringLiteral("Cmd + Arrows")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Zoom in"),
+			 QStringLiteral("放大"),
 			 QStringLiteral("Ctrl + Shift + Up | Ctrl + Mouse Wheel Up"),
 			 QStringLiteral("Cmd + Shift + Up | Cmd + Mouse Wheel Up")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Zoom out"),
+			 QStringLiteral("缩小"),
 			 QStringLiteral("Ctrl + Shift + Down | Ctrl + Mouse Wheel Down"),
 			 QStringLiteral("Cmd + Shift + Down | Cmd + Mouse Wheel Down")),
-		 Shortcut(QStringLiteral("Reset Zoom"), QStringLiteral("0")),
+		 Shortcut(QStringLiteral("重置"), QStringLiteral("0")),
 		 Shortcut::defaultOrMac(
-			 QStringLiteral("Open Custom Trail Dialog"),
+			 QStringLiteral("打开自定义踪迹对话框"),
 			 QStringLiteral("Ctrl + U"),
 			 QStringLiteral("Cmd + U"))});
 

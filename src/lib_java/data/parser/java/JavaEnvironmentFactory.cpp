@@ -57,7 +57,7 @@ void JavaEnvironmentFactory::createInstance(const std::string &classPath, std::s
 
 	if (javaPath.empty())
 	{
-		*errorString = "No Java Path provided in preferences.";
+		*errorString = "设置中未提供 Java 路径。";
 		return;
 	}
 

@@ -83,16 +83,16 @@ std::wstring SearchMatch::getCommandName(CommandType type)
 	switch (type)
 	{
 	case COMMAND_ALL:
-		return L"overview";
+		return L"概览";
 	case COMMAND_ERROR:
-		return L"error";
+		return L"错误";
 	case COMMAND_NODE_FILTER:
-		return L"node_filter";
+		return L"节点筛选器";
 	case COMMAND_LEGEND:
-		return L"legend";
+		return L"图例";
 	}
 
-	return L"none";
+	return L"无";
 }
 
 SearchMatch::SearchMatch()

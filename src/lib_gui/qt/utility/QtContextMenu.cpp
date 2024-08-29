@@ -65,28 +65,28 @@ QtContextMenu* QtContextMenu::getInstance()
 	{
 		s_instance = new QtContextMenu();
 
-		s_undoAction = new QAction(tr("Back"), s_instance);
-		s_undoAction->setStatusTip(tr("Go back to last active symbol"));
-		s_undoAction->setToolTip(tr("Go back to last active symbol"));
+		s_undoAction = new QAction(tr("返回"), s_instance);
+		s_undoAction->setStatusTip(tr("返回到上一活动符号"));
+		s_undoAction->setToolTip(tr("返回到上一活动符号"));
 		connect(s_undoAction, &QAction::triggered, s_instance, &QtContextMenu::undoActionTriggered);
 
-		s_redoAction = new QAction(tr("Forward"), s_instance);
-		s_redoAction->setStatusTip(tr("Go forward to next active symbol"));
-		s_redoAction->setToolTip(tr("Go forward to next active symbol"));
+		s_redoAction = new QAction(tr("前进"), s_instance);
+		s_redoAction->setStatusTip(tr("前进到下一活动符号"));
+		s_redoAction->setToolTip(tr("前进到下一活动符号"));
 		connect(s_redoAction, &QAction::triggered, s_instance, &QtContextMenu::redoActionTriggered);
 
-		s_copyFullPathAction = new QAction(tr("Copy Full Path"), s_instance);
-		s_copyFullPathAction->setStatusTip(tr("Copies the path of this file to the clipboard"));
-		s_copyFullPathAction->setToolTip(tr("Copies the path of this file to the clipboard"));
+		s_copyFullPathAction = new QAction(tr("复制完整路径"), s_instance);
+		s_copyFullPathAction->setStatusTip(tr("复制文件路径到剪贴板"));
+		s_copyFullPathAction->setToolTip(tr("复制文件路径到剪贴板"));
 		connect(
 			s_copyFullPathAction,
 			&QAction::triggered,
 			s_instance,
 			&QtContextMenu::copyFullPathActionTriggered);
 
-		s_openContainingFolderAction = new QAction(tr("Open Containing Folder"), s_instance);
-		s_openContainingFolderAction->setStatusTip(tr("Opens the folder that contains this file"));
-		s_openContainingFolderAction->setToolTip(tr("Opens the folder that contains this file"));
+		s_openContainingFolderAction = new QAction(tr("打开所在文件夹"), s_instance);
+		s_openContainingFolderAction->setStatusTip(tr("打开文件所在文件夹"));
+		s_openContainingFolderAction->setToolTip(tr("打开文件所在文件夹"));
 		connect(
 			s_openContainingFolderAction,
 			&QAction::triggered,

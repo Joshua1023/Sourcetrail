@@ -54,76 +54,76 @@ QtGraphicsView::QtGraphicsView(GraphFocusHandler* focusHandler, QWidget* parent)
 	connect(m_zoomLabelTimer.get(), &QTimer::timeout, this, &QtGraphicsView::hideZoomLabel);
 
 	m_openInTabAction = new QAction(
-		QStringLiteral("Open in New Tab (Ctrl + Shift + Left Click)"), this);
+		QStringLiteral("在新标签页中打开 (Ctrl + Shift + 左键点击)"), this);
 	if constexpr (utility::Platform::isMac()) {
-		m_openInTabAction->setText(QStringLiteral("Open in New Tab (Cmd + Shift + Left Click)"));
+		m_openInTabAction->setText(QStringLiteral("在新标签页中打开 (Cmd + Shift + 左键点击)"));
 	}
-	m_openInTabAction->setStatusTip(QStringLiteral("Open this node in a new tab"));
-	m_openInTabAction->setToolTip(QStringLiteral("Open this node in a new tab"));
+	m_openInTabAction->setStatusTip(QStringLiteral("在新标签页中打开该节点"));
+	m_openInTabAction->setToolTip(QStringLiteral("在新标签页中打开该节点"));
 	connect(m_openInTabAction, &QAction::triggered, this, &QtGraphicsView::openInTab);
 
-	m_copyNodeNameAction = new QAction(QStringLiteral("Copy Name"), this);
+	m_copyNodeNameAction = new QAction(QStringLiteral("复制"), this);
 	m_copyNodeNameAction->setStatusTip(
-		QStringLiteral("Copies the name of this node to the clipboard"));
+		QStringLiteral("复制节点名到剪贴板"));
 	m_copyNodeNameAction->setToolTip(
-		QStringLiteral("Copies the name of this node to the clipboard"));
+		QStringLiteral("复制节点名到剪贴板"));
 	connect(m_copyNodeNameAction, &QAction::triggered, this, &QtGraphicsView::copyNodeName);
 
-	m_collapseAction = new QAction(QStringLiteral("Collapse Node (Shift + Left Click)"), this);
-	m_collapseAction->setStatusTip(QStringLiteral("Hide the unconnected members of the node"));
-	m_collapseAction->setToolTip(QStringLiteral("Hide the unconnected members of the node"));
+	m_collapseAction = new QAction(QStringLiteral("收起节点 (Shift + 左键点击)"), this);
+	m_collapseAction->setStatusTip(QStringLiteral("隐藏节点中未连接的成员"));
+	m_collapseAction->setToolTip(QStringLiteral("隐藏节点中未连接的成员"));
 	connect(m_collapseAction, &QAction::triggered, this, &QtGraphicsView::collapseNode);
 
-	m_expandAction = new QAction(QStringLiteral("Expand Node (Shift + Left Click)"), this);
-	m_expandAction->setStatusTip(QStringLiteral("Show unconnected members of the node"));
-	m_expandAction->setToolTip(QStringLiteral("Show unconnected members of the node"));
+	m_expandAction = new QAction(QStringLiteral("展开节点 (Shift + 左键点击)"), this);
+	m_expandAction->setStatusTip(QStringLiteral("显示节点中未连接的成员"));
+	m_expandAction->setToolTip(QStringLiteral("显示节点中未连接的成员"));
 	connect(m_expandAction, &QAction::triggered, this, &QtGraphicsView::expandNode);
 
 	m_showInIDEAction = new QAction(
-		QStringLiteral("Show Definition in IDE (Ctrl + Left Click)"), this);
+		QStringLiteral("在 IDE 中转到定义 (Ctrl + 左键点击)"), this);
 	if constexpr (utility::Platform::isMac()) {
-		m_showInIDEAction->setText("Show Definition in IDE (Cmd + Left Click)");
+		m_showInIDEAction->setText("在 IDE 中转到定义 (Cmd + 左键点击)");
 	}
 	m_showInIDEAction->setStatusTip(
-		QStringLiteral("Show definition of this symbol in the IDE (via plug-in)"));
+		QStringLiteral("在 IDE 中转到定义位置 (需要插件)"));
 	m_showInIDEAction->setToolTip(
-		QStringLiteral("Show definition of this symbol in the IDE (via plug-in)"));
+		QStringLiteral("在 IDE 中转到定义位置 (需要插件)"));
 	connect(m_showInIDEAction, &QAction::triggered, this, &QtGraphicsView::showInIDE);
 
 	m_showDefinitionAction = new QAction(
-		QStringLiteral("Show Definition (Ctrl + Alt + Left Click)"), this);
+		QStringLiteral("转到定义 (Ctrl + Alt + 左键点击)"), this);
 	if constexpr (utility::Platform::isMac()) {
-		m_showDefinitionAction->setText("Show Definition (Cmd + Alt + Left Click)");
+		m_showDefinitionAction->setText("转到定义 (Cmd + Alt + 左键点击)");
 	}
 	m_showDefinitionAction->setStatusTip(
-		QStringLiteral("Show definition of this symbol in the code"));
+		QStringLiteral("转到定义位置"));
 	m_showDefinitionAction->setToolTip(
-		QStringLiteral("Show definition of this symbol in the code"));
+		QStringLiteral("转到定义位置"));
 	connect(m_showDefinitionAction, &QAction::triggered, this, &QtGraphicsView::showDefinition);
 
-	m_hideNodeAction = new QAction(QStringLiteral("Hide Node (Alt + Left Click)"), this);
-	m_hideNodeAction->setStatusTip(QStringLiteral("Hide the node from this graph"));
-	m_hideNodeAction->setToolTip(QStringLiteral("Hide the node from this graph"));
+	m_hideNodeAction = new QAction(QStringLiteral("隐藏节点 (Alt + 左键点击)"), this);
+	m_hideNodeAction->setStatusTip(QStringLiteral("在图中隐藏此节点"));
+	m_hideNodeAction->setToolTip(QStringLiteral("在图中隐藏此节点"));
 	connect(m_hideNodeAction, &QAction::triggered, this, &QtGraphicsView::hideNode);
 
-	m_hideEdgeAction = new QAction(QStringLiteral("Hide Edge (Alt + Left Click)"), this);
-	m_hideEdgeAction->setStatusTip(QStringLiteral("Hide the edge from this graph"));
-	m_hideEdgeAction->setToolTip(QStringLiteral("Hide the edge from this graph"));
+	m_hideEdgeAction = new QAction(QStringLiteral("隐藏边 (Alt + 左键点击)"), this);
+	m_hideEdgeAction->setStatusTip(QStringLiteral("在图中隐藏此边"));
+	m_hideEdgeAction->setToolTip(QStringLiteral("在图中隐藏此边"));
 	connect(m_hideEdgeAction, &QAction::triggered, this, &QtGraphicsView::hideEdge);
 
-	m_bookmarkNodeAction = new QAction(QStringLiteral("Bookmark Node"), this);
-	m_bookmarkNodeAction->setStatusTip(QStringLiteral("Create a bookmark for this node"));
-	m_bookmarkNodeAction->setToolTip(QStringLiteral("Create a bookmark for this node"));
+	m_bookmarkNodeAction = new QAction(QStringLiteral("创建书签"), this);
+	m_bookmarkNodeAction->setStatusTip(QStringLiteral("为该节点创建书签"));
+	m_bookmarkNodeAction->setToolTip(QStringLiteral("为该节点创建书签"));
 	connect(m_bookmarkNodeAction, &QAction::triggered, this, &QtGraphicsView::bookmarkNode);
 
-	m_exportGraphAction = new QAction(QStringLiteral("Save as Image"), this);
-	m_exportGraphAction->setStatusTip(QStringLiteral("Save this graph as image file"));
-	m_exportGraphAction->setToolTip(QStringLiteral("Save this graph as image file"));
+	m_exportGraphAction = new QAction(QStringLiteral("保存为图片"), this);
+	m_exportGraphAction->setStatusTip(QStringLiteral("将此图(graph)保存为图片"));
+	m_exportGraphAction->setToolTip(QStringLiteral("将此图(graph)保存为图片"));
 	connect(m_exportGraphAction, &QAction::triggered, this, &QtGraphicsView::exportGraph);
 
-	m_copyGraphAction = new QAction(QStringLiteral("Save to Clipboard"), this);
-	m_copyGraphAction->setStatusTip(QStringLiteral("Save this graph as image to the Clipboard"));
-	m_copyGraphAction->setToolTip(QStringLiteral("Save this graph as image to the Clipboard"));
+	m_copyGraphAction = new QAction(QStringLiteral("保存到剪贴板"), this);
+	m_copyGraphAction->setStatusTip(QStringLiteral("将此图(graph)保存到剪贴板"));
+	m_copyGraphAction->setToolTip(QStringLiteral("将此图(graph)保存到剪贴板"));
 	connect(m_copyGraphAction, &QAction::triggered, this, &QtGraphicsView::copyGraph);
 
 	m_focusIndicator = new QWidget(this);
@@ -141,7 +141,7 @@ QtGraphicsView::QtGraphicsView(GraphFocusHandler* focusHandler, QWidget* parent)
 		this);
 	m_zoomInButton->setObjectName(QStringLiteral("zoom_in_button"));
 	m_zoomInButton->setAutoRepeat(true);
-	m_zoomInButton->setToolTip("zoom in (" + modifierName + " + Mousewheel forward)");
+	m_zoomInButton->setToolTip("放大 (" + modifierName + " + 鼠标滚轮向上)");
 	connect(m_zoomInButton, &QPushButton::pressed, this, &QtGraphicsView::zoomInPressed);
 
 	m_zoomOutButton = new QtSelfRefreshIconButton(
@@ -151,7 +151,7 @@ QtGraphicsView::QtGraphicsView(GraphFocusHandler* focusHandler, QWidget* parent)
 		this);
 	m_zoomOutButton->setObjectName(QStringLiteral("zoom_out_button"));
 	m_zoomOutButton->setAutoRepeat(true);
-	m_zoomOutButton->setToolTip("zoom out (" + modifierName + " + Mousewheel back)");
+	m_zoomOutButton->setToolTip("缩小 (" + modifierName + " + 鼠标滚轮向下)");
 	connect(m_zoomOutButton, &QPushButton::pressed, this, &QtGraphicsView::zoomOutPressed);
 
 	m_legendButton = new QtSelfRefreshIconButton(
@@ -160,7 +160,7 @@ QtGraphicsView::QtGraphicsView(GraphFocusHandler* focusHandler, QWidget* parent)
 		"search/button",
 		this);
 	m_legendButton->setObjectName(QStringLiteral("legend_button"));
-	m_legendButton->setToolTip(QStringLiteral("show legend"));
+	m_legendButton->setToolTip(QStringLiteral("显示图例"));
 	connect(m_legendButton, &QPushButton::clicked, this, &QtGraphicsView::legendClicked);
 
 	m_tabId = TabId::currentTab();
@@ -673,7 +673,7 @@ void QtGraphicsView::openInTab()
 
 QImage QtGraphicsView::toQImage()
 {
-	const QString exportNotice = QStringLiteral("Exported from Sourcetrail");
+	const QString exportNotice = QStringLiteral("从 Sourcetrail 导出");
 	const int margin = 10;
 
 	QImage image(scene()->sceneRect().size().toSize() * 2, QImage::Format_ARGB32);
@@ -713,13 +713,13 @@ QImage QtGraphicsView::toQImage()
 
 void QtGraphicsView::exportGraph()
 {
-	const QString exportNotice = QStringLiteral("Exported from Sourcetrail");
+	const QString exportNotice = QStringLiteral("从 Sourcetrail 导出");
 	const int margin = 10;
 
 	FilePath filePath(
 		QtFileDialog::showSaveFileDialog(
 			nullptr,
-			QStringLiteral("Save image"),
+			QStringLiteral("保存图片"),
 			FilePath(),
 			QStringLiteral("PNG (*.png);;JPEG (*.JPEG);;BMP Files (*.bmp);;SVG (*.svg)"))
 			.toStdWString());
@@ -731,7 +731,7 @@ void QtGraphicsView::exportGraph()
 		svgGen.setSize(scene()->sceneRect().size().toSize());
 		svgGen.setViewBox(QRect(QPoint(0, 0), scene()->sceneRect().size().toSize()));
 		svgGen.setTitle(QString::fromStdWString(filePath.withoutExtension().fileName()));
-		svgGen.setDescription(QStringLiteral("Graph exported from Sourcetrail") + QChar(0x00AE));
+		svgGen.setDescription(QStringLiteral("从 Sourcetrail 导出图片") + QChar(0x00AE));
 
 		QPainter painter(&svgGen);
 		scene()->render(&painter);

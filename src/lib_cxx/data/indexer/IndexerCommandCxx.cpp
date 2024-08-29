@@ -20,7 +20,7 @@ std::vector<FilePath> IndexerCommandCxx::getSourceFilesFromCDB(const FilePath& c
 
 	if (!error.empty())
 	{
-		const std::wstring message = L"Loading Clang compilation database failed with error: \"" +
+		const std::wstring message = L"加载 Clang 编译数据库失败并出现错误：\"" +
 			utility::decodeFromUtf8(error) + L"\"";
 		LOG_ERROR(message);
 		MessageStatus(message, true).dispatch();

@@ -615,7 +615,7 @@ void QtMainWindow::newProjectFromCDB(const FilePath& filePath)
 void QtMainWindow::openProject()
 {
 	QString fileName = QtFileDialog::getOpenFileName(
-		this, tr("Open File"), FilePath(), QStringLiteral("Sourcetrail Project Files (*.srctrlprj)"));
+		this, tr("打开文件"), FilePath(), QStringLiteral("Sourcetrail Project Files (*.srctrlprj)"));
 
 	if (!fileName.isEmpty())
 	{
@@ -713,7 +713,7 @@ void QtMainWindow::forceRefresh()
 void QtMainWindow::saveAsImage()
 {
 	QString filePath = QtFileDialog::showSaveFileDialog(
-		this, tr("Save as Image"), FilePath(), "PNG (*.png);;JPEG (*.JPEG);;BMP Files (*.bmp)");
+		this, tr("保存为图片"), FilePath(), "PNG (*.png);;JPEG (*.JPEG);;BMP Files (*.bmp)");
 	if (filePath.isNull())
 	{
 		return;
@@ -842,36 +842,36 @@ void QtMainWindow::activateBookmarkAction()
 
 void QtMainWindow::setupProjectMenu()
 {
-	QMenu* menu = new QMenu(tr("&Project"), this);
+	QMenu* menu = new QMenu(tr("项目"), this);
 	menuBar()->addMenu(menu);
 
-	menu->addAction(tr("&New Project..."), QKeySequence::New, this, &QtMainWindow::newProject);
-	menu->addAction(tr("&Open Project..."), QKeySequence::Open, this, &QtMainWindow::openProject);
+	menu->addAction(tr("新建项目..."), QKeySequence::New, this, &QtMainWindow::newProject);
+	menu->addAction(tr("打开项目..."), QKeySequence::Open, this, &QtMainWindow::openProject);
 
-	m_recentProjectsMenu = new QMenu(tr("Recent Projects"));
+	m_recentProjectsMenu = new QMenu(tr("最近打开的项目"));
 	menu->addMenu(m_recentProjectsMenu);
 	updateRecentProjectsMenu();
 
 	menu->addSeparator();
 
-	menu->addAction(tr("&Edit Project..."), this, &QtMainWindow::editProject);
+	menu->addAction(tr("修改项目配置..."), this, &QtMainWindow::editProject);
 	menu->addSeparator();
 
-	menu->addAction(tr("Close Project"), this, &QtMainWindow::closeProject);
+	menu->addAction(tr("关闭项目"), this, &QtMainWindow::closeProject);
 	menu->addAction(
-		tr("E&xit"), QKeySequence::Quit, QCoreApplication::instance(), &QCoreApplication::quit);
+		tr("退出"), QKeySequence::Quit, QCoreApplication::instance(), &QCoreApplication::quit);
 }
 
 void QtMainWindow::setupEditMenu()
 {
-	QMenu* menu = new QMenu(tr("&Edit"), this);
+	QMenu* menu = new QMenu(tr("编辑"), this);
 	menuBar()->addMenu(menu);
 
-	menu->addAction(tr("&Refresh"), QKeySequence::Refresh, this, &QtMainWindow::refresh);
+	menu->addAction(tr("更新索引"), QKeySequence::Refresh, this, &QtMainWindow::refresh);
 	if constexpr (utility::Platform::isWindows())
 	{
 		menu->addAction(
-			tr("&Full Refresh"),
+			tr("重新索引"),
 			QKeySequence(Qt::SHIFT | Qt::Key_F5),
 			this,
 			&QtMainWindow::forceRefresh);
@@ -879,7 +879,7 @@ void QtMainWindow::setupEditMenu()
 	else
 	{
 		menu->addAction(
-			tr("&Full Refresh"),
+			tr("重新索引"),
 			QKeySequence(Qt::SHIFT | Qt::CTRL | Qt::Key_R),
 			this,
 			&QtMainWindow::forceRefresh);
@@ -887,35 +887,35 @@ void QtMainWindow::setupEditMenu()
 
 	menu->addSeparator();
 
-	menu->addAction(tr("&Find Symbol"), QKeySequence::Find, this, &QtMainWindow::find);
+	menu->addAction(tr("符号查找"), QKeySequence::Find, this, &QtMainWindow::find);
 	menu->addAction(
-		tr("&Find Text"),
+		tr("文本查找"),
 		QKeySequence(Qt::SHIFT | Qt::CTRL | Qt::Key_F),
 		this,
 		&QtMainWindow::findFulltext);
 	menu->addAction(
-		tr("&Find On-Screen"), QKeySequence(Qt::CTRL | Qt::Key_D), this, &QtMainWindow::findOnScreen);
+		tr("当前页面查找"), QKeySequence(Qt::CTRL | Qt::Key_D), this, &QtMainWindow::findOnScreen);
 
 	menu->addSeparator();
 
 	menu->addAction(
-		tr("Next Reference"),
+		tr("跳转到下一处引用"),
 		QKeySequence(Qt::CTRL | Qt::Key_G),
 		this,
 		&QtMainWindow::codeReferenceNext);
 	menu->addAction(
-		tr("Previous Reference"),
+		tr("跳转到上一处引用"),
 		QKeySequence(Qt::SHIFT | Qt::CTRL | Qt::Key_G),
 		this,
 		&QtMainWindow::codeReferencePrevious);
 
 	menu->addAction(
-		tr("Next Local Reference"),
+		tr("跳转到下一处本地引用"),
 		QKeySequence(Qt::CTRL | Qt::Key_L),
 		this,
 		&QtMainWindow::codeLocalReferenceNext);
 	menu->addAction(
-		tr("Previous Local Reference"),
+		tr("跳转到上一处本地引用"),
 		QKeySequence(Qt::SHIFT | Qt::CTRL | Qt::Key_L),
 		this,
 		&QtMainWindow::codeLocalReferencePrevious);
@@ -923,17 +923,17 @@ void QtMainWindow::setupEditMenu()
 	menu->addSeparator();
 
 	menu->addAction(
-		tr("Custom Trail..."), QKeySequence(Qt::CTRL | Qt::Key_U), this, &QtMainWindow::customTrail);
+		tr("自定义踪迹(trail)..."), QKeySequence(Qt::CTRL | Qt::Key_U), this, &QtMainWindow::customTrail);
 
 	menu->addSeparator();
 
 	menu->addAction(
-		tr("&To overview"), QKeySequence(Qt::CTRL | Qt::Key_Home), this, &QtMainWindow::overview);
+		tr("回到概览页"), QKeySequence(Qt::CTRL | Qt::Key_Home), this, &QtMainWindow::overview);
 
 	menu->addSeparator();
 
 	menu->addAction(
-		tr("&Save Graph as Image..."),
+		tr("保存为图片..."),
 		QKeySequence(Qt::SHIFT | Qt::CTRL | Qt::Key_S),
 		this,
 		&QtMainWindow::saveAsImage);
@@ -941,7 +941,7 @@ void QtMainWindow::setupEditMenu()
 	menu->addSeparator();
 
 	menu->addAction(
-		tr("Preferences..."),
+		tr("设置..."),
 		QKeySequence(Qt::CTRL | Qt::Key_Comma),
 		this,
 		&QtMainWindow::openSettings);
@@ -949,19 +949,19 @@ void QtMainWindow::setupEditMenu()
 
 void QtMainWindow::setupViewMenu()
 {
-	QMenu* menu = new QMenu(tr("&View"), this);
+	QMenu* menu = new QMenu(tr("查看"), this);
 	menuBar()->addMenu(menu);
 
-	menu->addAction(tr("New Tab"), QKeySequence::AddTab, this, &QtMainWindow::openTab);
+	menu->addAction(tr("新建标签页"), QKeySequence::AddTab, this, &QtMainWindow::openTab);
 	menu->addAction(
-		tr("Close Tab"), QKeySequence(Qt::CTRL | Qt::Key_W), this, &QtMainWindow::closeTab);
+		tr("关闭标签页"), QKeySequence(Qt::CTRL | Qt::Key_W), this, &QtMainWindow::closeTab);
 
 	if constexpr (utility::Platform::isMac())
 	{
 		menu->addAction(
-			tr("Select Next Tab"), QKeySequence(Qt::META | Qt::Key_Tab), this, &QtMainWindow::nextTab);
+			tr("前往下一标签页"), QKeySequence(Qt::META | Qt::Key_Tab), this, &QtMainWindow::nextTab);
 		menu->addAction(
-			tr("Select Previous Tab"),
+			tr("前往上一标签页"),
 			QKeySequence(Qt::SHIFT | Qt::META | Qt::Key_Tab),
 			this,
 			&QtMainWindow::previousTab);
@@ -969,9 +969,9 @@ void QtMainWindow::setupViewMenu()
 	else
 	{
 		menu->addAction(
-			tr("Select Next Tab"), QKeySequence(Qt::CTRL | Qt::Key_Tab), this, &QtMainWindow::nextTab);
+			tr("前往下一标签页"), QKeySequence(Qt::CTRL | Qt::Key_Tab), this, &QtMainWindow::nextTab);
 		menu->addAction(
-			tr("Select Previous Tab"),
+			tr("前往上一标签页"),
 			QKeySequence(Qt::SHIFT | Qt::CTRL | Qt::Key_Tab),
 			this,
 			&QtMainWindow::previousTab);
@@ -979,24 +979,24 @@ void QtMainWindow::setupViewMenu()
 
 	menu->addSeparator();
 
-	menu->addAction(tr("Show Start Window"), this, &QtMainWindow::showStartScreen);
+	menu->addAction(tr("显示开始窗口"), this, &QtMainWindow::showStartScreen);
 
-	m_showTitleBarsAction = new QAction(QStringLiteral("Show Title Bars"), this);
+	m_showTitleBarsAction = new QAction(QStringLiteral("显示标题栏"), this);
 	m_showTitleBarsAction->setCheckable(true);
 	m_showTitleBarsAction->setChecked(m_showDockWidgetTitleBars);
 	connect(
 		m_showTitleBarsAction, &QAction::triggered, this, &QtMainWindow::toggleShowDockWidgetTitleBars);
 	menu->addAction(m_showTitleBarsAction);
-	menu->addAction(tr("Reset Window Layout"), this, &QtMainWindow::resetWindowLayout);
+	menu->addAction(tr("重置窗口布局"), this, &QtMainWindow::resetWindowLayout);
 
 	menu->addSeparator();
 
 	m_viewSeparator = menu->addSeparator();
 
-	menu->addAction(tr("Larger Font"), QKeySequence::ZoomIn, this, &QtMainWindow::zoomIn);
-	menu->addAction(tr("Smaller Font"), QKeySequence::ZoomOut, this, &QtMainWindow::zoomOut);
+	menu->addAction(tr("增大字体"), QKeySequence::ZoomIn, this, &QtMainWindow::zoomIn);
+	menu->addAction(tr("减小字体"), QKeySequence::ZoomOut, this, &QtMainWindow::zoomOut);
 	menu->addAction(
-		tr("Reset Font Size"), QKeySequence(Qt::CTRL | Qt::Key_0), this, &QtMainWindow::resetZoom);
+		tr("重置字体大小"), QKeySequence(Qt::CTRL | Qt::Key_0), this, &QtMainWindow::resetZoom);
 
 	m_viewMenu = menu;
 }
@@ -1005,7 +1005,7 @@ void QtMainWindow::setupHistoryMenu()
 {
 	if (!m_historyMenu)
 	{
-		m_historyMenu = new QMenu(tr("&History"), this);
+		m_historyMenu = new QMenu(tr("历史记录"), this);
 		menuBar()->addMenu(m_historyMenu);
 	}
 	else
@@ -1013,12 +1013,12 @@ void QtMainWindow::setupHistoryMenu()
 		m_historyMenu->clear();
 	}
 
-	m_historyMenu->addAction(tr("Back"), QKeySequence::Back, this, &QtMainWindow::undo);
-	m_historyMenu->addAction(tr("Forward"), QKeySequence::Forward, this, &QtMainWindow::redo);
+	m_historyMenu->addAction(tr("返回"), QKeySequence::Back, this, &QtMainWindow::undo);
+	m_historyMenu->addAction(tr("前进"), QKeySequence::Forward, this, &QtMainWindow::redo);
 
 	m_historyMenu->addSeparator();
 
-	QAction* title = new QAction(tr("Recently Active Symbols"));
+	QAction* title = new QAction(tr("最近活动符号"));
 	title->setEnabled(false);
 	m_historyMenu->addAction(title);
 
@@ -1046,7 +1046,7 @@ void QtMainWindow::setupBookmarksMenu()
 {
 	if (!m_bookmarksMenu)
 	{
-		m_bookmarksMenu = new QMenu(tr("&Bookmarks"), this);
+		m_bookmarksMenu = new QMenu(tr("书签"), this);
 		menuBar()->addMenu(m_bookmarksMenu);
 	}
 	else
@@ -1055,16 +1055,16 @@ void QtMainWindow::setupBookmarksMenu()
 	}
 
 	m_bookmarksMenu->addAction(
-		tr("Bookmark Active Symbol..."), QKeySequence::Save, this, &QtMainWindow::showBookmarkCreator);
+		tr("创建书签..."), QKeySequence::Save, this, &QtMainWindow::showBookmarkCreator);
 	m_bookmarksMenu->addAction(
-		tr("Bookmark Manager"),
+		tr("书签管理器"),
 		QKeySequence(Qt::CTRL | Qt::Key_B),
 		this,
 		&QtMainWindow::showBookmarkBrowser);
 
 	m_bookmarksMenu->addSeparator();
 
-	QAction* title = new QAction(tr("Recent Bookmarks"));
+	QAction* title = new QAction(tr("最近使用书签"));
 	title->setEnabled(false);
 	m_bookmarksMenu->addAction(title);
 
@@ -1084,24 +1084,24 @@ void QtMainWindow::setupBookmarksMenu()
 
 void QtMainWindow::setupHelpMenu()
 {
-	QMenu* menu = new QMenu(tr("&Help"), this);
+	QMenu* menu = new QMenu(tr("帮助"), this);
 	menuBar()->addMenu(menu);
 
-	menu->addAction(tr("Keyboard Shortcuts"), this, &QtMainWindow::showKeyboardShortcuts);
-	menu->addAction(tr("Fixing Errors"), this, &QtMainWindow::showErrorHelpMessage);
-	menu->addAction(tr("Documentation"), this, &QtMainWindow::showDocumentation);
-	menu->addAction(tr("Changelog"), this, &QtMainWindow::showChangelog);
-	menu->addAction(tr("Bug Tracker"), this, &QtMainWindow::showBugtracker);
+	menu->addAction(tr("键盘快捷键"), this, &QtMainWindow::showKeyboardShortcuts);
+	menu->addAction(tr("错误修复"), this, &QtMainWindow::showErrorHelpMessage);
+	menu->addAction(tr("文档"), this, &QtMainWindow::showDocumentation);
+	menu->addAction(tr("更新日志"), this, &QtMainWindow::showChangelog);
+	menu->addAction(tr("Bug 提交"), this, &QtMainWindow::showBugtracker);
 
 	menu->addSeparator();
 
-	menu->addAction(tr("License"), this, &QtMainWindow::showLicenses);
-	menu->addAction(tr("&About Sourcetrail"), this, &QtMainWindow::about);
+	menu->addAction(tr("查看许可"), this, &QtMainWindow::showLicenses);
+	menu->addAction(tr("关于 Sourcetrail"), this, &QtMainWindow::about);
 
 	menu->addSeparator();
 
-	menu->addAction(tr("Show Data Folder"), this, &QtMainWindow::showDataFolder);
-	menu->addAction(tr("Show Log Folder"), this, &QtMainWindow::showLogFolder);
+	menu->addAction(tr("显示 Data 文件夹"), this, &QtMainWindow::showDataFolder);
+	menu->addAction(tr("显示 Log 文件夹"), this, &QtMainWindow::showLogFolder);
 }
 
 QtMainWindow::DockWidget* QtMainWindow::getDockWidgetForView(View* view)

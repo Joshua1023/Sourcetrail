@@ -29,11 +29,11 @@ void QtTextEditDialog::setReadOnly(bool readOnly)
 
 	if (readOnly)
 	{
-		updateNextButton(QStringLiteral("OK"));
+		updateNextButton(QStringLiteral("好的"));
 	}
 	else
 	{
-		updateNextButton(QStringLiteral("Save"));
+		updateNextButton(QStringLiteral("保存"));
 	}
 }
 
@@ -58,8 +58,8 @@ void QtTextEditDialog::populateWindow(QWidget* widget)
 
 void QtTextEditDialog::windowReady()
 {
-	updateNextButton(QStringLiteral("Save"));
-	updateCloseButton(QStringLiteral("Cancel"));
+	updateNextButton(QStringLiteral("保存"));
+	updateCloseButton(QStringLiteral("取消"));
 
 	setPreviousVisible(false);
 

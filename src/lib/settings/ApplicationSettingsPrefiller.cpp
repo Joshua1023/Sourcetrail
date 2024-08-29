@@ -34,13 +34,13 @@ bool ApplicationSettingsPrefiller::prefillJavaRuntimePath(ApplicationSettings* s
 	std::vector<FilePath> paths = javaPathDetector->getPaths();
 	if (!paths.empty())
 	{
-		MessageStatus(L"Ran Java runtime path detection, found: " + paths.front().wstr()).dispatch();
+		MessageStatus(L"运行 Java 运行时路径检测，发现：" + paths.front().wstr()).dispatch();
 
 		settings->setJavaPath(paths.front());
 	}
 	else
 	{
-		MessageStatus(L"Ran Java runtime path detection, no path found.").dispatch();
+		MessageStatus(L"运行 Java 运行时路径检测，未找到路径。").dispatch();
 	}
 
 	settings->setHasPrefilledJavaPath(true);
@@ -60,14 +60,14 @@ bool ApplicationSettingsPrefiller::prefillJreSystemLibraryPaths(ApplicationSetti
 	std::vector<FilePath> paths = jreSystemLibraryPathsDetector->getPaths();
 	if (!paths.empty())
 	{
-		MessageStatus(L"Ran JRE system library path detection, found: " + paths.front().wstr())
+		MessageStatus(L"运行 JRE 系统库路径检测，发现：" + paths.front().wstr())
 			.dispatch();
 
 		settings->setJreSystemLibraryPaths(paths);
 	}
 	else
 	{
-		MessageStatus(L"Ran JRE system library path detection, no path found.").dispatch();
+		MessageStatus(L"运行 JRE 系统库路径检测，未找到路径。").dispatch();
 	}
 
 	settings->setHasPrefilledJreSystemLibraryPaths(true);
@@ -87,13 +87,13 @@ bool ApplicationSettingsPrefiller::prefillMavenExecutablePath(ApplicationSetting
 	std::vector<FilePath> paths = mavenPathDetector->getPaths();
 	if (!paths.empty())
 	{
-		MessageStatus(L"Ran Maven executable path detection, found: " + paths.front().wstr()).dispatch();
+		MessageStatus(L"运行 Maven 可执行文件路径检测，发现：" + paths.front().wstr()).dispatch();
 
 		settings->setMavenPath(paths.front());
 	}
 	else
 	{
-		MessageStatus(L"Ran Maven executable path detection, no path found.").dispatch();
+		MessageStatus(L"运行 Maven 可执行文件路径检测，未找到路径。").dispatch();
 	}
 
 	settings->setHasPrefilledMavenPath(true);
@@ -113,8 +113,7 @@ bool ApplicationSettingsPrefiller::prefillCxxHeaderPaths(ApplicationSettings* se
 	if (!paths.empty())
 	{
 		MessageStatus(
-			L"Ran C/C++ header path detection, found " + std::to_wstring(paths.size()) + L" path" +
-			(paths.size() == 1 ? L"" : L"s"))
+			L"运行 C/C++ 头文件路径检测，发现 " + std::to_wstring(paths.size()) + L" 条路径")
 			.dispatch();
 
 		settings->setHeaderSearchPaths(paths);
@@ -138,8 +137,8 @@ bool ApplicationSettingsPrefiller::prefillCxxFrameworkPaths(ApplicationSettings*
 	if (!paths.empty())
 	{
 		MessageStatus(
-			L"Ran C/C++ framework path detection, found " + std::to_wstring(paths.size()) +
-			L" path" + (paths.size() == 1 ? L"" : L"s"))
+			L"运行 C/C++ 框架路径检测，发现 " + std::to_wstring(paths.size()) +
+			L" 条路径")
 			.dispatch();
 
 		settings->setFrameworkSearchPaths(paths);

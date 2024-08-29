@@ -85,7 +85,7 @@ void QtProjectWizardWindow::populateWindow(QWidget* widget)
 
 void QtProjectWizardWindow::windowReady()
 {
-	updateTitle(QStringLiteral("NEW SOURCE GROUP"));
+	updateTitle(QStringLiteral("创建源文件组"));
 
 	m_content->windowReady();
 }

@@ -11,7 +11,7 @@
 QtPathListBox::QtPathListBox(QWidget* parent, const QString& listName, SelectionPolicyType selectionPolicy)
 	: QtListBox(parent, listName), m_selectionPolicy(selectionPolicy)
 {
-	QLabel* dropInfoText = new QLabel(QStringLiteral("Drop Files & Folders"));
+	QLabel* dropInfoText = new QLabel(QStringLiteral("拖入文件/文件夹"));
 	dropInfoText->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 	dropInfoText->setObjectName(QStringLiteral("dropInfo"));
 	dropInfoText->setAlignment(Qt::AlignRight);

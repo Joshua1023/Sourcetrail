@@ -14,18 +14,15 @@ QtProjectWizardContentPathCxxPch::QtProjectWizardContentPathCxxPch(
 	QtProjectWizardWindow* window)
 	: QtProjectWizardContentPath(window), m_settings(settings), m_settingsCxxPch(settingsCxxPch)
 {
-	setTitleString(QStringLiteral("Precompiled Header File"));
+	setTitleString(QStringLiteral("预编译头文件"));
 	setHelpString(
-		"Specify the path to the input header file that should be used to generate a precompiled "
-		"header before indexing.<br />"
-		"If the indexed source code is usually built using precompiled headers, using this option "
-		"will speed up your indexing performance.<br />"
+		"指定在索引之前用于生成预编译头的输入头文件的路径。<br />"
+		"如果索引的源代码通常使用预编译头构建，则使用此选项将加快索引速度。<br />"
 		"<br />"
-		"If your source files use precompiled headers via \"#include &lt;pch.h&gt;\", specify "
+		"如果您的源文件通过 \"#include &lt;pch.h&gt;\" 来使用预编译头，请指定 "
 		"\"path/to/pch.h\".<br />"
 		"<br />"
-		"Leave blank to disable the use of precompiled headers. You can make use of environment "
-		"variables with ${ENV_VAR}.");
+		"留空则禁用预编译头。您可以通过 ${ENV_VAR} 的方式使用环境变量。");
 	setPlaceholderString(QStringLiteral("Not Using Precompiled Header"));
 }
 
@@ -56,7 +53,7 @@ bool QtProjectWizardContentPathCxxPch::check()
 		if (!cdb)
 		{
 			QtMessageBox msgBox(m_window);
-			msgBox.setText(QStringLiteral("Unable to open and read the provided compilation database file."));
+			msgBox.setText(QStringLiteral("无法打开并读取提供的编译数据库文件。"));
 			msgBox.execModal();
 			return false;
 		}
@@ -67,12 +64,9 @@ bool QtProjectWizardContentPathCxxPch::check()
 			{
 				QtMessageBox msgBox(m_window);
 				msgBox.setText(
-					"The provided compilation database file uses precompiled headers. If you want "
-					"to make use of "
-					"precompiled headers to speed up your indexer, please specify an input at "
-					"Precompiled Header File.");
-				QPushButton* cancelButton = msgBox.addButton(QStringLiteral("Cancel"), QtMessageBox::ButtonRole::RejectRole);
-				msgBox.addButton(QStringLiteral("Continue"), QtMessageBox::ButtonRole::AcceptRole);
+					"提供的编译数据库文件使用了预编译头。如果您想使用预编译头来加速索引器，请在预编译头文件中指定输入。");
+				QPushButton* cancelButton = msgBox.addButton(QStringLiteral("取消"), QtMessageBox::ButtonRole::RejectRole);
+				msgBox.addButton(QStringLiteral("继续"), QtMessageBox::ButtonRole::AcceptRole);
 				return msgBox.execModal() != cancelButton;
 			}
 		}
@@ -82,11 +76,9 @@ bool QtProjectWizardContentPathCxxPch::check()
 			{
 				QtMessageBox msgBox(m_window);
 				msgBox.setText(
-					"The provided compilation database file does not use precompiled headers. The "
-					"specified input file at "
-					"Precompiled Header File will not be used.");
-				QPushButton* cancelButton = msgBox.addButton(QStringLiteral("Cancel"), QtMessageBox::ButtonRole::RejectRole);
-				msgBox.addButton(QStringLiteral("Continue"), QtMessageBox::ButtonRole::AcceptRole);
+					"提供的编译数据库文件未使用预编译头。不会使用预编译头文件中指定的输入文件。");
+				QPushButton* cancelButton = msgBox.addButton(QStringLiteral("取消"), QtMessageBox::ButtonRole::RejectRole);
+				msgBox.addButton(QStringLiteral("继续"), QtMessageBox::ButtonRole::AcceptRole);
 				return msgBox.execModal() != cancelButton;
 			}
 		}

@@ -354,15 +354,15 @@ void QtWindow::addLogo()
 
 QHBoxLayout* QtWindow::createButtons()
 {
-	m_nextButton = new QPushButton(QStringLiteral("Next"));
+	m_nextButton = new QPushButton(QStringLiteral("下一个"));
 	m_nextButton->setObjectName(QStringLiteral("windowButton"));
 	connect(m_nextButton, &QPushButton::clicked, this, &QtWindow::handleNextPress);
 
-	m_previousButton = new QPushButton(QStringLiteral("Previous"));
+	m_previousButton = new QPushButton(QStringLiteral("上一个"));
 	m_previousButton->setObjectName(QStringLiteral("windowButton"));
 	connect(m_previousButton, &QPushButton::clicked, this, &QtWindow::handlePreviousPress);
 
-	m_closeButton = new QPushButton(QStringLiteral("Cancel"));
+	m_closeButton = new QPushButton(QStringLiteral("取消"));
 	m_closeButton->setObjectName(QStringLiteral("windowButton"));
 	connect(m_closeButton, &QPushButton::clicked, this, &QtWindow::handleClosePress);
 

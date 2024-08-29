@@ -80,7 +80,7 @@ bool SourceGroupJavaMaven::prepareMavenData()
 		std::shared_ptr<DialogView> dialogView = Application::getInstance()->getDialogView(
 			DialogView::UseCase::PROJECT_SETUP);
 		dialogView->showUnknownProgressDialog(
-			L"Preparing Project", L"Maven\nGenerating Source Files");
+			L"项目准备中", L"Maven\n正在生成源文件");
 
 		ScopedFunctor dialogHider([&dialogView]() { dialogView->hideUnknownProgressDialog(); });
 
@@ -94,7 +94,7 @@ bool SourceGroupJavaMaven::prepareMavenData()
 		}
 
 		dialogView->showUnknownProgressDialog(
-			L"Preparing Project", L"Maven\nExporting Dependencies");
+			L"项目准备中", L"Maven\n正在导出依赖");
 
 		bool success = utility::mavenCopyDependencies(
 			mavenPath,
@@ -116,7 +116,7 @@ std::vector<FilePath> SourceGroupJavaMaven::doGetAllSourcePaths() const
 		std::shared_ptr<DialogView> dialogView = Application::getInstance()->getDialogView(
 			DialogView::UseCase::PROJECT_SETUP);
 		dialogView->showUnknownProgressDialog(
-			L"Preparing Project", L"Maven\nFetching Source Directories");
+			L"项目准备中", L"Maven\n正在获取源文件目录");
 
 		const FilePath mavenPath(ApplicationSettings::getInstance()->getMavenPath());
 		const FilePath mavenSettingsPath = m_settings->getMavenSettingsFilePathExpandedAndAbsolute();

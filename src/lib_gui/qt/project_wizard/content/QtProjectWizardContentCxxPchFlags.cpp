@@ -16,36 +16,33 @@ QtProjectWizardContentCxxPchFlags::QtProjectWizardContentCxxPchFlags(
 
 void QtProjectWizardContentCxxPchFlags::populate(QGridLayout* layout, int& row)
 {
-	const QString labelText(QStringLiteral("Precompiled Header Flags"));
+	const QString labelText(QStringLiteral("预编译头标志"));
 	layout->addWidget(
 		createFormLabel(labelText), row, QtProjectWizardWindow::FRONT_COL, 2, 1, Qt::AlignTop);
 
 	const QString optionText(
-		m_isCDB ? QStringLiteral("Use flags of first indexed file and 'Additional Compiler Flags'")
-				: QStringLiteral("Use 'Compiler Flags'"));
+		m_isCDB ? QStringLiteral("使用第一个索引文件的标志以及'附加编译器标志'")
+				: QStringLiteral("使用'编译器标志'"));
 
 	const QString optionHelp(
-		m_isCDB ? QStringLiteral("Check <b>") + optionText +
-				QStringLiteral("</b> to use the flags specified "
-							   "in the first compile command of the Compilation Database and all "
-							   "flags specified "
-							   "at 'Additional Compiler Flags'.")
-				: QStringLiteral("Check <b>") + optionText +
-				QStringLiteral("</b> to reuse the flags specified at 'Compiler Flags'."));
+		m_isCDB ? QStringLiteral("查看 <b>") + optionText +
+				QStringLiteral("</b> 使用编译数据库的"
+							   "第一个编译命令中指定的标志以及"
+							   "'附加编译器标志'中指定的所有标志。")
+				: QStringLiteral("查看 <b>") + optionText +
+				QStringLiteral("</b> 以复用已指定的'编译器标志'。"));
 
 	addHelpButton(
-		QStringLiteral("Precompiled Header Flags"),
+		QStringLiteral("预编译头标志"),
 		QStringLiteral(
-			"<p>Define compiler flags used during precompiled header file generation.</p>"
+			"<p>定义预编译头文件生成期间使用的编译器标志。</p>"
 			"<p>") +
 			optionHelp +
 			QStringLiteral(
 				"</p>"
-				"<p>Additionally add compiler flags to the list for precompiled header generation "
-				"only. Some examples:</p>"
-				"<p>* use \"-DRELEASE\" to add a preprocessor #define for \"RELEASE\"</p>"
-				"<p>* use \"-U__clang__\" to remove the preprocessor #define for "
-				"\"__clang__\"</p>"),
+				"<p>另外，将编译器标志添加到仅用于预编译头生成的列表中，例如：</p>"
+				"<p>* 使用 \"-DRELEASE\" 为 \"RELEASE\" 添加预处理器 #define</p>"
+				"<p>* 使用 \"-U__clang__\" 为 \"__clang__\" 移除预处理器 #define</p>"),
 		layout,
 		row);
 

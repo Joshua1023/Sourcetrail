@@ -18,24 +18,17 @@ QtProjectWizardContentCrossCompilationOptions::QtProjectWizardContentCrossCompil
 void QtProjectWizardContentCrossCompilationOptions::populate(QGridLayout* layout, int& row)
 {
 	layout->addWidget(
-		createFormLabel("Cross-Compilation"), row, QtProjectWizardWindow::FRONT_COL, Qt::AlignRight);
+		createFormLabel("交叉编译"), row, QtProjectWizardWindow::FRONT_COL, Qt::AlignRight);
 	addHelpButton(
-		"Cross-Compilation",
+		"交叉编译",
 		QStringLiteral(
-			"<p>Use these options to specify the target architecture for the provided source code. "
-			"Even though Sourcetrail will "
-			"not generate a target binary, providing these options will affect which headers the "
-			"indexer will be looking for "
-			"while analyzing your source code.</p>"
-			"<p>If you are not sure which value to pick for a certain option just choose "
-			"\"unknown\" "
-			"and Sourcetrail will try "
-			"to guess the correct value.</p>"),
+			"<p>使用这些选项来指定所提供源代码的目标架构。尽管 Sourcetrail 不会生成目标二进制文件，但提供这些选项会影响索引器在分析源代码时查找哪些头文件。</p>"
+			"<p>如果您不确定为某个选项选择哪个值，只需选择“未知”，Sourcetrail 将尝试猜测正确的值。</p>"),
 		layout,
 		row);
 
 	{
-		m_useTargetOptions = new QCheckBox("Use specific target");
+		m_useTargetOptions = new QCheckBox("使用特定目标");
 		connect(
 			m_useTargetOptions,
 			&QCheckBox::stateChanged,
@@ -57,7 +50,7 @@ void QtProjectWizardContentCrossCompilationOptions::populate(QGridLayout* layout
 	QGridLayout* gridLayout = new QGridLayout();
 
 	{
-		QLabel* label = new QLabel("Architecture:");
+		QLabel* label = new QLabel("架构：");
 
 		m_arch = new QComboBox();
 		std::vector<std::wstring> archTypes =
@@ -74,7 +67,7 @@ void QtProjectWizardContentCrossCompilationOptions::populate(QGridLayout* layout
 	}
 
 	{
-		QLabel* label = new QLabel("Vendor:");
+		QLabel* label = new QLabel("供应商：");
 
 		m_vendor = new QComboBox();
 		std::vector<std::wstring> vendorTypes =
@@ -90,7 +83,7 @@ void QtProjectWizardContentCrossCompilationOptions::populate(QGridLayout* layout
 	}
 
 	{
-		QLabel* label = new QLabel("OS:");
+		QLabel* label = new QLabel("操作系统：");
 
 		m_sys = new QComboBox();
 		std::vector<std::wstring> osTypes =
@@ -106,7 +99,7 @@ void QtProjectWizardContentCrossCompilationOptions::populate(QGridLayout* layout
 	}
 
 	{
-		QLabel* label = new QLabel("Environment:");
+		QLabel* label = new QLabel("环境：");
 
 		m_abi = new QComboBox();
 		std::vector<std::wstring> environmentTypes =

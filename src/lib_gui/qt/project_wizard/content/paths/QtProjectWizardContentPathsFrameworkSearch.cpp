@@ -11,14 +11,12 @@ QtProjectWizardContentPathsFrameworkSearch::QtProjectWizardContentPathsFramework
 		  settings, window, QtPathListBox::SELECTION_POLICY_DIRECTORIES_ONLY, true)
 {
 	setTitleString(
-		indicateAsAdditional ? QStringLiteral("Additional Framework Search Paths")
-							 : QStringLiteral("Framework Search Paths"));
+		indicateAsAdditional ? QStringLiteral("附加框架搜索路径")
+							 : QStringLiteral("框架搜索路径"));
 	setHelpString(
-		"Framework Search Paths define where MacOS framework containers (.framework), that your "
-		"project depends on, are "
-		"found. These paths are usually passed to the compiler with the '-iframework' flag.<br />"
+		"框架搜索路径定义了您的项目所依赖的 MacOS 框架容器 (.framework) 的位置。这些路径通常使用“-iframework”标志传递给编译器。<br />"
 		"<br />"
-		"You can make use of environment variables with ${ENV_VAR}.");
+		"您可以通过 ${ENV_VAR} 的方式使用环境变量。");
 }
 
 void QtProjectWizardContentPathsFrameworkSearch::load()

@@ -24,7 +24,7 @@ QtCustomTrailView::QtCustomTrailView(ViewLayout* viewLayout)
 	, CustomTrailView(nullptr)
 	, m_controllerProxy(this, TabId::app())
 {
-	setWindowTitle(QStringLiteral("Custom Trail"));
+	setWindowTitle(QStringLiteral("自定义踪迹"));
 	setWindowFlags(Qt::Window);
 
 	QGridLayout* mainLayout = new QGridLayout();
@@ -62,10 +62,10 @@ QtCustomTrailView::QtCustomTrailView(ViewLayout* viewLayout)
 		hLayout->setContentsMargins(25, 10, 10, 10);
 		panelA1->setLayout(hLayout);
 
-		m_searchBoxFrom = new QtSmartSearchBox(QStringLiteral("Start Symbol"), false);
-		m_searchBoxTo = new QtSmartSearchBox(QStringLiteral("Target Symbol"), false);
+		m_searchBoxFrom = new QtSmartSearchBox(QStringLiteral("起始符号"), false);
+		m_searchBoxTo = new QtSmartSearchBox(QStringLiteral("目标符号"), false);
 
-		hLayout->addWidget(new QLabel(QStringLiteral("From:")));
+		hLayout->addWidget(new QLabel(QStringLiteral("开始：")));
 		hLayout->addWidget(createSearchBox(m_searchBoxFrom));
 		hLayout->addSpacing(15);
 
@@ -73,10 +73,10 @@ QtCustomTrailView::QtCustomTrailView(ViewLayout* viewLayout)
 		optionsLayout->setContentsMargins(10, 10, 25, 10);
 		panelA2->setLayout(optionsLayout);
 
-		m_optionTo = new QRadioButton(QString::fromUtf8("\xe2\x86\x92") + " To:");
-		m_optionReferenced = new QRadioButton(QString::fromUtf8("\xe2\x86\x92") + " All Referenced");
+		m_optionTo = new QRadioButton(QString::fromUtf8("\xe2\x86\x92") + " 结束");
+		m_optionReferenced = new QRadioButton(QString::fromUtf8("\xe2\x86\x92") + " 所有被引用");
 		m_optionReferencing = new QRadioButton(
-			QString::fromUtf8("\xe2\x86\x90") + " All Referencing");
+			QString::fromUtf8("\xe2\x86\x90") + " 所有引用");
 
 		m_optionTo->setAttribute(Qt::WA_LayoutUsesWidgetRect);			   // fixes layouting on Mac
 		m_optionReferenced->setAttribute(Qt::WA_LayoutUsesWidgetRect);	   // fixes layouting on Mac
@@ -130,11 +130,11 @@ QtCustomTrailView::QtCustomTrailView(ViewLayout* viewLayout)
 		hLayout->setContentsMargins(25, 10, 10, 10);
 		panelB1->setLayout(hLayout);
 
-		hLayout->addWidget(new QLabel(QStringLiteral("Max Depth:")));
+		hLayout->addWidget(new QLabel(QStringLiteral("最大深度:")));
 
 		m_slider = new QSlider(Qt::Horizontal);
 		m_slider->setObjectName(QStringLiteral("depth_slider"));
-		m_slider->setToolTip(QStringLiteral("adjust graph depth"));
+		m_slider->setToolTip(QStringLiteral("调整图深度"));
 		m_slider->setMinimum(1);
 		m_slider->setMaximum(51);
 		m_slider->setMinimumWidth(150);
@@ -149,7 +149,7 @@ QtCustomTrailView::QtCustomTrailView(ViewLayout* viewLayout)
 		connect(m_slider, &QSlider::valueChanged, [this, valueLabel](int) {
 			if (m_slider->value() == m_slider->maximum())
 			{
-				valueLabel->setText(QStringLiteral("inf"));
+				valueLabel->setText(QStringLiteral("无限制"));
 			}
 			else
 			{
@@ -167,12 +167,12 @@ QtCustomTrailView::QtCustomTrailView(ViewLayout* viewLayout)
 		hLayout->setSpacing(15);
 		panelB2->setLayout(hLayout);
 
-		m_horizontalButton = new QRadioButton(QStringLiteral("Horizontal"));
-		m_verticalButton = new QRadioButton(QStringLiteral("Vertical"));
+		m_horizontalButton = new QRadioButton(QStringLiteral("水平"));
+		m_verticalButton = new QRadioButton(QStringLiteral("竖直"));
 
 		m_horizontalButton->setChecked(true);
 
-		hLayout->addWidget(new QLabel(QStringLiteral("Layout Direction:")));
+		hLayout->addWidget(new QLabel(QStringLiteral("布局方向：")));
 		hLayout->addWidget(m_horizontalButton);
 		hLayout->addWidget(m_verticalButton);
 
@@ -219,7 +219,7 @@ QtCustomTrailView::QtCustomTrailView(ViewLayout* viewLayout)
 		}
 
 		QVBoxLayout* filterLayout = addFilters(
-			QStringLiteral("Nodes:"), nodeFilters, nodeColors, &m_nodeFilters, 11);
+			QStringLiteral("节点："), nodeFilters, nodeColors, &m_nodeFilters, 11);
 		filterLayout->setContentsMargins(25, 10, 25, 10);
 		panelC1->setLayout(filterLayout);
 	}
@@ -263,8 +263,8 @@ QtCustomTrailView::QtCustomTrailView(ViewLayout* viewLayout)
 
 	// controls
 	{
-		QPushButton* cancelButton = new QPushButton(QStringLiteral("Cancel"));
-		QPushButton* searchButton = new QPushButton(QStringLiteral("Search"));
+		QPushButton* cancelButton = new QPushButton(QStringLiteral("取消"));
+		QPushButton* searchButton = new QPushButton(QStringLiteral("搜索"));
 
 		cancelButton->setObjectName(QStringLiteral("button"));
 		searchButton->setObjectName(QStringLiteral("button"));
@@ -290,7 +290,7 @@ QtCustomTrailView::QtCustomTrailView(ViewLayout* viewLayout)
 			if (m_searchBoxFrom->getMatches().size() == 0 ||
 				m_searchBoxFrom->getMatches().front().tokenIds.size() == 0)
 			{
-				setError(QStringLiteral("No 'Start Symbol' symbol found."));
+				setError(QStringLiteral("未找到“起始符号”。"));
 				return;
 			}
 
@@ -310,7 +310,7 @@ QtCustomTrailView::QtCustomTrailView(ViewLayout* viewLayout)
 				}
 				else
 				{
-					setError(QStringLiteral("No 'Target Symbol' symbol found."));
+					setError(QStringLiteral("未找到“目标符号”。"));
 					return;
 				}
 			}
@@ -320,13 +320,13 @@ QtCustomTrailView::QtCustomTrailView(ViewLayout* viewLayout)
 
 			if (!nodeTypes)
 			{
-				setError(QStringLiteral("No 'Nodes' selected."));
+				setError(QStringLiteral("未选择“节点”。"));
 				return;
 			}
 
 			if (!edgeTypes)
 			{
-				setError(QStringLiteral("No 'Edges' selected."));
+				setError(QStringLiteral("未选择“边”。"));
 				return;
 			}
 
@@ -547,8 +547,8 @@ QHBoxLayout* QtCustomTrailView::addCheckButtons(const std::vector<QCheckBox*>& c
 {
 	QHBoxLayout* buttonLayout = new QHBoxLayout();
 
-	QPushButton* checkButton = new QPushButton(QStringLiteral("Check All"));
-	QPushButton* uncheckButton = new QPushButton(QStringLiteral("Uncheck All"));
+	QPushButton* checkButton = new QPushButton(QStringLiteral("选择全部"));
+	QPushButton* uncheckButton = new QPushButton(QStringLiteral("取消全部"));
 
 	checkButton->setObjectName(QStringLiteral("button_small"));
 	uncheckButton->setObjectName(QStringLiteral("button_small"));

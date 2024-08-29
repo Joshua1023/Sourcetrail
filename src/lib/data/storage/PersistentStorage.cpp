@@ -604,14 +604,14 @@ std::shared_ptr<SourceLocationCollection> PersistentStorage::getFullTextSearchLo
 
 		if (m_fullTextSearchCodec != codec.getName())
 		{
-			MessageStatus(L"Building fulltext search index", false, true).dispatch();
+			MessageStatus(L"正在建立全文搜索索引", false, true).dispatch();
 			buildFullTextSearchIndex();
 		}
 	}
 
 	MessageStatus(
-		std::wstring(L"Searching fulltext (case-") +
-			(caseSensitive ? L"sensitive" : L"insensitive") + L"): " + searchTerm,
+		std::wstring(L"正在搜索全文（大小写") +
+			(caseSensitive ? L"敏感" : L"不敏感") + L"）：" + searchTerm,
 		false,
 		true)
 		.dispatch();
@@ -697,10 +697,10 @@ std::shared_ptr<SourceLocationCollection> PersistentStorage::getFullTextSearchLo
 	addCompleteFlagsToSourceLocationCollection(collection.get());
 
 	MessageStatus(
-		std::to_wstring(collection->getSourceLocationCount()) + L" results in " +
+		std::to_wstring(collection->getSourceLocationCount()) + L" 个结果" +
 			std::to_wstring(collection->getSourceLocationFileCount()) +
-			L" files for fulltext search (case-" + (caseSensitive ? L"sensitive" : L"insensitive") +
-			L"): " + searchTerm,
+			L"  个文件进行全文搜索（大小写" + (caseSensitive ? L"敏感" : L"不敏感") +
+			L"）：" + searchTerm,
 		false,
 		false)
 		.dispatch();

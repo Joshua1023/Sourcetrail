@@ -15,15 +15,11 @@ QtProjectWizardContentPathCDB::QtProjectWizardContentPathCDB(
 			m_settings->getProjectDirectoryPath());
 	})
 {
-	setTitleString(QStringLiteral("Compilation Database (compile_commands.json)"));
+	setTitleString(QStringLiteral("编译数据库 (compile_commands.json)"));
 	setHelpString(
-		"Select the compilation database file for the project. Sourcetrail will index your project "
-		"based on the compile "
-		"commands. This file contains using all include paths and compiler flags of these compile "
-		"commands. The project "
-		"will stay up to date with changes in the compilation database on every refresh.<br />"
+		"选择项目的编译数据库文件。Sourcetrail 将根据编译命令为您的项目进行索引。此文件包含使用这些编译命令的所有 include 路径和编译器标志。每次更新索引时，项目都会与编译数据库中的更改保持同步。<br />"
 		"<br />"
-		"You can make use of environment variables with ${ENV_VAR}.");
+		"您可以通过 ${ENV_VAR} 的方式使用环境变量。");
 	setFileEndings({L".json"});
 	setIsRequired(true);
 }
@@ -42,16 +38,14 @@ void QtProjectWizardContentPathCDB::populate(QGridLayout* layout, int& row)
 		&QtProjectWizardContentPathCDB::onPickerTextChanged);
 
 	QLabel* description = new QLabel(
-		"Sourcetrail will use all include paths and compiler flags from the Compilation Database "
-		"and stay up-to-date "
-		"with changes on refresh.",
+		"Sourcetrail 将使用编译数据库中的所有 include 路径和编译器标志，并在刷新时保持最新的更改。",
 		this);
 	description->setObjectName(QStringLiteral("description"));
 	description->setWordWrap(true);
 	layout->addWidget(description, row, QtProjectWizardWindow::BACK_COL);
 	row++;
 
-	QLabel* title = createFormSubLabel(QStringLiteral("Source Files to Index"));
+	QLabel* title = createFormSubLabel(QStringLiteral("要索引的源文件"));
 	layout->addWidget(title, row, QtProjectWizardWindow::FRONT_COL, Qt::AlignTop);
 	layout->setRowStretch(row, 0);
 
@@ -60,7 +54,7 @@ void QtProjectWizardContentPathCDB::populate(QGridLayout* layout, int& row)
 	layout->addWidget(m_fileCountLabel, row, QtProjectWizardWindow::BACK_COL, Qt::AlignTop);
 	row++;
 
-	addFilesButton(QStringLiteral("show source files"), layout, row);
+	addFilesButton(QStringLiteral("显示源文件"), layout, row);
 	row++;
 }
 
@@ -84,7 +78,7 @@ void QtProjectWizardContentPathCDB::refresh()
 	{
 		m_fileCountLabel->setText(
 			"<b>" + QString::number(getFilePaths().size()) +
-			"</b> source files were found in the compilation database.");
+			"</b> 个源文件在编译数据库被找到");
 	}
 }
 
@@ -95,12 +89,12 @@ std::vector<FilePath> QtProjectWizardContentPathCDB::getFilePaths() const
 
 QString QtProjectWizardContentPathCDB::getFileNamesTitle() const
 {
-	return QStringLiteral("Source Files");
+	return QStringLiteral("源文件");
 }
 
 QString QtProjectWizardContentPathCDB::getFileNamesDescription() const
 {
-	return QStringLiteral(" source files will be indexed.");
+	return QStringLiteral(" 个源文件将被索引。");
 }
 
 void QtProjectWizardContentPathCDB::pickedPath()

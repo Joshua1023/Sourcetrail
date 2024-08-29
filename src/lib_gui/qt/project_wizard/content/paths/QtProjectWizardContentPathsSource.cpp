@@ -29,19 +29,15 @@ QtProjectWizardContentPathsSource::QtProjectWizardContentPathsSource(
 	: QtProjectWizardContentPaths(
 		  settings, window, QtPathListBox::SELECTION_POLICY_FILES_AND_DIRECTORIES, true)
 {
-	m_showFilesString = QStringLiteral("show files");
+	m_showFilesString = QStringLiteral("显示文件");
 
-	setTitleString(QStringLiteral("Files & Directories to Index"));
+	setTitleString(QStringLiteral("要索引的文件/目录"));
 	setHelpString(QStringLiteral(
-		"These paths define the files and directories that will be indexed by Sourcetrail. Provide "
-		"a directory to recursively "
-		"add all contained source and header files.<br />"
+		"这些路径定义了将被 Sourcetrail 索引的文件和目录。提供一个目录以递归添加所有包含的源文件和头文件。<br />"
 		"<br />"
-		"If your project's source code resides in one location, but generated source files are "
-		"kept at a different location, "
-		"you will also need to add that directory.<br />"
+		"如果您的项目源代码位于一个位置，但生成的源文件保存在不同的位置，那么您也需要添加该目录。<br />"
 		"<br />"
-		"You can make use of environment variables with ${ENV_VAR}."));
+		"您可以通过 ${ENV_VAR} 的方式使用环境变量。"));
 	setIsRequired(true);
 }
 
@@ -70,13 +66,11 @@ bool QtProjectWizardContentPathsSource::check()
 	if (m_list->getPathsAsDisplayed().empty())
 	{
 		QtMessageBox msgBox(m_window);
-		msgBox.setText(QStringLiteral("You didn't specify any 'Files & Directories to Index'."));
+		msgBox.setText(QStringLiteral("您没有指定任何“要索引的文件/目录”。"));
 		msgBox.setInformativeText(
-			QStringLiteral("Sourcetrail will not index any files for this Source Group. Please add "
-						   "paths to files or directories "
-						   "that should be indexed."));
-		QPushButton *continueButton = msgBox.addButton(QStringLiteral("Continue"), QtMessageBox::ButtonRole::YesRole);
-		msgBox.addButton(QStringLiteral("Cancel"), QtMessageBox::ButtonRole::NoRole);
+			QStringLiteral("Sourcetrail 不会为该源文件组索引任何文件。请添加应索引的文件或目录的路径。"));
+		QPushButton *continueButton = msgBox.addButton(QStringLiteral("继续"), QtMessageBox::ButtonRole::YesRole);
+		msgBox.addButton(QStringLiteral("取消"), QtMessageBox::ButtonRole::NoRole);
 		msgBox.setDefaultButton(continueButton);
 
 		if (msgBox.execModal() != continueButton)
@@ -127,10 +121,10 @@ std::vector<FilePath> QtProjectWizardContentPathsSource::getFilePaths() const
 
 QString QtProjectWizardContentPathsSource::getFileNamesTitle() const
 {
-	return QStringLiteral("Indexed Files");
+	return QStringLiteral("被索引文件");
 }
 
 QString QtProjectWizardContentPathsSource::getFileNamesDescription() const
 {
-	return QStringLiteral(" files will be indexed.");
+	return QStringLiteral(" 个文件将被索引.");
 }
