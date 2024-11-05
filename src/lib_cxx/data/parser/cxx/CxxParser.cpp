@@ -23,6 +23,7 @@
 #include "SingleFrontendActionFactory.h"
 #include "TextAccess.h"
 #include "logging.h"
+#include "test_checker.h"
 #include "utility.h"
 #include "utilityString.h"
 
@@ -201,6 +202,10 @@ void CxxParser::runTool(
 	clang::ASTFrontendAction* action = new ASTAction(
 		m_client, canonicalFilePathCache, m_indexerStateInfo);
 	tool.run(new SingleFrontendActionFactory(action));
+	misra::rule_6_3::ASTChecker ast_checker(sourceFilePath);
+	ast_checker.Init(m_client, canonicalFilePathCache);
+	int status =
+		tool.run(clang::tooling::newFrontendActionFactory(ast_checker.GetMatchFinder()).get());
 
 	if (!m_client->hasContent())
 	{

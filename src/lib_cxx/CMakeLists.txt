@@ -76,6 +76,8 @@ add_library(Sourcetrail_lib_cxx
 	data/parser/cxx/PreprocessorCallbacks.h
 	data/parser/cxx/SingleFrontendActionFactory.cpp
 	data/parser/cxx/SingleFrontendActionFactory.h
+	data/parser/cxx/test_checker.cpp
+	data/parser/cxx/test_checker.h
 	data/parser/cxx/utilityClang.cpp
 	data/parser/cxx/utilityClang.h
 
